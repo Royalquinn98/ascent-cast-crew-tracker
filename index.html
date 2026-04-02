@@ -2032,13 +2032,43 @@ function loadEmployeeList() {
           </div>
         </div>
         <div class="emp-actions">
-          <button class="btn btn-icon btn-secondary" onclick="openEditMember('${id}')" style="width:32px;height:32px">
+          <button class="btn btn-icon btn-secondary" onclick="openEditMember('${id}')" style="width:32px;height:32px" title="Edit">
             <i class="fas fa-edit" style="font-size:12px"></i>
+          </button>
+          <button class="btn btn-icon" onclick="deleteMember('${id}','${m.name.replace(/'/g,"\\'")}')" style="width:32px;height:32px;background:var(--red-light);color:var(--red)" title="Delete">
+            <i class="fas fa-trash" style="font-size:12px"></i>
           </button>
         </div>
       </div>
     `).join('');
   });
+}
+
+function deleteMember(id, name) {
+  if (!confirm(`⚠️ "${name}" কে delete করতে চান?\n\nএর সমস্ত performance data-ও মুছে যাবে। এটা undo করা যাবে না!`)) return;
+  
+  // Delete member data
+  db.ref('crew_members/' + id).remove().then(() => {
+    // Delete their performance entries
+    db.ref('crew_daily_performance').orderByChild('memberId').equalTo(id).once('value').then(snap => {
+      const updates = {};
+      snap.forEach(child => { updates[child.key] = null; });
+      if (Object.keys(updates).length > 0) db.ref('crew_daily_performance').update(updates);
+    });
+    // Delete their weekly entries
+    db.ref('crew_weekly_discipline').orderByChild('memberId').equalTo(id).once('value').then(snap => {
+      const updates = {};
+      snap.forEach(child => { updates[child.key] = null; });
+      if (Object.keys(updates).length > 0) db.ref('crew_weekly_discipline').update(updates);
+    });
+    // Delete their user mapping
+    db.ref('crew_users').orderByChild('memberId').equalTo(id).once('value').then(snap => {
+      snap.forEach(child => { db.ref('crew_users/' + child.key).remove(); });
+    });
+    
+    showToast('✅ ' + name + ' deleted!');
+    loadEmployeeList();
+  }).catch(err => showToast('Error: ' + err.message, true));
 }
 
 function togglePw(id, pw) {
@@ -2142,33 +2172,40 @@ function updateMember() {
     if (newPw.length < 6) return showToast('Password minimum 6 characters', true);
     updates.password = newPw;
     
-    // Also update Firebase Auth password
+    // Check if old password exists in database
     db.ref('crew_members/' + id).once('value').then(snap => {
       const member = snap.val();
       const memberEmail = member.email;
-      const oldPassword = member.password || currentPw;
+      const oldPassword = member.password;
       
-      // Use secondary app to sign in as this staff and change password
+      // If no old password saved, just update database only
+      if (!oldPassword || oldPassword === 'N/A') {
+        db.ref('crew_members/' + id).update(updates).then(() => {
+          showToast('✅ Database-এ password saved! ⚠️ কিন্তু login password change হয়নি — এই member delete করে নতুন করে add করুন।', true);
+          closeModal('editMemberModal');
+          loadEmployeeList();
+        });
+        return;
+      }
+      
+      // Old password exists - change in Firebase Auth too
       let secondaryApp;
       try { secondaryApp = firebase.app('secondary'); } 
       catch (e) { secondaryApp = firebase.initializeApp(firebaseConfig, 'secondary'); }
       const secondaryAuth = secondaryApp.auth();
       
       secondaryAuth.signInWithEmailAndPassword(memberEmail, oldPassword).then(cred => {
-        // Change the password in Firebase Auth
         return cred.user.updatePassword(newPw);
       }).then(() => {
         secondaryAuth.signOut();
-        // Now update database
         return db.ref('crew_members/' + id).update(updates);
       }).then(() => {
-        showToast('✅ Member updated! Password changed — নতুন password দিয়ে login করতে পারবে।');
+        showToast('✅ Password changed! নতুন password দিয়ে login করতে পারবে।');
         closeModal('editMemberModal');
         loadEmployeeList();
       }).catch(err => {
-        // If auth password change fails, still update database
         db.ref('crew_members/' + id).update(updates).then(() => {
-          showToast('⚠️ Database updated, but Auth password change failed: ' + err.message, true);
+          showToast('⚠️ Database updated, but Auth failed: ' + err.message, true);
           closeModal('editMemberModal');
           loadEmployeeList();
         });
