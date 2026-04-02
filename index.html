@@ -1189,6 +1189,14 @@
         <option value="Inactive">Inactive</option>
       </select>
     </div>
+    <div class="form-group">
+      <label>Current Password</label>
+      <input type="text" id="editMemberCurrentPw" disabled style="opacity:0.6">
+    </div>
+    <div class="form-group">
+      <label>New Password (ফাঁকা রাখলে change হবে না)</label>
+      <input type="text" id="editMemberNewPw" placeholder="নতুন password দিন (optional)">
+    </div>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeModal('editMemberModal')">Cancel</button>
       <button class="btn btn-primary" onclick="updateMember()"><i class="fas fa-save"></i> Save</button>
@@ -2008,12 +2016,20 @@ function loadEmployeeList() {
     }
 
     container.innerHTML = entries.map(([id, m]) => `
-      <div class="emp-card">
+      <div class="emp-card" style="flex-wrap:wrap">
         <div class="emp-avatar">${getInitials(m.name)}</div>
         <div class="emp-info">
           <div class="emp-name">${m.name}</div>
           <div class="emp-meta">${m.role} · ${m.staffType||'Daily'} · ${m.phone||''}</div>
           <div class="emp-meta">${m.status === 'Inactive' ? '<span style="color:var(--red)">Inactive</span>' : '<span style="color:var(--green)">Active</span>'} · Joined: ${m.joinDate||'N/A'}</div>
+          <div class="emp-meta" style="margin-top:4px">
+            <span style="color:var(--text-muted)">📧</span> ${m.email||'N/A'} &nbsp;
+            <span style="color:var(--text-muted)">🔑</span> 
+            <span id="pw_${id}" style="font-family:monospace;background:var(--bg-primary);padding:2px 6px;border-radius:4px;font-size:12px">••••••</span>
+            <button onclick="togglePw('${id}','${(m.password||'N/A').replace(/'/g,"\\'")}')" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:12px;padding:2px 4px" title="Show/Hide Password">
+              <i class="fas fa-eye" id="pwicon_${id}"></i>
+            </button>
+          </div>
         </div>
         <div class="emp-actions">
           <button class="btn btn-icon btn-secondary" onclick="openEditMember('${id}')" style="width:32px;height:32px">
@@ -2023,6 +2039,18 @@ function loadEmployeeList() {
       </div>
     `).join('');
   });
+}
+
+function togglePw(id, pw) {
+  const span = document.getElementById('pw_' + id);
+  const icon = document.getElementById('pwicon_' + id);
+  if (span.textContent === '••••••') {
+    span.textContent = pw;
+    icon.className = 'fas fa-eye-slash';
+  } else {
+    span.textContent = '••••••';
+    icon.className = 'fas fa-eye';
+  }
 }
 
 function openAddMemberModal() {
@@ -2060,7 +2088,7 @@ function addNewMember() {
   secondaryAuth.createUserWithEmailAndPassword(email, password).then(cred => {
     // Save member data
     return memberRef.set({
-      name, phone, email, role, staffType,
+      name, phone, email, role, staffType, password,
       status: 'Active',
       joinDate: getToday(),
       createdAt: firebase.database.ServerValue.TIMESTAMP
@@ -2092,12 +2120,16 @@ function openEditMember(id) {
     document.getElementById('editMemberRole').value = m.role;
     document.getElementById('editMemberType').value = m.staffType || 'Daily';
     document.getElementById('editMemberStatus').value = m.status || 'Active';
+    document.getElementById('editMemberCurrentPw').value = m.password || 'N/A';
+    document.getElementById('editMemberNewPw').value = '';
     openModal('editMemberModal');
   });
 }
 
 function updateMember() {
   const id = document.getElementById('editMemberId').value;
+  const newPw = document.getElementById('editMemberNewPw').value.trim();
+  const currentPw = document.getElementById('editMemberCurrentPw').value;
   const updates = {
     name: document.getElementById('editMemberName').value.trim(),
     phone: document.getElementById('editMemberPhone').value.trim(),
@@ -2105,11 +2137,51 @@ function updateMember() {
     staffType: document.getElementById('editMemberType').value,
     status: document.getElementById('editMemberStatus').value
   };
-  db.ref('crew_members/' + id).update(updates).then(() => {
-    showToast('✅ Member updated!');
-    closeModal('editMemberModal');
-    loadEmployeeList();
-  });
+  
+  if (newPw) {
+    if (newPw.length < 6) return showToast('Password minimum 6 characters', true);
+    updates.password = newPw;
+    
+    // Also update Firebase Auth password
+    db.ref('crew_members/' + id).once('value').then(snap => {
+      const member = snap.val();
+      const memberEmail = member.email;
+      const oldPassword = member.password || currentPw;
+      
+      // Use secondary app to sign in as this staff and change password
+      let secondaryApp;
+      try { secondaryApp = firebase.app('secondary'); } 
+      catch (e) { secondaryApp = firebase.initializeApp(firebaseConfig, 'secondary'); }
+      const secondaryAuth = secondaryApp.auth();
+      
+      secondaryAuth.signInWithEmailAndPassword(memberEmail, oldPassword).then(cred => {
+        // Change the password in Firebase Auth
+        return cred.user.updatePassword(newPw);
+      }).then(() => {
+        secondaryAuth.signOut();
+        // Now update database
+        return db.ref('crew_members/' + id).update(updates);
+      }).then(() => {
+        showToast('✅ Member updated! Password changed — নতুন password দিয়ে login করতে পারবে।');
+        closeModal('editMemberModal');
+        loadEmployeeList();
+      }).catch(err => {
+        // If auth password change fails, still update database
+        db.ref('crew_members/' + id).update(updates).then(() => {
+          showToast('⚠️ Database updated, but Auth password change failed: ' + err.message, true);
+          closeModal('editMemberModal');
+          loadEmployeeList();
+        });
+      });
+    });
+  } else {
+    // No password change, just update other fields
+    db.ref('crew_members/' + id).update(updates).then(() => {
+      showToast('✅ Member updated!');
+      closeModal('editMemberModal');
+      loadEmployeeList();
+    });
+  }
 }
 
 // ========================
