@@ -9,13 +9,11 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0f172a">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-  <style>
+<style>
     :root {
       --bg-primary: #0f172a;
       --bg-secondary: #1e293b;
@@ -698,65 +696,79 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
+
+<style>
+.role-select-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.role-card{background:var(--bg-input);border:2px solid var(--border);border-radius:var(--radius);padding:24px 16px;text-align:center;cursor:pointer;transition:all 0.2s}
+.role-card:hover{border-color:var(--accent)}
+.role-card .rc-icon{font-size:36px;margin-bottom:8px}
+.role-card .rc-title{font-size:15px;font-weight:700}
+.role-card .rc-desc{font-size:11px;color:var(--text-muted);margin-top:4px}
+.staff-select-list{max-height:300px;overflow-y:auto;margin-bottom:16px}
+.staff-option{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg-input);border:2px solid transparent;border-radius:var(--radius-sm);margin-bottom:8px;cursor:pointer;transition:all 0.2s}
+.staff-option:hover{border-color:var(--border)}
+.staff-option.selected{border-color:var(--accent);background:var(--accent-light)}
+.staff-option .so-avatar{width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#000}
+.staff-option .so-name{font-size:15px;font-weight:600}
+.staff-option .so-role{font-size:11px;color:var(--text-muted)}
+</style>
+
 </head>
 <body>
-
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- LOGIN SCREEN -->
-<!-- LOGIN SCREEN -->
+<!-- LOGIN: ROLE SELECT -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="login-logo">🎬</div>
     <div class="login-title">Ascent Crew Tracker</div>
     <div class="login-subtitle">Shooting Team Performance Management</div>
-    <div class="form-group">
-      <label>Email</label>
-      <input type="email" id="loginEmail" placeholder="your@email.com">
+    <div class="role-select-grid">
+      <div class="role-card" onclick="showAdminLogin()"><div class="rc-icon">👑</div><div class="rc-title">Admin Panel</div><div class="rc-desc">Full Control</div></div>
+      <div class="role-card" onclick="showStaffLogin()"><div class="rc-icon">👤</div><div class="rc-title">Staff Panel</div><div class="rc-desc">My Dashboard</div></div>
     </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="loginPassword" placeholder="••••••••">
-    </div>
-    <button class="btn btn-primary" onclick="handleLogin()" style="margin-top:8px">
-      <i class="fas fa-sign-in-alt"></i> Login
-    </button>
-    <p style="margin-top:16px" id="setupBtnWrapper">
-      <button onclick="showSetup()" id="setupBtn" style="display:none;background:none;border:none;color:var(--accent);font-family:inherit;font-size:13px;cursor:pointer;text-decoration:underline">
-        🔧 First Time? Setup Admin Account
-      </button>
-    </p>
-    <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Ascent Digital Creation © 2026</p>
+    <p id="setupLink"><button onclick="showSetup()" style="background:none;border:none;color:var(--accent);font-family:inherit;font-size:13px;cursor:pointer;text-decoration:underline">🔧 First Time? Setup Admin</button></p>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:12px">Ascent Digital Creation &copy; 2026</p>
   </div>
 </div>
 
-<!-- ADMIN SETUP SCREEN -->
+<!-- LOGIN: ADMIN -->
+<div class="login-screen" id="adminLoginScreen" style="display:none">
+  <div class="login-box">
+    <div class="login-logo">👑</div>
+    <div class="login-title">Admin Login</div>
+    <div class="login-subtitle">Admin password দিন</div>
+    <div class="form-group"><label>Password</label><input type="password" id="adminLoginPw" placeholder="••••••••" onkeydown="if(event.key==='Enter')adminLogin()"></div>
+    <button class="btn btn-primary" onclick="adminLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
+    <p style="margin-top:16px"><button onclick="backToRoleSelect()" style="background:none;border:none;color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer">&larr; Back</button></p>
+  </div>
+</div>
+
+<!-- LOGIN: STAFF -->
+<div class="login-screen" id="staffLoginScreen" style="display:none">
+  <div class="login-box" style="max-width:460px">
+    <div class="login-logo">👤</div>
+    <div class="login-title">Staff Login</div>
+    <div class="login-subtitle">আপনার নাম select করুন</div>
+    <div class="staff-select-list" id="staffSelectList"><div class="loading"><div class="spinner"></div></div></div>
+    <div id="staffPwSection" style="display:none">
+      <div class="form-group"><label>Password</label><input type="password" id="staffLoginPw" placeholder="••••••••" onkeydown="if(event.key==='Enter')staffLogin()"></div>
+      <button class="btn btn-primary" onclick="staffLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
+    </div>
+    <p style="margin-top:16px"><button onclick="backToRoleSelect()" style="background:none;border:none;color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer">&larr; Back</button></p>
+  </div>
+</div>
+
+<!-- ADMIN SETUP -->
 <div class="login-screen" id="setupScreen" style="display:none">
   <div class="login-box">
     <div class="login-logo">🔧</div>
     <div class="login-title">Admin Setup</div>
     <div class="login-subtitle">প্রথমবার Admin account তৈরি করুন</div>
-    <div class="form-group">
-      <label>Admin Name</label>
-      <input type="text" id="setupName" placeholder="Biman">
-    </div>
-    <div class="form-group">
-      <label>Admin Email</label>
-      <input type="email" id="setupEmail" placeholder="admin@email.com">
-    </div>
-    <div class="form-group">
-      <label>Password (min 6 chars)</label>
-      <input type="password" id="setupPassword" placeholder="••••••••">
-    </div>
-    <button class="btn btn-primary" onclick="setupAdmin()" style="margin-top:8px">
-      <i class="fas fa-user-shield"></i> Create Admin Account
-    </button>
-    <p style="margin-top:16px">
-      <button onclick="hideSetup()" style="background:none;border:none;color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer;text-decoration:underline">
-        ← Back to Login
-      </button>
-    </p>
+    <div class="form-group"><label>Admin Name</label><input type="text" id="setupName" placeholder="Biman"></div>
+    <div class="form-group"><label>Password (min 6 chars)</label><input type="password" id="setupPassword" placeholder="••••••••"></div>
+    <button class="btn btn-primary" onclick="setupAdmin()"><i class="fas fa-user-shield"></i> Create Admin</button>
+    <p style="margin-top:16px"><button onclick="backToRoleSelect()" style="background:none;border:none;color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer">&larr; Back</button></p>
   </div>
 </div>
 
@@ -770,8 +782,8 @@
       </div>
     </div>
     <div class="topbar-right">
-      <span class="topbar-role" id="adminRoleBadge">Admin</span>
-      <button class="btn btn-icon btn-secondary" onclick="handleLogout()" title="Logout">
+      <span class="topbar-role" >👑 Admin</span>
+      <button class="btn btn-icon btn-secondary" onclick="logout()" title="Logout">
         <i class="fas fa-sign-out-alt"></i>
       </button>
     </div>
@@ -1015,8 +1027,8 @@
       </div>
     </div>
     <div class="topbar-right">
-      <span class="topbar-role" style="background:var(--green-light);color:var(--green)">Staff</span>
-      <button class="btn btn-icon btn-secondary" onclick="handleLogout()" title="Logout">
+      <span class="topbar-role" style="background:var(--green-light);color:var(--green)" id="staffNameBadge">Staff</span>
+      <button class="btn btn-icon btn-secondary" onclick="logout()" title="Logout">
         <i class="fas fa-sign-out-alt"></i>
       </button>
     </div>
@@ -1138,13 +1150,7 @@
         <option value="Freelancer">Freelancer</option>
       </select>
     </div>
-    <div class="form-group">
-      <label>Access Level</label>
-      <select id="newMemberAccess">
-        <option value="staff">Staff (শুধু নিজের data দেখবে)</option>
-        <option value="manager">Manager (Admin-এর মতো সব control)</option>
-      </select>
-    </div>
+    
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeModal('addMemberModal')">Cancel</button>
       <button class="btn btn-primary" onclick="addNewMember()"><i class="fas fa-plus"></i> Add</button>
@@ -1217,1164 +1223,96 @@
     </div>
   </div>
 </div>
+
 <script>
-// ===== FIREBASE CONFIG =====
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAPnA_34R1iuQQUymQ2MftSJuquFJREMu4",
-  authDomain: "ascent-editor-tracker.firebaseapp.com",
-  projectId: "ascent-editor-tracker",
-  storageBucket: "ascent-editor-tracker.firebasestorage.app",
-  messagingSenderId: "1044465732037",
-  appId: "1:1044465732037:web:855174ba2eb0b843cca3ac",
-  databaseURL: "https://ascent-editor-tracker-default-rtdb.asia-southeast1.firebasedatabase.app"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-const auth = firebase.auth();
-
-// ===== APP LOGIC =====
-// ========================
-// ASCENT CREW TRACKER - APP.JS
-// ========================
-
-let currentUser = null;
-let currentRole = null;
-let currentMemberId = null;
-let members = {};
-let selectedMemberId = null;
-let currentEntryTab = 'daily';
-let currentLBTab = 'monthly';
-let dailyRatings = {};
-let weeklyRatings = {};
-
-// ========================
-// UTILITY FUNCTIONS
-// ========================
-function showToast(msg, isError = false) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast' + (isError ? ' error' : '');
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-function getToday() {
-  return new Date().toISOString().split('T')[0];
-}
-
-function getCurrentMonth() {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-}
-
-function getPrevMonth() {
-  const d = new Date();
-  d.setMonth(d.getMonth()-1);
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-}
-
-function getMonthName(ym) {
-  const [y, m] = ym.split('-');
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  return months[parseInt(m)-1] + ' ' + y;
-}
-
-function getWeekStart() {
-  const d = new Date();
-  const day = d.getDay();
-  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-  const monday = new Date(d.setDate(diff));
-  return monday.toISOString().split('T')[0];
-}
-
-function getInitials(name) {
-  return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2);
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.remove('active');
-}
-
-function openModal(id) {
-  document.getElementById(id).classList.add('active');
-}
-
-// ========================
-// AUTH
-// ========================
-
-// Check if admin exists - if not, show setup button
-function checkAdminExists() {
-  db.ref('crew_users').orderByChild('role').equalTo('admin').once('value').then(snap => {
-    if (!snap.exists()) {
-      document.getElementById('setupBtn').style.display = 'inline';
-    } else {
-      document.getElementById('setupBtn').style.display = 'none';
-      document.getElementById('setupBtnWrapper').style.display = 'none';
-    }
-  });
-}
-// Run on page load
-checkAdminExists();
-
-function showSetup() {
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('setupScreen').style.display = 'flex';
-}
-function hideSetup() {
-  document.getElementById('setupScreen').style.display = 'none';
-  document.getElementById('loginScreen').style.display = 'flex';
-}
-
-function setupAdmin() {
-  const name = document.getElementById('setupName').value.trim();
-  const email = document.getElementById('setupEmail').value.trim();
-  const pass = document.getElementById('setupPassword').value;
-  if (!name || !email || !pass) return showToast('সব field পূরণ করুন', true);
-  if (pass.length < 6) return showToast('Password minimum 6 characters', true);
-
-  // Check if admin already exists
-  db.ref('crew_users').orderByChild('role').equalTo('admin').once('value').then(snap => {
-    if (snap.exists()) {
-      return showToast('Admin already exists! Please login.', true);
-    }
-    // Create admin auth user
-    auth.createUserWithEmailAndPassword(email, pass).then(cred => {
-      return db.ref('crew_users/' + cred.user.uid).set({
-        role: 'admin',
-        email: email,
-        name: name
-      });
-    }).then(() => {
-      showToast('✅ Admin account created! Logging in...');
-      document.getElementById('setupScreen').style.display = 'none';
-      // Auth state change will handle the rest
-    }).catch(err => showToast('Error: ' + err.message, true));
-  });
-}
-
-function handleLogin() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass = document.getElementById('loginPassword').value;
-  if (!email || !pass) return showToast('Email ও Password দিন', true);
-
-  auth.signInWithEmailAndPassword(email, pass)
-    .then(cred => {
-      checkUserRole(cred.user);
-    })
-    .catch(err => {
-      showToast('Login failed: ' + err.message, true);
-    });
-}
-
-function handleLogout() {
-  auth.signOut().then(() => {
-    document.getElementById('loginScreen').style.display = 'flex';
-    document.getElementById('setupScreen').style.display = 'none';
-    document.getElementById('adminApp').classList.remove('active');
-    document.getElementById('staffApp').classList.remove('active');
-    currentUser = null;
-    currentRole = null;
-  });
-}
-
-auth.onAuthStateChanged(user => {
-  if (user) {
-    currentUser = user;
-    checkUserRole(user);
-  }
-});
-
-function checkUserRole(user) {
-  db.ref('crew_users/' + user.uid).once('value').then(snap => {
-    const data = snap.val();
-    if (!data) {
-      showToast('User not registered in system', true);
-      auth.signOut();
-      return;
-    }
-    currentRole = data.role;
-    currentMemberId = data.memberId || null;
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('setupScreen').style.display = 'none';
-
-    if (data.role === 'admin' || data.role === 'manager') {
-      document.getElementById('adminApp').classList.add('active');
-      document.getElementById('adminRoleBadge').textContent = data.role === 'admin' ? 'Admin' : 'Manager';
-      loadAdminDashboard();
-      loadMembers();
-    } else {
-      document.getElementById('staffApp').classList.add('active');
-      loadStaffDashboard();
-    }
-  });
-}
-
-// ========================
-// NAVIGATION
-// ========================
-function switchAdminPage(pageId, el) {
-  document.querySelectorAll('#adminApp .page').forEach(p => p.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
-  document.querySelectorAll('#adminApp .nav-item').forEach(n => n.classList.remove('active'));
-  if (el) el.classList.add('active');
-
-  if (pageId === 'adminDashboard') loadAdminDashboard();
-  if (pageId === 'adminEntry') loadEntryMembers();
-  if (pageId === 'adminPerformance') loadAllPerformance();
-  if (pageId === 'adminLeaderboard') loadLeaderboard();
-  if (pageId === 'adminEmployees') loadEmployeeList();
-}
-
-function switchStaffPage(pageId, el) {
-  document.querySelectorAll('#staffApp .page').forEach(p => p.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
-  document.querySelectorAll('#staffApp .nav-item').forEach(n => n.classList.remove('active'));
-  if (el) el.classList.add('active');
-
-  if (pageId === 'staffDashboard') loadStaffDashboard();
-  if (pageId === 'staffLeaderboard') loadStaffLeaderboard();
-  if (pageId === 'staffRewards') loadStaffRewards();
-}
-
-// ========================
-// LOAD MEMBERS
-// ========================
-function loadMembers() {
-  db.ref('crew_members').on('value', snap => {
-    members = snap.val() || {};
-    updateMemberDropdowns();
-  });
-}
-
-function updateMemberDropdowns() {
-  const filter = document.getElementById('perfFilterMember');
-  if (filter) {
-    filter.innerHTML = '<option value="">All Members</option>';
-    Object.entries(members).forEach(([id, m]) => {
-      if (m.status !== 'Inactive') {
-        filter.innerHTML += `<option value="${id}">${m.name}</option>`;
-      }
-    });
-  }
-}
-
-// ========================
-// ADMIN DASHBOARD
-// ========================
-function loadAdminDashboard() {
-  const today = getToday();
-  const month = getCurrentMonth();
-  const weekStart = getWeekStart();
-
-  // Load entries count
-  db.ref('crew_daily_performance').orderByChild('date').equalTo(today).once('value').then(snap => {
-    document.getElementById('todayEntries').textContent = snap.numChildren();
-  });
-
-  // Weekly entries
-  db.ref('crew_daily_performance').orderByChild('date').startAt(weekStart).once('value').then(snap => {
-    document.getElementById('weeklyEntries').textContent = snap.numChildren();
-  });
-
-  // Total members
-  db.ref('crew_members').once('value').then(snap => {
-    const all = snap.val() || {};
-    const active = Object.values(all).filter(m => m.status !== 'Inactive').length;
-    document.getElementById('totalMembers').textContent = active;
-  });
-
-  // Load top performers & alerts
-  loadTopPerformers(month);
-  loadPrevMonthWinner('admin');
-}
-
-function loadTopPerformers(month) {
-  calculateMonthlyScores(month).then(scores => {
-    const sorted = scores.sort((a, b) => b.percentage - a.percentage);
-    const top3 = sorted.slice(0, 3);
-    const container = document.getElementById('topPerformers');
-
-    if (top3.length === 0) {
-      container.innerHTML = '<p style="color:var(--text-muted);font-size:13px;text-align:center;padding:20px">No data yet for this month</p>';
-      return;
-    }
-
-    container.innerHTML = top3.map((p, i) => `
-      <div class="top-performer">
-        <div class="rank rank-${i+1}">${i+1}</div>
-        <div class="tp-info">
-          <div class="tp-name">${p.name}</div>
-          <div class="tp-role">${p.role} · ${p.type} · ${p.workDays} days</div>
-        </div>
-        <div style="text-align:right">
-          <div class="tp-score">${p.percentage}%</div>
-          <div class="tp-pct">${p.totalPoints} pts</div>
-        </div>
-      </div>
-    `).join('');
-
-    // Alerts
-    const alerts = scores.filter(s => s.percentage < 40 && s.workDays > 0);
-    const alertCount = alerts.filter(s => s.percentage < 25).length;
-    document.getElementById('alertCount').textContent = alertCount;
-
-    if (alerts.length > 0) {
-      document.getElementById('alertCard').style.display = 'block';
-      document.getElementById('alertList').innerHTML = alerts.map(a => {
-        let badge = '';
-        if (a.percentage < 25) badge = '<span class="alert-badge alert-red"><i class="fas fa-exclamation-triangle"></i> Red Flag</span>';
-        else badge = '<span class="alert-badge alert-yellow"><i class="fas fa-exclamation-circle"></i> Warning</span>';
-        return `
-          <div class="top-performer" style="margin-bottom:8px">
-            <div style="width:36px;height:36px;border-radius:50%;background:var(--red-light);display:flex;align-items:center;justify-content:center">
-              <i class="fas fa-exclamation" style="color:var(--red)"></i>
-            </div>
-            <div class="tp-info">
-              <div class="tp-name">${a.name}</div>
-              <div class="tp-role">${a.percentage}% · ${a.workDays} days worked</div>
-            </div>
-            ${badge}
-          </div>
-        `;
-      }).join('');
-    } else {
-      document.getElementById('alertCard').style.display = 'none';
-    }
-  });
-}
-
-function loadPrevMonthWinner(panel) {
-  const prevMonth = getPrevMonth();
-  db.ref('crew_star_performers/' + prevMonth).once('value').then(snap => {
-    const data = snap.val();
-    const prefix = panel === 'admin' ? 'admin' : 'staff';
-    if (data) {
-      document.getElementById(`${prefix}PrevWinner`).style.display = 'block';
-      document.getElementById(`${prefix}PrevMonth`).textContent = getMonthName(prevMonth);
-      document.getElementById(`${prefix}PrevName`).textContent = data.name;
-      document.getElementById(`${prefix}PrevScore`).textContent = `${data.percentage}% · ${data.totalPoints} points`;
-
-      // Top 3 for staff
-      if (panel === 'staff' && data.top3) {
-        document.getElementById('staffTop3Card').style.display = 'block';
-        document.getElementById('staffTop3List').innerHTML = data.top3.map((p, i) => `
-          <div class="top-performer">
-            <div class="rank rank-${i+1}">${i+1}</div>
-            <div class="tp-info">
-              <div class="tp-name">${p.name}</div>
-              <div class="tp-role">${p.role}</div>
-            </div>
-            <div style="text-align:right">
-              <div class="tp-score">${p.percentage}%</div>
-            </div>
-          </div>
-        `).join('');
-      }
-    }
-  });
-}
-
-// ========================
-// CALCULATE SCORES
-// ========================
-async function calculateMonthlyScores(month) {
-  const membersSnap = await db.ref('crew_members').once('value');
-  const allMembers = membersSnap.val() || {};
-  
-  const dailySnap = await db.ref('crew_daily_performance').orderByChild('month').equalTo(month).once('value');
-  const dailyData = dailySnap.val() || {};
-
-  const weeklySnap = await db.ref('crew_weekly_discipline').orderByChild('month').equalTo(month).once('value');
-  const weeklyData = weeklySnap.val() || {};
-
-  const scores = [];
-
-  Object.entries(allMembers).forEach(([mid, member]) => {
-    if (member.status === 'Inactive') return;
-
-    // Daily performance
-    let dailyTotal = 0;
-    let dailyDays = 0;
-    Object.values(dailyData).forEach(entry => {
-      if (entry.memberId === mid) {
-        dailyTotal += (entry.quality || 0) + (entry.speed || 0) + (entry.behavior || 0) + (entry.initiative || 0) + (entry.conduct || 0);
-        dailyDays++;
-      }
-    });
-
-    // Weekly discipline
-    let weeklyTotal = 0;
-    let weeklyWeeks = 0;
-    Object.values(weeklyData).forEach(entry => {
-      if (entry.memberId === mid) {
-        weeklyTotal += (entry.attendance || 0);
-        weeklyWeeks++;
-      }
-    });
-
-    const maxDaily = dailyDays * 50;
-    const maxWeekly = weeklyWeeks * 20;
-    const maxPossible = maxDaily + maxWeekly;
-    const totalPoints = dailyTotal + weeklyTotal;
-    const percentage = maxPossible > 0 ? Math.round((totalPoints / maxPossible) * 100) : 0;
-
-    scores.push({
-      memberId: mid,
-      name: member.name,
-      role: member.role,
-      type: member.staffType || 'Daily',
-      totalPoints,
-      maxPossible,
-      percentage,
-      workDays: dailyDays,
-      weeklyWeeks,
-      dailyTotal,
-      weeklyTotal
-    });
-  });
-
-  return scores;
-}
-
-async function calculateWeeklyScores() {
-  const weekStart = getWeekStart();
-  const membersSnap = await db.ref('crew_members').once('value');
-  const allMembers = membersSnap.val() || {};
-
-  const dailySnap = await db.ref('crew_daily_performance').orderByChild('date').startAt(weekStart).once('value');
-  const dailyData = dailySnap.val() || {};
-
-  const weeklySnap = await db.ref('crew_weekly_discipline').orderByChild('weekStart').equalTo(weekStart).once('value');
-  const weeklyData = weeklySnap.val() || {};
-
-  const scores = [];
-  Object.entries(allMembers).forEach(([mid, member]) => {
-    if (member.status === 'Inactive') return;
-    let dailyTotal = 0, dailyDays = 0;
-    Object.values(dailyData).forEach(e => {
-      if (e.memberId === mid) {
-        dailyTotal += (e.quality||0)+(e.speed||0)+(e.behavior||0)+(e.initiative||0)+(e.conduct||0);
-        dailyDays++;
-      }
-    });
-    let weeklyTotal = 0, weeklyWeeks = 0;
-    Object.values(weeklyData).forEach(e => {
-      if (e.memberId === mid) { weeklyTotal += (e.attendance||0); weeklyWeeks++; }
-    });
-    const max = (dailyDays*50) + (weeklyWeeks*20);
-    const total = dailyTotal + weeklyTotal;
-    const pct = max > 0 ? Math.round((total/max)*100) : 0;
-    scores.push({ memberId: mid, name: member.name, role: member.role, type: member.staffType||'Daily', totalPoints: total, maxPossible: max, percentage: pct, workDays: dailyDays });
-  });
-  return scores;
-}
-
-// ========================
-// PERFORMANCE ENTRY
-// ========================
-function switchEntryTab(tab) {
-  currentEntryTab = tab;
-  document.querySelectorAll('#adminEntry .section-tab').forEach((t,i) => {
-    t.classList.toggle('active', (i===0 && tab==='daily') || (i===1 && tab==='weekly'));
-  });
-  document.getElementById('dailyEntrySection').style.display = tab === 'daily' ? 'block' : 'none';
-  document.getElementById('weeklyEntrySection').style.display = tab === 'weekly' ? 'block' : 'none';
-  loadEntryMembers();
-}
-
-function loadEntryMembers() {
-  db.ref('crew_members').once('value').then(snap => {
-    const all = snap.val() || {};
-    const active = Object.entries(all).filter(([_,m]) => m.status !== 'Inactive');
-
-    ['daily', 'weekly'].forEach(type => {
-      const container = document.getElementById(`${type}MemberList`);
-      container.innerHTML = active.map(([id, m]) => `
-        <div class="member-chip" onclick="selectEntryMember('${id}', '${type}')" id="${type}_chip_${id}">
-          <div class="mc-avatar">${getInitials(m.name)}</div>
-          <div>
-            <div class="mc-name">${m.name}</div>
-            <div class="mc-role">${m.role}</div>
-          </div>
-          <span class="mc-type type-${(m.staffType||'Daily').toLowerCase()}">${m.staffType||'Daily'}</span>
-        </div>
-      `).join('');
-    });
-  });
-}
-
-function selectEntryMember(id, type) {
-  selectedMemberId = id;
-  // Reset selections
-  document.querySelectorAll(`#${type}MemberList .member-chip`).forEach(c => c.classList.remove('selected'));
-  document.getElementById(`${type}_chip_${id}`).classList.add('selected');
-
-  if (type === 'daily') {
-    document.getElementById('dailyRatingForm').style.display = 'block';
-    document.getElementById('dailyDate').textContent = getToday();
-    // Reset ratings
-    dailyRatings = {};
-    document.querySelectorAll('#dailyRatingForm .rating-btn').forEach(b => b.classList.remove('selected'));
-    document.getElementById('dailyTotalPreview').textContent = '0 / 50';
-  } else {
-    document.getElementById('weeklyRatingForm').style.display = 'block';
-    document.getElementById('weeklyDate').textContent = getWeekStart();
-    weeklyRatings = {};
-    document.querySelectorAll('#weeklyRatingForm .rating-btn').forEach(b => b.classList.remove('selected'));
-    document.getElementById('weeklyTotalPreview').textContent = '0 / 20';
-  }
-}
-
-function selectRating(btn) {
-  const container = btn.closest('.rating-options');
-  const field = container.dataset.field;
-  const value = parseInt(btn.dataset.value);
-
-  container.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-
-  if (['quality','speed','behavior','initiative','conduct'].includes(field)) {
-    dailyRatings[field] = value;
-    const total = Object.values(dailyRatings).reduce((a,b) => a+b, 0);
-    document.getElementById('dailyTotalPreview').textContent = `${total} / 50`;
-  } else if (field === 'attendance') {
-    weeklyRatings[field] = value;
-    document.getElementById('weeklyTotalPreview').textContent = `${value} / 20`;
-  }
-}
-
-function submitDailyEntry() {
-  if (!selectedMemberId) return showToast('Member select করুন', true);
-  const required = ['quality','speed','behavior','initiative','conduct'];
-  for (const r of required) {
-    if (!dailyRatings[r]) return showToast(`${r} rating দিন`, true);
-  }
-
-  const entry = {
-    memberId: selectedMemberId,
-    memberName: members[selectedMemberId]?.name || '',
-    date: getToday(),
-    month: getCurrentMonth(),
-    quality: dailyRatings.quality,
-    speed: dailyRatings.speed,
-    behavior: dailyRatings.behavior,
-    initiative: dailyRatings.initiative,
-    conduct: dailyRatings.conduct,
-    total: Object.values(dailyRatings).reduce((a,b) => a+b, 0),
-    enteredBy: currentUser.uid,
-    timestamp: firebase.database.ServerValue.TIMESTAMP
-  };
-
-  db.ref('crew_daily_performance').push(entry).then(() => {
-    showToast('✅ Daily entry saved!');
-    dailyRatings = {};
-    document.querySelectorAll('#dailyRatingForm .rating-btn').forEach(b => b.classList.remove('selected'));
-    document.getElementById('dailyTotalPreview').textContent = '0 / 50';
-    document.getElementById('dailyRatingForm').style.display = 'none';
-    document.querySelectorAll('#dailyMemberList .member-chip').forEach(c => c.classList.remove('selected'));
-    selectedMemberId = null;
-  }).catch(err => showToast('Error: ' + err.message, true));
-}
-
-function submitWeeklyEntry() {
-  if (!selectedMemberId) return showToast('Member select করুন', true);
-  if (!weeklyRatings.attendance) return showToast('Attendance rating দিন', true);
-
-  const entry = {
-    memberId: selectedMemberId,
-    memberName: members[selectedMemberId]?.name || '',
-    weekStart: getWeekStart(),
-    month: getCurrentMonth(),
-    attendance: weeklyRatings.attendance,
-    enteredBy: currentUser.uid,
-    timestamp: firebase.database.ServerValue.TIMESTAMP
-  };
-
-  db.ref('crew_weekly_discipline').push(entry).then(() => {
-    showToast('✅ Weekly entry saved!');
-    weeklyRatings = {};
-    document.querySelectorAll('#weeklyRatingForm .rating-btn').forEach(b => b.classList.remove('selected'));
-    document.getElementById('weeklyTotalPreview').textContent = '0 / 20';
-    document.getElementById('weeklyRatingForm').style.display = 'none';
-    document.querySelectorAll('#weeklyMemberList .member-chip').forEach(c => c.classList.remove('selected'));
-    selectedMemberId = null;
-  }).catch(err => showToast('Error: ' + err.message, true));
-}
-
-// ========================
-// ALL PERFORMANCE VIEW
-// ========================
-function loadAllPerformance() {
-  const month = getCurrentMonth();
-  db.ref('crew_daily_performance').orderByChild('month').equalTo(month).once('value').then(snap => {
-    const data = snap.val() || {};
-    const entries = Object.entries(data).sort((a,b) => (b[1].timestamp||0) - (a[1].timestamp||0));
-    renderPerformanceList(entries);
-  });
-}
-
-function filterPerformance() {
-  const memberId = document.getElementById('perfFilterMember').value;
-  const date = document.getElementById('perfFilterDate').value;
-  const month = getCurrentMonth();
-
-  db.ref('crew_daily_performance').orderByChild('month').equalTo(month).once('value').then(snap => {
-    let entries = Object.entries(snap.val() || {});
-    if (memberId) entries = entries.filter(([_,e]) => e.memberId === memberId);
-    if (date) entries = entries.filter(([_,e]) => e.date === date);
-    entries.sort((a,b) => (b[1].timestamp||0) - (a[1].timestamp||0));
-    renderPerformanceList(entries);
-  });
-}
-
-function renderPerformanceList(entries) {
-  const container = document.getElementById('performanceList');
-  if (entries.length === 0) {
-    container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px">No entries found</p>';
-    return;
-  }
-  container.innerHTML = entries.map(([id, e]) => `
-    <div class="card" style="padding:14px">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px">
-        <div>
-          <div style="font-weight:700;font-size:14px">${e.memberName || 'Unknown'}</div>
-          <div style="font-size:11px;color:var(--text-muted)">${e.date}</div>
-        </div>
-        <div style="display:flex;gap:6px;align-items:center">
-          <span style="font-size:20px;font-weight:800;color:var(--accent)">${e.total}/50</span>
-          <button class="btn btn-icon btn-secondary btn-sm" onclick="openEditPerf('${id}','daily')" style="width:28px;height:28px">
-            <i class="fas fa-edit" style="font-size:11px"></i>
-          </button>
-        </div>
-      </div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <span class="alert-badge ${e.quality>=7?'alert-green':e.quality>=4?'alert-yellow':'alert-red'}">Quality: ${e.quality}</span>
-        <span class="alert-badge ${e.speed>=7?'alert-green':e.speed>=4?'alert-yellow':'alert-red'}">Speed: ${e.speed}</span>
-        <span class="alert-badge ${e.behavior>=7?'alert-green':e.behavior>=4?'alert-yellow':'alert-red'}">Behavior: ${e.behavior}</span>
-        <span class="alert-badge ${e.initiative>=7?'alert-green':e.initiative>=4?'alert-yellow':'alert-red'}">Initiative: ${e.initiative}</span>
-        <span class="alert-badge ${e.conduct>=7?'alert-green':e.conduct>=4?'alert-yellow':'alert-red'}">Conduct: ${e.conduct}</span>
-      </div>
-    </div>
-  `).join('');
-}
-
-function openEditPerf(id, type) {
-  document.getElementById('editPerfId').value = id;
-  document.getElementById('editPerfType').value = type;
-
-  db.ref(`crew_daily_performance/${id}`).once('value').then(snap => {
-    const e = snap.val();
-    const fields = ['quality','speed','behavior','initiative','conduct'];
-    document.getElementById('editPerfFields').innerHTML = fields.map(f => `
-      <div class="form-group">
-        <label>${f.charAt(0).toUpperCase()+f.slice(1)}</label>
-        <select id="editPerf_${f}">
-          ${f === 'initiative' ?
-            `<option value="10" ${e[f]===10?'selected':''}>High (10)</option>
-             <option value="6" ${e[f]===6?'selected':''}>Medium (6)</option>
-             <option value="3" ${e[f]===3?'selected':''}>Low (3)</option>` :
-            `<option value="10" ${e[f]===10?'selected':''}>Excellent (10)</option>
-             <option value="7" ${e[f]===7?'selected':''}>Good (7)</option>
-             <option value="4" ${e[f]===4?'selected':''}>Average (4)</option>
-             <option value="1" ${e[f]===1?'selected':''}>Poor (1)</option>`
-          }
-        </select>
-      </div>
-    `).join('');
-    openModal('editPerfModal');
-  });
-}
-
-function updatePerformance() {
-  const id = document.getElementById('editPerfId').value;
-  const fields = ['quality','speed','behavior','initiative','conduct'];
-  const updates = {};
-  let total = 0;
-  fields.forEach(f => {
-    const v = parseInt(document.getElementById(`editPerf_${f}`).value);
-    updates[f] = v;
-    total += v;
-  });
-  updates.total = total;
-
-  db.ref(`crew_daily_performance/${id}`).update(updates).then(() => {
-    showToast('✅ Updated!');
-    closeModal('editPerfModal');
-    loadAllPerformance();
-  });
-}
-
-// ========================
-// LEADERBOARD
-// ========================
-function switchLBTab(tab) {
-  currentLBTab = tab;
-  document.querySelectorAll('#adminLeaderboard .section-tab').forEach((t,i) => {
-    t.classList.toggle('active', (i===0 && tab==='monthly') || (i===1 && tab==='weekly'));
-  });
-  loadLeaderboard();
-}
-
-function loadLeaderboard() {
-  const month = getCurrentMonth();
-  const isMonthly = currentLBTab === 'monthly';
-
-  const calc = isMonthly ? calculateMonthlyScores(month) : calculateWeeklyScores();
-  calc.then(scores => {
-    const sorted = scores.sort((a,b) => b.percentage - a.percentage);
-
-    // Star performer suggestion (monthly only)
-    if (isMonthly && sorted.length > 0 && sorted[0].workDays > 0) {
-      document.getElementById('starDeclareSection').style.display = 'block';
-      document.getElementById('suggestedStarName').textContent = sorted[0].name;
-      document.getElementById('suggestedStarScore').textContent = `${sorted[0].percentage}% · ${sorted[0].totalPoints} points · ${sorted[0].workDays} days`;
-    } else {
-      document.getElementById('starDeclareSection').style.display = 'none';
-    }
-
-    const container = document.getElementById('leaderboardContent');
-    if (sorted.length === 0) {
-      container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px">No data yet</p>';
-      return;
-    }
-
-    container.innerHTML = `
-      <div style="overflow-x:auto">
-        <table class="lb-table">
-          <thead><tr>
-            <th>#</th><th>Name</th><th>Type</th><th>Days</th><th>Points</th><th>%</th><th>Status</th>
-          </tr></thead>
-          <tbody>
-            ${sorted.map((s, i) => {
-              let badge = '';
-              if (s.workDays === 0) badge = '<span class="alert-badge" style="background:var(--bg-input);color:var(--text-muted)">No Data</span>';
-              else if (s.percentage >= 70) badge = '<span class="alert-badge alert-green">Excellent</span>';
-              else if (s.percentage >= 40) badge = '<span class="alert-badge alert-yellow">Average</span>';
-              else badge = '<span class="alert-badge alert-red">Red Flag</span>';
-
-              return `<tr>
-                <td><strong>${i+1}</strong></td>
-                <td>
-                  <div style="font-weight:600">${s.name}</div>
-                  <div style="font-size:11px;color:var(--text-muted)">${s.role}</div>
-                </td>
-                <td><span class="mc-type type-${s.type.toLowerCase()}">${s.type}</span></td>
-                <td>${s.workDays}</td>
-                <td><strong>${s.totalPoints}</strong></td>
-                <td><strong style="color:var(--accent)">${s.percentage}%</strong></td>
-                <td>${badge}</td>
-              </tr>`;
-            }).join('')}
-          </tbody>
-        </table>
-      </div>
-    `;
-  });
-}
-
-function declareStarPerformer() {
-  const month = getCurrentMonth();
-  calculateMonthlyScores(month).then(scores => {
-    const sorted = scores.sort((a,b) => b.percentage - a.percentage);
-    if (sorted.length === 0) return;
-
-    const winner = sorted[0];
-    const top3 = sorted.slice(0,3).map(s => ({
-      name: s.name, role: s.role, percentage: s.percentage, totalPoints: s.totalPoints
-    }));
-
-    const declaration = {
-      name: winner.name,
-      memberId: winner.memberId,
-      percentage: winner.percentage,
-      totalPoints: winner.totalPoints,
-      top3: top3,
-      declaredBy: currentUser.uid,
-      declaredAt: firebase.database.ServerValue.TIMESTAMP
-    };
-
-    db.ref('crew_star_performers/' + month).set(declaration).then(() => {
-      showToast('🌟 Star Performer declared: ' + winner.name);
-    });
-  });
-}
-
-// ========================
-// EMPLOYEE MANAGEMENT
-// ========================
-function loadEmployeeList() {
-  db.ref('crew_members').once('value').then(snap => {
-    const all = snap.val() || {};
-    const container = document.getElementById('employeeList');
-    const entries = Object.entries(all);
-    
-    if (entries.length === 0) {
-      container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px">No members added yet</p>';
-      return;
-    }
-
-    container.innerHTML = entries.map(([id, m]) => `
-      <div class="emp-card" style="flex-wrap:wrap">
-        <div class="emp-avatar">${getInitials(m.name)}</div>
-        <div class="emp-info">
-          <div class="emp-name">${m.name}</div>
-          <div class="emp-meta">${m.role} · ${m.staffType||'Daily'} · ${m.phone||''}</div>
-          <div class="emp-meta">${m.status === 'Inactive' ? '<span style="color:var(--red)">Inactive</span>' : '<span style="color:var(--green)">Active</span>'} · Joined: ${m.joinDate||'N/A'}</div>
-          <div class="emp-meta" style="margin-top:4px">
-            <span style="color:var(--text-muted)">📧</span> ${m.email||'N/A'} &nbsp;
-            <span style="color:var(--text-muted)">🔑</span> 
-            <span id="pw_${id}" style="font-family:monospace;background:var(--bg-primary);padding:2px 6px;border-radius:4px;font-size:12px">••••••</span>
-            <button onclick="togglePw('${id}','${(m.password||'N/A').replace(/'/g,"\\'")}')" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:12px;padding:2px 4px" title="Show/Hide Password">
-              <i class="fas fa-eye" id="pwicon_${id}"></i>
-            </button>
-          </div>
-        </div>
-        <div class="emp-actions">
-          <button class="btn btn-icon btn-secondary" onclick="openEditMember('${id}')" style="width:32px;height:32px" title="Edit">
-            <i class="fas fa-edit" style="font-size:12px"></i>
-          </button>
-          <button class="btn btn-icon" onclick="deleteMember('${id}','${m.name.replace(/'/g,"\\'")}')" style="width:32px;height:32px;background:var(--red-light);color:var(--red)" title="Delete">
-            <i class="fas fa-trash" style="font-size:12px"></i>
-          </button>
-        </div>
-      </div>
-    `).join('');
-  });
-}
-
-function deleteMember(id, name) {
-  if (!confirm(`⚠️ "${name}" কে delete করতে চান?\n\nএর সমস্ত performance data-ও মুছে যাবে। এটা undo করা যাবে না!`)) return;
-  
-  // Delete member data
-  db.ref('crew_members/' + id).remove().then(() => {
-    // Delete their performance entries
-    db.ref('crew_daily_performance').orderByChild('memberId').equalTo(id).once('value').then(snap => {
-      const updates = {};
-      snap.forEach(child => { updates[child.key] = null; });
-      if (Object.keys(updates).length > 0) db.ref('crew_daily_performance').update(updates);
-    });
-    // Delete their weekly entries
-    db.ref('crew_weekly_discipline').orderByChild('memberId').equalTo(id).once('value').then(snap => {
-      const updates = {};
-      snap.forEach(child => { updates[child.key] = null; });
-      if (Object.keys(updates).length > 0) db.ref('crew_weekly_discipline').update(updates);
-    });
-    // Delete their user mapping
-    db.ref('crew_users').orderByChild('memberId').equalTo(id).once('value').then(snap => {
-      snap.forEach(child => { db.ref('crew_users/' + child.key).remove(); });
-    });
-    
-    showToast('✅ ' + name + ' deleted!');
-    loadEmployeeList();
-  }).catch(err => showToast('Error: ' + err.message, true));
-}
-
-function togglePw(id, pw) {
-  const span = document.getElementById('pw_' + id);
-  const icon = document.getElementById('pwicon_' + id);
-  if (span.textContent === '••••••') {
-    span.textContent = pw;
-    icon.className = 'fas fa-eye-slash';
-  } else {
-    span.textContent = '••••••';
-    icon.className = 'fas fa-eye';
-  }
-}
-
-function openAddMemberModal() {
-  document.getElementById('newMemberName').value = '';
-  document.getElementById('newMemberPhone').value = '';
-  document.getElementById('newMemberEmail').value = '';
-  document.getElementById('newMemberPassword').value = '';
-  openModal('addMemberModal');
-}
-
-function addNewMember() {
-  const name = document.getElementById('newMemberName').value.trim();
-  const phone = document.getElementById('newMemberPhone').value.trim();
-  const email = document.getElementById('newMemberEmail').value.trim();
-  const password = document.getElementById('newMemberPassword').value;
-  const role = document.getElementById('newMemberRole').value;
-  const staffType = document.getElementById('newMemberType').value;
-  const accessLevel = document.getElementById('newMemberAccess').value;
-
-  if (!name || !email || !password) return showToast('Name, Email ও Password দিন', true);
-  if (password.length < 6) return showToast('Password minimum 6 characters', true);
-
-  // Use secondary Firebase app to create user without signing out admin
-  let secondaryApp;
-  try {
-    secondaryApp = firebase.app('secondary');
-  } catch (e) {
-    secondaryApp = firebase.initializeApp(firebaseConfig, 'secondary');
-  }
-  const secondaryAuth = secondaryApp.auth();
-
-  const memberRef = db.ref('crew_members').push();
-  const memberId = memberRef.key;
-
-  secondaryAuth.createUserWithEmailAndPassword(email, password).then(cred => {
-    // Save member data
-    return memberRef.set({
-      name, phone, email, role, staffType, password,
-      status: 'Active',
-      joinDate: getToday(),
-      createdAt: firebase.database.ServerValue.TIMESTAMP
-    }).then(() => {
-      // Save user role mapping
-      return db.ref('crew_users/' + cred.user.uid).set({
-        role: accessLevel,
-        memberId: memberId,
-        email: email,
-        name: name
-      });
-    });
-  }).then(() => {
-    secondaryAuth.signOut();
-    showToast('✅ Member added successfully!');
-    closeModal('addMemberModal');
-    loadEmployeeList();
-  }).catch(err => {
-    showToast('Error: ' + err.message, true);
-  });
-}
-
-function openEditMember(id) {
-  db.ref('crew_members/' + id).once('value').then(snap => {
-    const m = snap.val();
-    document.getElementById('editMemberId').value = id;
-    document.getElementById('editMemberName').value = m.name;
-    document.getElementById('editMemberPhone').value = m.phone || '';
-    document.getElementById('editMemberRole').value = m.role;
-    document.getElementById('editMemberType').value = m.staffType || 'Daily';
-    document.getElementById('editMemberStatus').value = m.status || 'Active';
-    document.getElementById('editMemberCurrentPw').value = m.password || 'N/A';
-    document.getElementById('editMemberNewPw').value = '';
-    openModal('editMemberModal');
-  });
-}
-
-function updateMember() {
-  const id = document.getElementById('editMemberId').value;
-  const newPw = document.getElementById('editMemberNewPw').value.trim();
-  const currentPw = document.getElementById('editMemberCurrentPw').value;
-  const updates = {
-    name: document.getElementById('editMemberName').value.trim(),
-    phone: document.getElementById('editMemberPhone').value.trim(),
-    role: document.getElementById('editMemberRole').value,
-    staffType: document.getElementById('editMemberType').value,
-    status: document.getElementById('editMemberStatus').value
-  };
-  
-  if (newPw) {
-    if (newPw.length < 6) return showToast('Password minimum 6 characters', true);
-    updates.password = newPw;
-    
-    // Check if old password exists in database
-    db.ref('crew_members/' + id).once('value').then(snap => {
-      const member = snap.val();
-      const memberEmail = member.email;
-      const oldPassword = member.password;
-      
-      // If no old password saved, just update database only
-      if (!oldPassword || oldPassword === 'N/A') {
-        db.ref('crew_members/' + id).update(updates).then(() => {
-          showToast('✅ Database-এ password saved! ⚠️ কিন্তু login password change হয়নি — এই member delete করে নতুন করে add করুন।', true);
-          closeModal('editMemberModal');
-          loadEmployeeList();
-        });
-        return;
-      }
-      
-      // Old password exists - change in Firebase Auth too
-      let secondaryApp;
-      try { secondaryApp = firebase.app('secondary'); } 
-      catch (e) { secondaryApp = firebase.initializeApp(firebaseConfig, 'secondary'); }
-      const secondaryAuth = secondaryApp.auth();
-      
-      secondaryAuth.signInWithEmailAndPassword(memberEmail, oldPassword).then(cred => {
-        return cred.user.updatePassword(newPw);
-      }).then(() => {
-        secondaryAuth.signOut();
-        return db.ref('crew_members/' + id).update(updates);
-      }).then(() => {
-        showToast('✅ Password changed! নতুন password দিয়ে login করতে পারবে।');
-        closeModal('editMemberModal');
-        loadEmployeeList();
-      }).catch(err => {
-        db.ref('crew_members/' + id).update(updates).then(() => {
-          showToast('⚠️ Database updated, but Auth failed: ' + err.message, true);
-          closeModal('editMemberModal');
-          loadEmployeeList();
-        });
-      });
-    });
-  } else {
-    // No password change, just update other fields
-    db.ref('crew_members/' + id).update(updates).then(() => {
-      showToast('✅ Member updated!');
-      closeModal('editMemberModal');
-      loadEmployeeList();
-    });
-  }
-}
-
-// ========================
-// STAFF PANEL
-// ========================
-function loadStaffDashboard() {
-  if (!currentMemberId) return;
-  const month = getCurrentMonth();
-  const today = getToday();
-  const weekStart = getWeekStart();
-
-  loadPrevMonthWinner('staff');
-
-  // Today's points
-  db.ref('crew_daily_performance').orderByChild('date').equalTo(today).once('value').then(snap => {
-    const data = snap.val() || {};
-    let todayPts = '-';
-    Object.values(data).forEach(e => {
-      if (e.memberId === currentMemberId) todayPts = e.total;
-    });
-    document.getElementById('staffTodayPts').textContent = todayPts;
-  });
-
-  // Weekly points
-  db.ref('crew_daily_performance').orderByChild('date').startAt(weekStart).once('value').then(snap => {
-    const data = snap.val() || {};
-    let weekTotal = 0;
-    Object.values(data).forEach(e => {
-      if (e.memberId === currentMemberId) weekTotal += e.total;
-    });
-    document.getElementById('staffWeeklyPts').textContent = weekTotal;
-
-    // Daily score list for this week
-    const dailyScores = [];
-    Object.values(data).forEach(e => {
-      if (e.memberId === currentMemberId) dailyScores.push({ date: e.date, total: e.total });
-    });
-    dailyScores.sort((a,b) => a.date.localeCompare(b.date));
-    
-    const container = document.getElementById('staffDailyScores');
-    if (dailyScores.length === 0) {
-      container.innerHTML = '<p style="color:var(--text-muted);font-size:13px;text-align:center;padding:16px">No scores this week yet</p>';
-    } else {
-      container.innerHTML = dailyScores.map(s => {
-        const pct = Math.round((s.total/50)*100);
-        const color = pct >= 70 ? 'var(--green)' : pct >= 40 ? 'var(--yellow)' : 'var(--red)';
-        return `
-          <div class="score-day">
-            <div class="sd-date">${s.date.slice(5)}</div>
-            <div class="sd-bar">
-              <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${color}"></div></div>
-            </div>
-            <div class="sd-points" style="color:${color}">${s.total}/50</div>
-          </div>
-        `;
-      }).join('');
-    }
-  });
-
-  // Monthly stats & rank
-  calculateMonthlyScores(month).then(scores => {
-    const sorted = scores.sort((a,b) => b.percentage - a.percentage);
-    const myIndex = sorted.findIndex(s => s.memberId === currentMemberId);
-    const myScore = myIndex >= 0 ? sorted[myIndex] : null;
-
-    document.getElementById('staffMyRank').textContent = myIndex >= 0 ? `#${myIndex+1}` : '-';
-    document.getElementById('staffTotalMembers').textContent = sorted.length;
-    document.getElementById('staffMonthlyPts').textContent = myScore ? myScore.totalPoints : 0;
-    document.getElementById('staffMonthlyPct').textContent = myScore ? myScore.percentage + '%' : '0%';
-  });
-}
-
-function loadStaffLeaderboard() {
-  const month = getCurrentMonth();
-  calculateMonthlyScores(month).then(scores => {
-    const sorted = scores.sort((a,b) => b.percentage - a.percentage).slice(0, 10);
-    const container = document.getElementById('staffLeaderboardContent');
-
-    if (sorted.length === 0) {
-      container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px">No data yet</p>';
-      return;
-    }
-
-    container.innerHTML = sorted.map((s, i) => {
-      const isMe = s.memberId === currentMemberId;
-      return `
-        <div class="top-performer" style="${isMe ? 'border:2px solid var(--accent);background:var(--accent-light)' : ''}">
-          <div class="rank ${i<3?'rank-'+(i+1):''}" style="${i>=3?'background:var(--bg-input);color:var(--text-muted)':''}">${i+1}</div>
-          <div class="tp-info">
-            <div class="tp-name">${s.name} ${isMe ? '(You)' : ''}</div>
-            <div class="tp-role">${s.role} · ${s.type} · ${s.workDays} days</div>
-          </div>
-          <div style="text-align:right">
-            <div class="tp-score">${s.percentage}%</div>
-            <div class="tp-pct">${s.totalPoints} pts</div>
-          </div>
-        </div>
-      `;
-    }).join('');
-  });
-}
-
-function loadStaffRewards() {
-  if (!currentMemberId) return;
-  const month = getCurrentMonth();
-  calculateMonthlyScores(month).then(scores => {
-    const sorted = scores.sort((a,b) => b.percentage - a.percentage);
-    const myIndex = sorted.findIndex(s => s.memberId === currentMemberId);
-    const myScore = myIndex >= 0 ? sorted[myIndex] : null;
-
-    const container = document.getElementById('staffRewardsContent');
-    const pct = myScore ? myScore.percentage : 0;
-
-    const rewards = [
-      {
-        icon: '🌟',
-        title: 'Star Performer of the Month',
-        desc: 'Rank #1 with highest percentage',
-        eligible: myIndex === 0 && pct > 0,
-        status: myIndex === 0 ? 'Eligible!' : `Need Rank #1 (Current: #${myIndex+1})`
-      },
-      {
-        icon: '🏆',
-        title: 'Top 3 Leaderboard Recognition',
-        desc: 'Be in the top 3 monthly ranking',
-        eligible: myIndex >= 0 && myIndex < 3 && pct > 0,
-        status: myIndex < 3 ? 'Eligible!' : `Need Top 3 (Current: #${myIndex+1})`
-      },
-      {
-        icon: '💰',
-        title: 'Bonus Eligibility',
-        desc: 'Maintain 70%+ monthly score',
-        eligible: pct >= 70,
-        status: pct >= 70 ? 'Eligible!' : `Need 70%+ (Current: ${pct}%)`
-      }
-    ];
-
-    container.innerHTML = rewards.map(r => `
-      <div class="reward-card">
-        <div class="rw-icon">${r.icon}</div>
-        <div class="rw-info">
-          <div class="rw-title">${r.title}</div>
-          <div class="rw-desc">${r.desc}</div>
-        </div>
-        <span class="rw-status ${r.eligible ? 'alert-green' : 'alert-yellow'}">${r.status}</span>
-      </div>
-    `).join('');
-  });
-}
-
-// ========================
-// INITIAL ADMIN SETUP
-// ========================
-// First time: create admin user in Firebase Console, then add to crew_users:
-// crew_users/{uid}: { role: "admin", email: "admin@ascent.com", name: "Biman" }
-
+// ===== FIREBASE =====
+const firebaseConfig={apiKey:"AIzaSyAPnA_34R1iuQQUymQ2MftSJuquFJREMu4",authDomain:"ascent-editor-tracker.firebaseapp.com",projectId:"ascent-editor-tracker",storageBucket:"ascent-editor-tracker.firebasestorage.app",messagingSenderId:"1044465732037",appId:"1:1044465732037:web:855174ba2eb0b843cca3ac",databaseURL:"https://ascent-editor-tracker-default-rtdb.asia-southeast1.firebasedatabase.app"};
+firebase.initializeApp(firebaseConfig);const db=firebase.database();
+
+// ===== GLOBALS =====
+let currentMemberId=null,members={},selectedMemberId=null,currentEntryTab='daily',currentLBTab='monthly',dailyRatings={},weeklyRatings={},selectedStaffId=null;
+
+// ===== UTILS =====
+function showToast(m,e=false){const t=document.getElementById('toast');t.textContent=m;t.className='toast'+(e?' error':'');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+function getToday(){return new Date().toISOString().split('T')[0]}
+function getCurrentMonth(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`}
+function getPrevMonth(){const d=new Date();d.setMonth(d.getMonth()-1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`}
+function getMonthName(ym){const[y,m]=ym.split('-');const ms=['January','February','March','April','May','June','July','August','September','October','November','December'];return ms[parseInt(m)-1]+' '+y}
+function getWeekStart(){const d=new Date();const day=d.getDay();const diff=d.getDate()-day+(day===0?-6:1);return new Date(d.setDate(diff)).toISOString().split('T')[0]}
+function getInitials(n){return n.split(' ').map(x=>x[0]).join('').toUpperCase().slice(0,2)}
+function closeModal(id){document.getElementById(id).classList.remove('active')}
+function openModal(id){document.getElementById(id).classList.add('active')}
+function hideAll(){['loginScreen','adminLoginScreen','staffLoginScreen','setupScreen'].forEach(id=>document.getElementById(id).style.display='none');document.getElementById('adminApp').classList.remove('active');document.getElementById('staffApp').classList.remove('active')}
+
+// ===== LOGIN =====
+db.ref('crew_admin').once('value').then(s=>{if(s.exists())document.getElementById('setupLink').style.display='none'});
+function showAdminLogin(){hideAll();document.getElementById('adminLoginScreen').style.display='flex';document.getElementById('adminLoginPw').focus()}
+function showStaffLogin(){hideAll();document.getElementById('staffLoginScreen').style.display='flex';loadStaffList()}
+function showSetup(){hideAll();document.getElementById('setupScreen').style.display='flex'}
+function backToRoleSelect(){hideAll();document.getElementById('loginScreen').style.display='flex'}
+function logout(){hideAll();document.getElementById('loginScreen').style.display='flex';currentMemberId=null}
+
+function setupAdmin(){const name=document.getElementById('setupName').value.trim(),pw=document.getElementById('setupPassword').value;if(!name||!pw)return showToast('Name ও Password দিন',true);if(pw.length<6)return showToast('Password minimum 6 characters',true);db.ref('crew_admin').once('value').then(s=>{if(s.exists())return showToast('Admin already exists!',true);db.ref('crew_admin').set({name:name,password:pw,createdAt:getToday()}).then(()=>{showToast('✅ Admin created!');document.getElementById('setupLink').style.display='none';backToRoleSelect()})})}
+
+function adminLogin(){const pw=document.getElementById('adminLoginPw').value;if(!pw)return showToast('Password দিন',true);db.ref('crew_admin/password').once('value').then(s=>{if(s.val()===pw){hideAll();document.getElementById('adminApp').classList.add('active');loadAdminDashboard();loadMembers()}else showToast('Wrong password!',true)})}
+
+function loadStaffList(){db.ref('crew_members').once('value').then(s=>{const all=s.val()||{};const active=Object.entries(all).filter(([_,m])=>m.status!=='Inactive');const c=document.getElementById('staffSelectList');if(active.length===0){c.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:16px">No members yet</p>';return}c.innerHTML=active.map(([id,m])=>`<div class="staff-option" onclick="selectStaff('${id}')" id="so_${id}"><div class="so-avatar">${getInitials(m.name)}</div><div><div class="so-name">${m.name}</div><div class="so-role">${m.role} · ${m.staffType||'Daily'}</div></div></div>`).join('')})}
+
+function selectStaff(id){selectedStaffId=id;document.querySelectorAll('.staff-option').forEach(x=>x.classList.remove('selected'));document.getElementById('so_'+id).classList.add('selected');document.getElementById('staffPwSection').style.display='block';document.getElementById('staffLoginPw').value='';document.getElementById('staffLoginPw').focus()}
+
+function staffLogin(){if(!selectedStaffId)return showToast('নাম select করুন',true);const pw=document.getElementById('staffLoginPw').value;if(!pw)return showToast('Password দিন',true);db.ref('crew_members/'+selectedStaffId+'/password').once('value').then(s=>{if(s.val()===pw){currentMemberId=selectedStaffId;db.ref('crew_members/'+selectedStaffId+'/name').once('value').then(ns=>{document.getElementById('staffNameBadge').textContent=ns.val();hideAll();document.getElementById('staffApp').classList.add('active');loadStaffDashboard()})}else showToast('Wrong password!',true)})}
+
+// ===== NAV =====
+function switchAdminPage(p,el){document.querySelectorAll('#adminApp .page').forEach(x=>x.classList.remove('active'));document.getElementById(p).classList.add('active');document.querySelectorAll('#adminApp .nav-item').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(p==='adminDashboard')loadAdminDashboard();if(p==='adminEntry')loadEntryMembers();if(p==='adminPerformance')loadAllPerformance();if(p==='adminLeaderboard')loadLeaderboard();if(p==='adminEmployees')loadEmployeeList()}
+function switchStaffPage(p,el){document.querySelectorAll('#staffApp .page').forEach(x=>x.classList.remove('active'));document.getElementById(p).classList.add('active');document.querySelectorAll('#staffApp .nav-item').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(p==='staffDashboard')loadStaffDashboard();if(p==='staffLeaderboard')loadStaffLeaderboard();if(p==='staffRewards')loadStaffRewards()}
+
+// ===== MEMBERS =====
+function loadMembers(){db.ref('crew_members').on('value',s=>{members=s.val()||{};const f=document.getElementById('perfFilterMember');if(f){f.innerHTML='<option value="">All Members</option>';Object.entries(members).forEach(([id,m])=>{if(m.status!=='Inactive')f.innerHTML+=`<option value="${id}">${m.name}</option>`})}})}
+
+// ===== DASHBOARD =====
+function loadAdminDashboard(){const today=getToday(),month=getCurrentMonth(),ws=getWeekStart();db.ref('crew_daily_performance').orderByChild('date').equalTo(today).once('value').then(s=>{document.getElementById('todayEntries').textContent=s.numChildren()});db.ref('crew_daily_performance').orderByChild('date').startAt(ws).once('value').then(s=>{document.getElementById('weeklyEntries').textContent=s.numChildren()});db.ref('crew_members').once('value').then(s=>{document.getElementById('totalMembers').textContent=Object.values(s.val()||{}).filter(m=>m.status!=='Inactive').length});loadTopPerformers(month);loadPrevMonthWinner('admin')}
+
+function loadTopPerformers(month){calculateMonthlyScores(month).then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage),top3=sorted.slice(0,3);const c=document.getElementById('topPerformers');if(top3.length===0){c.innerHTML='<p style="color:var(--text-muted);font-size:13px;text-align:center;padding:20px">No data yet</p>';return}c.innerHTML=top3.map((p,i)=>`<div class="top-performer"><div class="rank rank-${i+1}">${i+1}</div><div class="tp-info"><div class="tp-name">${p.name}</div><div class="tp-role">${p.role} · ${p.type} · ${p.workDays} days</div></div><div style="text-align:right"><div class="tp-score">${p.percentage}%</div><div class="tp-pct">${p.totalPoints} pts</div></div></div>`).join('');const alerts=scores.filter(s=>s.percentage<40&&s.workDays>0);document.getElementById('alertCount').textContent=alerts.filter(s=>s.percentage<25).length;if(alerts.length>0){document.getElementById('alertCard').style.display='block';document.getElementById('alertList').innerHTML=alerts.map(a=>{let b=a.percentage<25?'<span class="alert-badge alert-red"><i class="fas fa-exclamation-triangle"></i> Red Flag</span>':'<span class="alert-badge alert-yellow"><i class="fas fa-exclamation-circle"></i> Warning</span>';return `<div class="top-performer" style="margin-bottom:8px"><div style="width:36px;height:36px;border-radius:50%;background:var(--red-light);display:flex;align-items:center;justify-content:center"><i class="fas fa-exclamation" style="color:var(--red)"></i></div><div class="tp-info"><div class="tp-name">${a.name}</div><div class="tp-role">${a.percentage}% · ${a.workDays} days</div></div>${b}</div>`}).join('')}else{document.getElementById('alertCard').style.display='none'}})}
+
+function loadPrevMonthWinner(panel){const pm=getPrevMonth();db.ref('crew_star_performers/'+pm).once('value').then(s=>{const d=s.val();const px=panel==='admin'?'admin':'staff';if(d){document.getElementById(`${px}PrevWinner`).style.display='block';document.getElementById(`${px}PrevMonth`).textContent=getMonthName(pm);document.getElementById(`${px}PrevName`).textContent=d.name;document.getElementById(`${px}PrevScore`).textContent=`${d.percentage}% · ${d.totalPoints} points`;if(panel==='staff'&&d.top3){document.getElementById('staffTop3Card').style.display='block';document.getElementById('staffTop3List').innerHTML=d.top3.map((p,i)=>`<div class="top-performer"><div class="rank rank-${i+1}">${i+1}</div><div class="tp-info"><div class="tp-name">${p.name}</div><div class="tp-role">${p.role}</div></div><div style="text-align:right"><div class="tp-score">${p.percentage}%</div></div></div>`).join('')}}})}
+
+// ===== SCORES =====
+async function calculateMonthlyScores(month){const ms=await db.ref('crew_members').once('value');const am=ms.val()||{};const ds=await db.ref('crew_daily_performance').orderByChild('month').equalTo(month).once('value');const dd=ds.val()||{};const ws=await db.ref('crew_weekly_discipline').orderByChild('month').equalTo(month).once('value');const wd=ws.val()||{};const scores=[];Object.entries(am).forEach(([mid,member])=>{if(member.status==='Inactive')return;let dt=0,ddays=0;Object.values(dd).forEach(e=>{if(e.memberId===mid){dt+=(e.quality||0)+(e.speed||0)+(e.behavior||0)+(e.initiative||0)+(e.conduct||0);ddays++}});let wt=0,ww=0;Object.values(wd).forEach(e=>{if(e.memberId===mid){wt+=(e.attendance||0);ww++}});const mx=(ddays*50)+(ww*20),tp=dt+wt,pct=mx>0?Math.round((tp/mx)*100):0;scores.push({memberId:mid,name:member.name,role:member.role,type:member.staffType||'Daily',totalPoints:tp,maxPossible:mx,percentage:pct,workDays:ddays})});return scores}
+async function calculateWeeklyScores(){const wst=getWeekStart();const ms=await db.ref('crew_members').once('value');const am=ms.val()||{};const ds=await db.ref('crew_daily_performance').orderByChild('date').startAt(wst).once('value');const dd=ds.val()||{};const wds=await db.ref('crew_weekly_discipline').orderByChild('weekStart').equalTo(wst).once('value');const wd=wds.val()||{};const scores=[];Object.entries(am).forEach(([mid,member])=>{if(member.status==='Inactive')return;let dt=0,ddays=0;Object.values(dd).forEach(e=>{if(e.memberId===mid){dt+=(e.quality||0)+(e.speed||0)+(e.behavior||0)+(e.initiative||0)+(e.conduct||0);ddays++}});let wt=0,ww=0;Object.values(wd).forEach(e=>{if(e.memberId===mid){wt+=(e.attendance||0);ww++}});const mx=(ddays*50)+(ww*20),tp=dt+wt,pct=mx>0?Math.round((tp/mx)*100):0;scores.push({memberId:mid,name:member.name,role:member.role,type:member.staffType||'Daily',totalPoints:tp,maxPossible:mx,percentage:pct,workDays:ddays})});return scores}
+
+// ===== ENTRY =====
+function switchEntryTab(tab){currentEntryTab=tab;document.querySelectorAll('#adminEntry .section-tab').forEach((t,i)=>{t.classList.toggle('active',(i===0&&tab==='daily')||(i===1&&tab==='weekly'))});document.getElementById('dailyEntrySection').style.display=tab==='daily'?'block':'none';document.getElementById('weeklyEntrySection').style.display=tab==='weekly'?'block':'none';loadEntryMembers()}
+function loadEntryMembers(){db.ref('crew_members').once('value').then(s=>{const a=s.val()||{};const active=Object.entries(a).filter(([_,m])=>m.status!=='Inactive');['daily','weekly'].forEach(type=>{document.getElementById(`${type}MemberList`).innerHTML=active.map(([id,m])=>`<div class="member-chip" onclick="selectEntryMember('${id}','${type}')" id="${type}_chip_${id}"><div class="mc-avatar">${getInitials(m.name)}</div><div><div class="mc-name">${m.name}</div><div class="mc-role">${m.role}</div></div><span class="mc-type type-${(m.staffType||'Daily').toLowerCase()}">${m.staffType||'Daily'}</span></div>`).join('')})})}
+function selectEntryMember(id,type){selectedMemberId=id;document.querySelectorAll(`#${type}MemberList .member-chip`).forEach(c=>c.classList.remove('selected'));document.getElementById(`${type}_chip_${id}`).classList.add('selected');if(type==='daily'){document.getElementById('dailyRatingForm').style.display='block';document.getElementById('dailyDate').textContent=getToday();dailyRatings={};document.querySelectorAll('#dailyRatingForm .rating-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('dailyTotalPreview').textContent='0 / 50'}else{document.getElementById('weeklyRatingForm').style.display='block';document.getElementById('weeklyDate').textContent=getWeekStart();weeklyRatings={};document.querySelectorAll('#weeklyRatingForm .rating-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('weeklyTotalPreview').textContent='0 / 20'}}
+function selectRating(btn){const c=btn.closest('.rating-options'),f=c.dataset.field,v=parseInt(btn.dataset.value);c.querySelectorAll('.rating-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');if(['quality','speed','behavior','initiative','conduct'].includes(f)){dailyRatings[f]=v;document.getElementById('dailyTotalPreview').textContent=`${Object.values(dailyRatings).reduce((a,b)=>a+b,0)} / 50`}else if(f==='attendance'){weeklyRatings[f]=v;document.getElementById('weeklyTotalPreview').textContent=`${v} / 20`}}
+function submitDailyEntry(){if(!selectedMemberId)return showToast('Member select করুন',true);for(const r of['quality','speed','behavior','initiative','conduct']){if(!dailyRatings[r])return showToast(`${r} rating দিন`,true)}db.ref('crew_daily_performance').push({memberId:selectedMemberId,memberName:members[selectedMemberId]?.name||'',date:getToday(),month:getCurrentMonth(),quality:dailyRatings.quality,speed:dailyRatings.speed,behavior:dailyRatings.behavior,initiative:dailyRatings.initiative,conduct:dailyRatings.conduct,total:Object.values(dailyRatings).reduce((a,b)=>a+b,0),timestamp:firebase.database.ServerValue.TIMESTAMP}).then(()=>{showToast('✅ Daily entry saved!');dailyRatings={};document.querySelectorAll('#dailyRatingForm .rating-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('dailyTotalPreview').textContent='0 / 50';document.getElementById('dailyRatingForm').style.display='none';document.querySelectorAll('#dailyMemberList .member-chip').forEach(c=>c.classList.remove('selected'));selectedMemberId=null}).catch(e=>showToast('Error: '+e.message,true))}
+function submitWeeklyEntry(){if(!selectedMemberId)return showToast('Member select করুন',true);if(!weeklyRatings.attendance)return showToast('Attendance rating দিন',true);db.ref('crew_weekly_discipline').push({memberId:selectedMemberId,memberName:members[selectedMemberId]?.name||'',weekStart:getWeekStart(),month:getCurrentMonth(),attendance:weeklyRatings.attendance,timestamp:firebase.database.ServerValue.TIMESTAMP}).then(()=>{showToast('✅ Weekly entry saved!');weeklyRatings={};document.querySelectorAll('#weeklyRatingForm .rating-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('weeklyTotalPreview').textContent='0 / 20';document.getElementById('weeklyRatingForm').style.display='none';document.querySelectorAll('#weeklyMemberList .member-chip').forEach(c=>c.classList.remove('selected'));selectedMemberId=null}).catch(e=>showToast('Error: '+e.message,true))}
+
+// ===== PERFORMANCE VIEW =====
+function loadAllPerformance(){db.ref('crew_daily_performance').orderByChild('month').equalTo(getCurrentMonth()).once('value').then(s=>{renderPerformanceList(Object.entries(s.val()||{}).sort((a,b)=>(b[1].timestamp||0)-(a[1].timestamp||0)))})}
+function filterPerformance(){const mid=document.getElementById('perfFilterMember').value,dt=document.getElementById('perfFilterDate').value;db.ref('crew_daily_performance').orderByChild('month').equalTo(getCurrentMonth()).once('value').then(s=>{let e=Object.entries(s.val()||{});if(mid)e=e.filter(([_,x])=>x.memberId===mid);if(dt)e=e.filter(([_,x])=>x.date===dt);renderPerformanceList(e.sort((a,b)=>(b[1].timestamp||0)-(a[1].timestamp||0)))})}
+function renderPerformanceList(entries){const c=document.getElementById('performanceList');if(entries.length===0){c.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:20px">No entries found</p>';return}c.innerHTML=entries.map(([id,e])=>`<div class="card" style="padding:14px"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px"><div><div style="font-weight:700;font-size:14px">${e.memberName||'Unknown'}</div><div style="font-size:11px;color:var(--text-muted)">${e.date}</div></div><div style="display:flex;gap:6px;align-items:center"><span style="font-size:20px;font-weight:800;color:var(--accent)">${e.total}/50</span><button class="btn btn-icon btn-secondary btn-sm" onclick="openEditPerf('${id}')" style="width:28px;height:28px"><i class="fas fa-edit" style="font-size:11px"></i></button></div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="alert-badge ${e.quality>=7?'alert-green':e.quality>=4?'alert-yellow':'alert-red'}">Q:${e.quality}</span><span class="alert-badge ${e.speed>=7?'alert-green':e.speed>=4?'alert-yellow':'alert-red'}">S:${e.speed}</span><span class="alert-badge ${e.behavior>=7?'alert-green':e.behavior>=4?'alert-yellow':'alert-red'}">B:${e.behavior}</span><span class="alert-badge ${e.initiative>=7?'alert-green':e.initiative>=4?'alert-yellow':'alert-red'}">I:${e.initiative}</span><span class="alert-badge ${e.conduct>=7?'alert-green':e.conduct>=4?'alert-yellow':'alert-red'}">C:${e.conduct}</span></div></div>`).join('')}
+function openEditPerf(id){document.getElementById('editPerfId').value=id;db.ref(`crew_daily_performance/${id}`).once('value').then(s=>{const e=s.val();document.getElementById('editPerfFields').innerHTML=['quality','speed','behavior','initiative','conduct'].map(f=>`<div class="form-group"><label>${f.charAt(0).toUpperCase()+f.slice(1)}</label><select id="editPerf_${f}">${f==='initiative'?`<option value="10" ${e[f]===10?'selected':''}>High (10)</option><option value="6" ${e[f]===6?'selected':''}>Medium (6)</option><option value="3" ${e[f]===3?'selected':''}>Low (3)</option>`:`<option value="10" ${e[f]===10?'selected':''}>Excellent (10)</option><option value="7" ${e[f]===7?'selected':''}>Good (7)</option><option value="4" ${e[f]===4?'selected':''}>Average (4)</option><option value="1" ${e[f]===1?'selected':''}>Poor (1)</option>`}</select></div>`).join('');openModal('editPerfModal')})}
+function updatePerformance(){const id=document.getElementById('editPerfId').value,u={};let t=0;['quality','speed','behavior','initiative','conduct'].forEach(f=>{const v=parseInt(document.getElementById(`editPerf_${f}`).value);u[f]=v;t+=v});u.total=t;db.ref(`crew_daily_performance/${id}`).update(u).then(()=>{showToast('✅ Updated!');closeModal('editPerfModal');loadAllPerformance()})}
+
+// ===== LEADERBOARD =====
+function switchLBTab(tab){currentLBTab=tab;document.querySelectorAll('#adminLeaderboard .section-tab').forEach((t,i)=>{t.classList.toggle('active',(i===0&&tab==='monthly')||(i===1&&tab==='weekly'))});loadLeaderboard()}
+function loadLeaderboard(){const calc=currentLBTab==='monthly'?calculateMonthlyScores(getCurrentMonth()):calculateWeeklyScores();calc.then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage);if(currentLBTab==='monthly'&&sorted.length>0&&sorted[0].workDays>0){document.getElementById('starDeclareSection').style.display='block';document.getElementById('suggestedStarName').textContent=sorted[0].name;document.getElementById('suggestedStarScore').textContent=`${sorted[0].percentage}% · ${sorted[0].totalPoints} pts · ${sorted[0].workDays} days`}else{document.getElementById('starDeclareSection').style.display='none'}const c=document.getElementById('leaderboardContent');if(sorted.length===0){c.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:20px">No data</p>';return}c.innerHTML=`<div style="overflow-x:auto"><table class="lb-table"><thead><tr><th>#</th><th>Name</th><th>Type</th><th>Days</th><th>Pts</th><th>%</th><th>Status</th></tr></thead><tbody>${sorted.map((s,i)=>{let b=s.workDays===0?'<span class="alert-badge" style="background:var(--bg-input);color:var(--text-muted)">-</span>':s.percentage>=70?'<span class="alert-badge alert-green">✓</span>':s.percentage>=40?'<span class="alert-badge alert-yellow">⚠</span>':'<span class="alert-badge alert-red">✗</span>';return `<tr><td><strong>${i+1}</strong></td><td><div style="font-weight:600">${s.name}</div><div style="font-size:11px;color:var(--text-muted)">${s.role}</div></td><td><span class="mc-type type-${s.type.toLowerCase()}">${s.type}</span></td><td>${s.workDays}</td><td><strong>${s.totalPoints}</strong></td><td><strong style="color:var(--accent)">${s.percentage}%</strong></td><td>${b}</td></tr>`}).join('')}</tbody></table></div>`})}
+function declareStarPerformer(){calculateMonthlyScores(getCurrentMonth()).then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage);if(sorted.length===0)return;const w=sorted[0],t3=sorted.slice(0,3).map(s=>({name:s.name,role:s.role,percentage:s.percentage,totalPoints:s.totalPoints}));db.ref('crew_star_performers/'+getCurrentMonth()).set({name:w.name,memberId:w.memberId,percentage:w.percentage,totalPoints:w.totalPoints,top3:t3,declaredAt:firebase.database.ServerValue.TIMESTAMP}).then(()=>showToast('🌟 Star Performer: '+w.name))})}
+
+// ===== EMPLOYEES =====
+function loadEmployeeList(){db.ref('crew_members').once('value').then(s=>{const all=s.val()||{},c=document.getElementById('employeeList'),e=Object.entries(all);if(e.length===0){c.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:20px">No members yet</p>';return}c.innerHTML=e.map(([id,m])=>`<div class="emp-card"><div class="emp-avatar">${getInitials(m.name)}</div><div class="emp-info"><div class="emp-name">${m.name}</div><div class="emp-meta">${m.role} · ${m.staffType||'Daily'} · ${m.phone||''}</div><div class="emp-meta">${m.status==='Inactive'?'<span style="color:var(--red)">Inactive</span>':'<span style="color:var(--green)">Active</span>'} · Joined: ${m.joinDate||'N/A'}</div><div class="emp-meta" style="margin-top:4px">🔑 <span id="pw_${id}" style="font-family:monospace;background:var(--bg-primary);padding:2px 6px;border-radius:4px;font-size:12px">••••••</span> <button onclick="togglePw('${id}','${(m.password||'N/A').replace(/'/g,"\\'")}')" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:12px"><i class="fas fa-eye" id="pwicon_${id}"></i></button></div></div><div class="emp-actions"><button class="btn btn-icon btn-secondary" onclick="openEditMember('${id}')" style="width:32px;height:32px"><i class="fas fa-edit" style="font-size:12px"></i></button><button class="btn btn-icon" onclick="deleteMember('${id}','${m.name.replace(/'/g,"\\'")}')" style="width:32px;height:32px;background:var(--red-light);color:var(--red)"><i class="fas fa-trash" style="font-size:12px"></i></button></div></div>`).join('')})}
+function togglePw(id,pw){const s=document.getElementById('pw_'+id),i=document.getElementById('pwicon_'+id);if(s.textContent==='••••••'){s.textContent=pw;i.className='fas fa-eye-slash'}else{s.textContent='••••••';i.className='fas fa-eye'}}
+function deleteMember(id,name){if(!confirm('⚠️ "'+name+'" delete করতে চান?'))return;db.ref('crew_members/'+id).remove().then(()=>{db.ref('crew_daily_performance').orderByChild('memberId').equalTo(id).once('value').then(s=>{const u={};s.forEach(c=>{u[c.key]=null});if(Object.keys(u).length>0)db.ref('crew_daily_performance').update(u)});db.ref('crew_weekly_discipline').orderByChild('memberId').equalTo(id).once('value').then(s=>{const u={};s.forEach(c=>{u[c.key]=null});if(Object.keys(u).length>0)db.ref('crew_weekly_discipline').update(u)});showToast('✅ Deleted!');loadEmployeeList()}).catch(e=>showToast('Error: '+e.message,true))}
+function openAddMemberModal(){['newMemberName','newMemberPhone','newMemberPassword'].forEach(id=>document.getElementById(id).value='');openModal('addMemberModal')}
+function addNewMember(){const name=document.getElementById('newMemberName').value.trim(),phone=document.getElementById('newMemberPhone').value.trim(),role=document.getElementById('newMemberRole').value,staffType=document.getElementById('newMemberType').value,password=document.getElementById('newMemberPassword').value;if(!name||!password)return showToast('Name ও Password দিন',true);if(password.length<6)return showToast('Password min 6 chars',true);db.ref('crew_members').push({name:name,phone:phone,role:role,staffType:staffType,password:password,status:'Active',joinDate:getToday(),createdAt:firebase.database.ServerValue.TIMESTAMP}).then(()=>{showToast('✅ '+name+' added!');closeModal('addMemberModal');loadEmployeeList()}).catch(e=>showToast('Error: '+e.message,true))}
+function openEditMember(id){db.ref('crew_members/'+id).once('value').then(s=>{const m=s.val();document.getElementById('editMemberId').value=id;document.getElementById('editMemberName').value=m.name;document.getElementById('editMemberPhone').value=m.phone||'';document.getElementById('editMemberRole').value=m.role;document.getElementById('editMemberType').value=m.staffType||'Daily';document.getElementById('editMemberStatus').value=m.status||'Active';document.getElementById('editMemberCurrentPw').value=m.password||'N/A';document.getElementById('editMemberNewPw').value='';openModal('editMemberModal')})}
+function updateMember(){const id=document.getElementById('editMemberId').value,newPw=document.getElementById('editMemberNewPw').value.trim(),u={name:document.getElementById('editMemberName').value.trim(),phone:document.getElementById('editMemberPhone').value.trim(),role:document.getElementById('editMemberRole').value,staffType:document.getElementById('editMemberType').value,status:document.getElementById('editMemberStatus').value};if(newPw){if(newPw.length<6)return showToast('Password min 6 chars',true);u.password=newPw}db.ref('crew_members/'+id).update(u).then(()=>{showToast('✅ Updated!'+(newPw?' Password changed.':''));closeModal('editMemberModal');loadEmployeeList()})}
+
+// ===== STAFF PANEL =====
+function loadStaffDashboard(){if(!currentMemberId)return;const month=getCurrentMonth(),today=getToday(),ws=getWeekStart();loadPrevMonthWinner('staff');db.ref('crew_daily_performance').orderByChild('date').equalTo(today).once('value').then(s=>{let tp='-';Object.values(s.val()||{}).forEach(e=>{if(e.memberId===currentMemberId)tp=e.total});document.getElementById('staffTodayPts').textContent=tp});db.ref('crew_daily_performance').orderByChild('date').startAt(ws).once('value').then(s=>{let wt=0;const ds=[];Object.values(s.val()||{}).forEach(e=>{if(e.memberId===currentMemberId){wt+=e.total;ds.push({date:e.date,total:e.total})}});document.getElementById('staffWeeklyPts').textContent=wt;ds.sort((a,b)=>a.date.localeCompare(b.date));const c=document.getElementById('staffDailyScores');if(ds.length===0)c.innerHTML='<p style="color:var(--text-muted);font-size:13px;text-align:center;padding:16px">No scores this week</p>';else c.innerHTML=ds.map(s=>{const p=Math.round((s.total/50)*100),cl=p>=70?'var(--green)':p>=40?'var(--yellow)':'var(--red)';return `<div class="score-day"><div class="sd-date">${s.date.slice(5)}</div><div class="sd-bar"><div class="progress-bar"><div class="progress-fill" style="width:${p}%;background:${cl}"></div></div></div><div class="sd-points" style="color:${cl}">${s.total}/50</div></div>`}).join('')});calculateMonthlyScores(month).then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage),mi=sorted.findIndex(s=>s.memberId===currentMemberId),ms=mi>=0?sorted[mi]:null;document.getElementById('staffMyRank').textContent=mi>=0?`#${mi+1}`:'-';document.getElementById('staffTotalMembers').textContent=sorted.length;document.getElementById('staffMonthlyPts').textContent=ms?ms.totalPoints:0;document.getElementById('staffMonthlyPct').textContent=ms?ms.percentage+'%':'0%'})}
+function loadStaffLeaderboard(){calculateMonthlyScores(getCurrentMonth()).then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage).slice(0,10);const c=document.getElementById('staffLeaderboardContent');if(sorted.length===0){c.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:20px">No data</p>';return}c.innerHTML=sorted.map((s,i)=>{const me=s.memberId===currentMemberId;return `<div class="top-performer" style="${me?'border:2px solid var(--accent);background:var(--accent-light)':''}"><div class="rank ${i<3?'rank-'+(i+1):''}" style="${i>=3?'background:var(--bg-input);color:var(--text-muted)':''}">${i+1}</div><div class="tp-info"><div class="tp-name">${s.name} ${me?'(You)':''}</div><div class="tp-role">${s.role} · ${s.type} · ${s.workDays} days</div></div><div style="text-align:right"><div class="tp-score">${s.percentage}%</div><div class="tp-pct">${s.totalPoints} pts</div></div></div>`}).join('')})}
+function loadStaffRewards(){if(!currentMemberId)return;calculateMonthlyScores(getCurrentMonth()).then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage),mi=sorted.findIndex(s=>s.memberId===currentMemberId),ms=mi>=0?sorted[mi]:null,pct=ms?ms.percentage:0;document.getElementById('staffRewardsContent').innerHTML=[{i:'🌟',t:'Star Performer',d:'Rank #1',ok:mi===0&&pct>0,s:mi===0?'Eligible!':'Need #1 (Now #'+(mi+1)+')'},{i:'🏆',t:'Top 3',d:'Top 3 ranking',ok:mi>=0&&mi<3&&pct>0,s:mi<3?'Eligible!':'Need Top 3 (Now #'+(mi+1)+')'},{i:'💰',t:'Bonus',d:'70%+ score',ok:pct>=70,s:pct>=70?'Eligible!':'Need 70%+ (Now '+pct+'%)'}].map(r=>`<div class="reward-card"><div class="rw-icon">${r.i}</div><div class="rw-info"><div class="rw-title">${r.t}</div><div class="rw-desc">${r.d}</div></div><span class="rw-status ${r.ok?'alert-green':'alert-yellow'}">${r.s}</span></div>`).join('')})}
 </script>
 </body>
 </html>
