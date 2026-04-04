@@ -30,6 +30,8 @@
       --yellow-light: rgba(234,179,8,0.15);
       --blue: #3b82f6;
       --blue-light: rgba(59,130,246,0.15);
+      --purple: #a855f7;
+      --purple-light: rgba(168,85,247,0.15);
       --text-primary: #f1f5f9;
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
@@ -65,80 +67,40 @@
       box-shadow: var(--shadow);
       text-align: center;
     }
-    .login-logo {
-      font-size: 48px;
-      margin-bottom: 8px;
-    }
+    .login-logo { font-size: 48px; margin-bottom: 8px; }
     .login-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--accent);
-      margin-bottom: 4px;
-      letter-spacing: -0.5px;
+      font-size: 22px; font-weight: 800; color: var(--accent);
+      margin-bottom: 4px; letter-spacing: -0.5px;
     }
     .login-subtitle {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-bottom: 28px;
+      font-size: 13px; color: var(--text-secondary); margin-bottom: 28px;
     }
-    .form-group {
-      margin-bottom: 16px;
-      text-align: left;
-    }
+    .form-group { margin-bottom: 16px; text-align: left; }
     .form-group label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      display: block; font-size: 12px; font-weight: 600;
+      color: var(--text-secondary); margin-bottom: 6px;
+      text-transform: uppercase; letter-spacing: 0.5px;
     }
     .form-group input, .form-group select {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      font-size: 15px;
-      font-family: inherit;
-      outline: none;
+      width: 100%; padding: 12px 16px;
+      background: var(--bg-input); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text-primary);
+      font-size: 15px; font-family: inherit; outline: none;
       transition: border 0.2s;
     }
-    .form-group input:focus, .form-group select:focus {
-      border-color: var(--accent);
-    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--accent); }
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 24px;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 12px 24px; border: none;
+      border-radius: var(--radius-sm); font-family: inherit;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; text-decoration: none;
     }
-    .btn-primary {
-      background: var(--accent);
-      color: #000;
-      width: 100%;
-    }
+    .btn-primary { background: var(--accent); color: #000; width: 100%; }
     .btn-primary:hover { background: var(--accent-hover); }
-    .btn-secondary {
-      background: var(--bg-input);
-      color: var(--text-primary);
-    }
+    .btn-secondary { background: var(--bg-input); color: var(--text-primary); }
     .btn-secondary:hover { background: var(--border); }
-    .btn-danger {
-      background: var(--red);
-      color: #fff;
-    }
+    .btn-danger { background: var(--red); color: #fff; }
     .btn-sm { padding: 8px 16px; font-size: 13px; }
     .btn-icon {
       width: 36px; height: 36px; padding: 0;
@@ -152,70 +114,34 @@
 
     /* TOP BAR */
     .topbar {
-      background: var(--bg-secondary);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: var(--bg-secondary); border-bottom: 1px solid var(--border);
+      padding: 16px 20px; display: flex; align-items: center;
+      justify-content: space-between; position: sticky; top: 0; z-index: 100;
     }
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; }
     .topbar-logo { font-size: 24px; }
-    .topbar-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--accent);
-    }
+    .topbar-title { font-size: 16px; font-weight: 700; color: var(--accent); }
     .topbar-role {
-      font-size: 11px;
-      color: var(--text-muted);
-      background: var(--bg-input);
-      padding: 2px 8px;
-      border-radius: 20px;
+      font-size: 11px; color: var(--text-muted);
+      background: var(--bg-input); padding: 2px 8px; border-radius: 20px;
     }
     .topbar-right { display: flex; gap: 8px; align-items: center; }
-    .topbar-user {
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
+    .topbar-user { font-size: 13px; color: var(--text-secondary); }
 
     /* BOTTOM NAV */
     .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-around;
-      padding: 8px 0 12px;
-      z-index: 100;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--bg-secondary); border-top: 1px solid var(--border);
+      display: flex; justify-content: space-around;
+      padding: 8px 0 12px; z-index: 100;
     }
     .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      font-size: 10px;
-      color: var(--text-muted);
-      cursor: pointer;
-      padding: 4px 12px;
-      transition: color 0.2s;
-      background: none;
-      border: none;
-      font-family: inherit;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 4px; font-size: 10px; color: var(--text-muted);
+      cursor: pointer; padding: 4px 12px; transition: color 0.2s;
+      background: none; border: none; font-family: inherit;
     }
-    .nav-item.active, .nav-item:hover {
-      color: var(--accent);
-    }
+    .nav-item.active, .nav-item:hover { color: var(--accent); }
     .nav-item i { font-size: 20px; }
 
     /* PAGES */
@@ -224,49 +150,28 @@
 
     /* CARDS */
     .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow);
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      margin-bottom: 16px; box-shadow: var(--shadow);
     }
     .card-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 14px; font-weight: 700; color: var(--text-secondary);
+      margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;
     }
 
     /* STAT BOXES */
-    .stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
     .stat-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      text-align: center;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px; text-align: center;
     }
     .stat-box .stat-icon { font-size: 24px; margin-bottom: 8px; }
     .stat-box .stat-value {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1;
+      font-size: 28px; font-weight: 800; color: var(--text-primary); line-height: 1;
     }
     .stat-box .stat-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 11px; color: var(--text-muted); margin-top: 4px;
+      text-transform: uppercase; letter-spacing: 0.5px;
     }
     .stat-box.gold { border-color: var(--accent); background: var(--accent-light); }
     .stat-box.green { border-color: var(--green); background: var(--green-light); }
@@ -275,17 +180,12 @@
 
     /* TOP PERFORMERS */
     .top-performer {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px;
-      border-radius: var(--radius-sm);
-      margin-bottom: 8px;
-      background: var(--bg-input);
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px; border-radius: var(--radius-sm);
+      margin-bottom: 8px; background: var(--bg-input);
     }
     .top-performer .rank {
-      width: 32px; height: 32px;
-      border-radius: 50%;
+      width: 32px; height: 32px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-weight: 800; font-size: 14px;
     }
@@ -295,161 +195,83 @@
     .top-performer .tp-info { flex: 1; }
     .top-performer .tp-name { font-size: 14px; font-weight: 600; }
     .top-performer .tp-role { font-size: 11px; color: var(--text-muted); }
-    .top-performer .tp-score {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--accent);
-    }
-    .top-performer .tp-pct {
-      font-size: 11px;
-      color: var(--text-secondary);
-    }
+    .top-performer .tp-score { font-size: 18px; font-weight: 800; color: var(--accent); }
+    .top-performer .tp-pct { font-size: 11px; color: var(--text-secondary); }
 
     /* ALERT BADGES */
     .alert-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
     }
     .alert-green { background: var(--green-light); color: var(--green); }
     .alert-yellow { background: var(--yellow-light); color: var(--yellow); }
     .alert-red { background: var(--red-light); color: var(--red); }
 
     /* PERFORMANCE ENTRY */
-    .entry-member-select {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
+    .entry-member-select { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 16px; }
     .member-chip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      background: var(--bg-input);
-      border: 2px solid transparent;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all 0.2s;
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px; background: var(--bg-input);
+      border: 2px solid transparent; border-radius: var(--radius-sm);
+      cursor: pointer; transition: all 0.2s;
     }
     .member-chip:hover { border-color: var(--border); }
     .member-chip.selected { border-color: var(--accent); background: var(--accent-light); }
     .member-chip .mc-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 14px; color: #000;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--accent); display: flex; align-items: center;
+      justify-content: center; font-weight: 700; font-size: 14px; color: #000;
     }
     .member-chip .mc-name { font-size: 14px; font-weight: 600; }
     .member-chip .mc-role { font-size: 11px; color: var(--text-muted); }
     .member-chip .mc-type {
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 10px;
-      margin-left: auto;
+      font-size: 10px; padding: 2px 6px; border-radius: 10px; margin-left: auto;
     }
     .type-daily { background: var(--blue-light); color: var(--blue); }
     .type-freelancer { background: var(--yellow-light); color: var(--yellow); }
 
     /* RATING BUTTONS */
     .rating-section { margin-bottom: 20px; }
-    .rating-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-    .rating-options {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-    }
-    .rating-options.three-col {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    .rating-label { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+    .rating-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .rating-options.three-col { grid-template-columns: repeat(3, 1fr); }
     .rating-btn {
-      padding: 10px 8px;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--bg-input);
-      color: var(--text-secondary);
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: center;
+      padding: 10px 8px; border: 2px solid var(--border);
+      border-radius: var(--radius-sm); background: var(--bg-input);
+      color: var(--text-secondary); font-family: inherit;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; text-align: center;
     }
     .rating-btn:hover { border-color: var(--text-muted); }
     .rating-btn.selected {
-      border-color: var(--accent);
-      background: var(--accent-light);
-      color: var(--accent);
+      border-color: var(--accent); background: var(--accent-light); color: var(--accent);
     }
-    .rating-btn .rb-points {
-      display: block;
-      font-size: 16px;
-      font-weight: 800;
-      margin-top: 2px;
-    }
+    .rating-btn .rb-points { display: block; font-size: 16px; font-weight: 800; margin-top: 2px; }
 
     /* SECTION TABS */
-    .section-tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
-      overflow-x: auto;
-    }
+    .section-tabs { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; }
     .section-tab {
-      padding: 10px 20px;
-      border-radius: 30px;
-      border: 1px solid var(--border);
-      background: var(--bg-input);
-      color: var(--text-secondary);
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s;
+      padding: 10px 20px; border-radius: 30px; border: 1px solid var(--border);
+      background: var(--bg-input); color: var(--text-secondary);
+      font-family: inherit; font-size: 13px; font-weight: 600;
+      cursor: pointer; white-space: nowrap; transition: all 0.2s;
     }
-    .section-tab.active {
-      background: var(--accent);
-      color: #000;
-      border-color: var(--accent);
-    }
+    .section-tab.active { background: var(--accent); color: #000; border-color: var(--accent); }
 
     /* LEADERBOARD TABLE */
     .lb-table { width: 100%; border-collapse: collapse; }
     .lb-table th {
-      font-size: 11px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      padding: 8px 12px;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
+      font-size: 11px; text-transform: uppercase; color: var(--text-muted);
+      padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border);
     }
-    .lb-table td {
-      padding: 12px;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-    }
+    .lb-table td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 13px; }
     .lb-table tr:hover { background: var(--bg-input); }
 
     /* STAR PERFORMER DECLARATION */
     .star-declare {
       background: linear-gradient(135deg, var(--accent-light), var(--bg-card));
-      border: 2px solid var(--accent);
-      border-radius: var(--radius);
-      padding: 24px;
-      text-align: center;
-      margin-bottom: 16px;
+      border: 2px solid var(--accent); border-radius: var(--radius);
+      padding: 24px; text-align: center; margin-bottom: 16px;
     }
     .star-declare .star-icon { font-size: 48px; margin-bottom: 8px; }
     .star-declare .star-name { font-size: 22px; font-weight: 800; color: var(--accent); }
@@ -457,20 +279,14 @@
 
     /* EMPLOYEE TABLE */
     .emp-card {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px;
-      background: var(--bg-input);
-      border-radius: var(--radius-sm);
-      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px; background: var(--bg-input);
+      border-radius: var(--radius-sm); margin-bottom: 8px;
     }
     .emp-card .emp-avatar {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; color: #000;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent); display: flex; align-items: center;
+      justify-content: center; font-weight: 700; color: #000;
     }
     .emp-card .emp-info { flex: 1; }
     .emp-card .emp-name { font-size: 14px; font-weight: 600; }
@@ -479,55 +295,29 @@
 
     /* MODAL */
     .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7); z-index: 200;
+      align-items: center; justify-content: center; padding: 20px;
     }
     .modal-overlay.active { display: flex; }
     .modal {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      width: 100%;
-      max-width: 440px;
-      max-height: 80vh;
-      overflow-y: auto;
-      box-shadow: var(--shadow);
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      width: 100%; max-width: 440px; max-height: 80vh;
+      overflow-y: auto; box-shadow: var(--shadow);
     }
-    .modal-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: var(--accent);
-    }
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
+    .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--accent); }
+    .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
     .modal-actions .btn { flex: 1; }
 
     /* TOAST */
     .toast {
-      position: fixed;
-      top: 20px;
-      left: 50%;
+      position: fixed; top: 20px; left: 50%;
       transform: translateX(-50%) translateY(-100px);
-      background: var(--green);
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: var(--radius-sm);
-      font-size: 14px;
-      font-weight: 600;
-      z-index: 300;
-      transition: transform 0.3s ease;
-      box-shadow: var(--shadow);
+      background: var(--green); color: #fff;
+      padding: 12px 24px; border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 600; z-index: 300;
+      transition: transform 0.3s ease; box-shadow: var(--shadow);
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
     .toast.error { background: var(--red); }
@@ -535,135 +325,90 @@
     /* STAFF PANEL STYLES */
     .my-rank-card {
       background: linear-gradient(135deg, var(--accent-light), var(--bg-card));
-      border: 1px solid var(--accent);
-      border-radius: var(--radius);
-      padding: 24px;
-      text-align: center;
-      margin-bottom: 16px;
+      border: 1px solid var(--accent); border-radius: var(--radius);
+      padding: 24px; text-align: center; margin-bottom: 16px;
     }
-    .my-rank-card .big-rank {
-      font-size: 64px;
-      font-weight: 800;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .my-rank-card .rank-label {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
+    .my-rank-card .big-rank { font-size: 64px; font-weight: 800; color: var(--accent); line-height: 1; }
+    .my-rank-card .rank-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
 
     /* PROGRESS BAR */
     .progress-bar {
-      width: 100%;
-      height: 8px;
-      background: var(--bg-input);
-      border-radius: 4px;
-      overflow: hidden;
-      margin-top: 8px;
+      width: 100%; height: 8px; background: var(--bg-input);
+      border-radius: 4px; overflow: hidden; margin-top: 8px;
     }
-    .progress-fill {
-      height: 100%;
-      border-radius: 4px;
-      transition: width 0.5s ease;
-    }
+    .progress-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
 
     /* DAILY SCORE LIST */
-    .score-day {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .score-day .sd-date {
-      font-size: 12px;
-      color: var(--text-muted);
-      min-width: 70px;
-    }
+    .score-day { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .score-day .sd-date { font-size: 12px; color: var(--text-muted); min-width: 70px; }
     .score-day .sd-bar { flex: 1; }
-    .score-day .sd-points {
-      font-size: 14px;
-      font-weight: 700;
-      min-width: 50px;
-      text-align: right;
-    }
+    .score-day .sd-points { font-size: 14px; font-weight: 700; min-width: 50px; text-align: right; }
 
     /* PREV MONTH WINNER */
     .prev-winner {
       background: linear-gradient(135deg, #1a1a2e, #16213e);
-      border: 2px solid var(--accent);
-      border-radius: var(--radius);
-      padding: 20px;
-      text-align: center;
-      margin-bottom: 16px;
-      position: relative;
-      overflow: hidden;
+      border: 2px solid var(--accent); border-radius: var(--radius);
+      padding: 20px; text-align: center; margin-bottom: 16px;
+      position: relative; overflow: hidden;
     }
     .prev-winner::before {
-      content: '🏆';
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      font-size: 80px;
-      opacity: 0.1;
+      content: '🏆'; position: absolute; top: -10px; right: -10px;
+      font-size: 80px; opacity: 0.1;
     }
     .prev-winner .pw-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--accent);
-      margin-bottom: 8px;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--accent); margin-bottom: 8px;
     }
-    .prev-winner .pw-name {
-      font-size: 20px;
-      font-weight: 800;
-    }
-    .prev-winner .pw-score {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 4px;
-    }
+    .prev-winner .pw-name { font-size: 20px; font-weight: 800; }
+    .prev-winner .pw-score { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
 
     /* REWARDS */
     .reward-card {
-      background: var(--bg-input);
-      border-radius: var(--radius-sm);
-      padding: 16px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      background: var(--bg-input); border-radius: var(--radius-sm);
+      padding: 16px; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 12px;
     }
     .reward-card .rw-icon { font-size: 28px; }
     .reward-card .rw-info { flex: 1; }
     .reward-card .rw-title { font-size: 14px; font-weight: 600; }
     .reward-card .rw-desc { font-size: 12px; color: var(--text-muted); }
-    .reward-card .rw-status {
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-    }
+    .reward-card .rw-status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
 
     /* FILTER BAR */
-    .filter-bar {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
+    .filter-bar { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
     .filter-bar select, .filter-bar input {
-      padding: 8px 12px;
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--text-primary);
-      font-family: inherit;
-      font-size: 13px;
-      flex: 1;
-      min-width: 120px;
+      padding: 8px 12px; background: var(--bg-input); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text-primary);
+      font-family: inherit; font-size: 13px; flex: 1; min-width: 120px;
     }
+
+    /* ROLE SELECT GRID - 3 columns */
+    .role-select-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    .role-card {
+      background: var(--bg-input); border: 2px solid var(--border);
+      border-radius: var(--radius); padding: 20px 12px;
+      text-align: center; cursor: pointer; transition: all 0.2s;
+    }
+    .role-card:hover { border-color: var(--accent); }
+    .role-card .rc-icon { font-size: 32px; margin-bottom: 6px; }
+    .role-card .rc-title { font-size: 13px; font-weight: 700; }
+    .role-card .rc-desc { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+    .staff-select-list { max-height: 300px; overflow-y: auto; margin-bottom: 16px; }
+    .staff-option {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; background: var(--bg-input);
+      border: 2px solid transparent; border-radius: var(--radius-sm);
+      margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+    }
+    .staff-option:hover { border-color: var(--border); }
+    .staff-option.selected { border-color: var(--accent); background: var(--accent-light); }
+    .staff-option .so-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent); display: flex; align-items: center;
+      justify-content: center; font-weight: 700; font-size: 16px; color: #000;
+    }
+    .staff-option .so-name { font-size: 15px; font-weight: 600; }
+    .staff-option .so-role { font-size: 11px; color: var(--text-muted); }
 
     /* RESPONSIVE */
     @media (max-width: 480px) {
@@ -673,6 +418,10 @@
       .rating-options.three-col { grid-template-columns: repeat(3, 1fr); }
       .topbar { padding: 12px 16px; }
       .page { padding: 16px; }
+      .role-select-grid { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+      .role-card { padding: 16px 8px; }
+      .role-card .rc-icon { font-size: 28px; }
+      .role-card .rc-title { font-size: 12px; }
     }
 
     /* SCROLLBAR */
@@ -681,70 +430,66 @@
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
     /* Loading */
-    .loading {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-    }
+    .loading { display: flex; align-items: center; justify-content: center; padding: 40px; }
     .spinner {
-      width: 32px; height: 32px;
-      border: 3px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
+      width: 32px; height: 32px; border: 3px solid var(--border);
+      border-top-color: var(--accent); border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-  </style>
 
-<style>
-.role-select-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-.role-card{background:var(--bg-input);border:2px solid var(--border);border-radius:var(--radius);padding:24px 16px;text-align:center;cursor:pointer;transition:all 0.2s}
-.role-card:hover{border-color:var(--accent)}
-.role-card .rc-icon{font-size:36px;margin-bottom:8px}
-.role-card .rc-title{font-size:15px;font-weight:700}
-.role-card .rc-desc{font-size:11px;color:var(--text-muted);margin-top:4px}
-.staff-select-list{max-height:300px;overflow-y:auto;margin-bottom:16px}
-.staff-option{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg-input);border:2px solid transparent;border-radius:var(--radius-sm);margin-bottom:8px;cursor:pointer;transition:all 0.2s}
-.staff-option:hover{border-color:var(--border)}
-.staff-option.selected{border-color:var(--accent);background:var(--accent-light)}
-.staff-option .so-avatar{width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#000}
-.staff-option .so-name{font-size:15px;font-weight:600}
-.staff-option .so-role{font-size:11px;color:var(--text-muted)}
+    /* MANAGER PIN SETTINGS */
+    .pin-display {
+      font-family: monospace; font-size: 20px; letter-spacing: 6px;
+      background: var(--bg-primary); padding: 8px 16px; border-radius: var(--radius-sm);
+      display: inline-block; margin: 8px 0;
+    }
 </style>
-
 </head>
 <body>
 <div class="toast" id="toast"></div>
 
-<!-- LOGIN: ROLE SELECT -->
+<!-- ==================== LOGIN: ROLE SELECT ==================== -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="login-logo">🎬</div>
     <div class="login-title">Ascent Crew Tracker</div>
     <div class="login-subtitle">Shooting Team Performance Management</div>
     <div class="role-select-grid">
-      <div class="role-card" onclick="showAdminLogin()"><div class="rc-icon">👑</div><div class="rc-title">Admin Panel</div><div class="rc-desc">Full Control</div></div>
-      <div class="role-card" onclick="showStaffLogin()"><div class="rc-icon">👤</div><div class="rc-title">Staff Panel</div><div class="rc-desc">My Dashboard</div></div>
+      <div class="role-card" data-action="showAdminLogin"><div class="rc-icon">👑</div><div class="rc-title">Admin</div><div class="rc-desc">Full Control</div></div>
+      <div class="role-card" data-action="showManagerLogin"><div class="rc-icon">📋</div><div class="rc-title">Manager</div><div class="rc-desc">Entry & View</div></div>
+      <div class="role-card" data-action="showStaffLogin"><div class="rc-icon">👤</div><div class="rc-title">Staff</div><div class="rc-desc">My Dashboard</div></div>
     </div>
-    <p id="setupLink"><button onclick="showSetup()" style="background:none;border:none;color:var(--accent);font-family:inherit;font-size:13px;cursor:pointer;text-decoration:underline">🔧 First Time? Setup Admin</button></p>
+    <p id="setupLink"><button data-action="showSetup" style="background:none;border:none;color:var(--accent);font-family:inherit;font-size:13px;cursor:pointer;text-decoration:underline">🔧 First Time? Setup Admin</button></p>
     <p style="font-size:12px;color:var(--text-muted);margin-top:12px">Ascent Digital Creation &copy; 2026</p>
   </div>
 </div>
 
-<!-- LOGIN: ADMIN -->
+<!-- ==================== LOGIN: ADMIN ==================== -->
 <div class="login-screen" id="adminLoginScreen" style="display:none">
   <div class="login-box">
     <div class="login-logo">👑</div>
     <div class="login-title">Admin Login</div>
     <div class="login-subtitle">Admin password দিন</div>
-    <div class="form-group"><label>Password</label><input type="password" id="adminLoginPw" placeholder="••••••••" onkeydown="if(event.key==='Enter')adminLogin()"></div>
-    <button class="btn btn-primary" onclick="adminLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
-    <p style="margin-top:16px"><button onclick="backToRoleSelect()" style="background:none;border:none;color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer">&larr; Back</button></p>
+    <div class="form-group"><label>Password</label><input type="password" id="adminLoginPw" placeholder="••••••••"></div>
+    <button class="btn btn-primary" data-action="adminLogin"><i class="fas fa-sign-in-alt"></i> Login</button>
+    <p style="margin-top:16px"><button data-action="backToRoleSelect" style="background:none;border:none;color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer">&larr; Back</button></p>
   </div>
 </div>
 
-<!-- LOGIN: STAFF -->
+<!-- ==================== LOGIN: MANAGER ==================== -->
+<div class="login-screen" id="managerLoginScreen" style="display:none">
+  <div class="login-box">
+    <div class="login-logo">📋</div>
+    <div class="login-title">Manager Login</div>
+    <div class="login-subtitle">Manager PIN দিন</div>
+    <div class="form-group"><label>PIN</label><input type="password" id="managerLoginPin" placeholder="••••••" maxlength="10"></div>
+    <button class="btn btn-primary" data-action="managerLogin"><i class="fas fa-sign-in-alt"></i> Login</button>
+    <p style="margin-top:16px"><button data-action="backToRoleSelect" style="background:none;border:none;color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer">&larr; Back</button></p>
+  </div>
+</div>
+
+<!-- ==================== LOGIN: STAFF ==================== -->
 <div class="login-screen" id="staffLoginScreen" style="display:none">
   <div class="login-box" style="max-width:460px">
     <div class="login-logo">👤</div>
@@ -752,14 +497,14 @@
     <div class="login-subtitle">আপনার নাম select করুন</div>
     <div class="staff-select-list" id="staffSelectList"><div class="loading"><div class="spinner"></div></div></div>
     <div id="staffPwSection" style="display:none">
-      <div class="form-group"><label>Password</label><input type="password" id="staffLoginPw" placeholder="••••••••" onkeydown="if(event.key==='Enter')staffLogin()"></div>
-      <button class="btn btn-primary" onclick="staffLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
+      <div class="form-group"><label>Password</label><input type="password" id="staffLoginPw" placeholder="••••••••"></div>
+      <button class="btn btn-primary" data-action="staffLogin"><i class="fas fa-sign-in-alt"></i> Login</button>
     </div>
-    <p style="margin-top:16px"><button onclick="backToRoleSelect()" style="background:none;border:none;color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer">&larr; Back</button></p>
+    <p style="margin-top:16px"><button data-action="backToRoleSelect" style="background:none;border:none;color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer">&larr; Back</button></p>
   </div>
 </div>
 
-<!-- ADMIN SETUP -->
+<!-- ==================== ADMIN SETUP ==================== -->
 <div class="login-screen" id="setupScreen" style="display:none">
   <div class="login-box">
     <div class="login-logo">🔧</div>
@@ -767,186 +512,72 @@
     <div class="login-subtitle">প্রথমবার Admin account তৈরি করুন</div>
     <div class="form-group"><label>Admin Name</label><input type="text" id="setupName" placeholder="Biman"></div>
     <div class="form-group"><label>Password (min 6 chars)</label><input type="password" id="setupPassword" placeholder="••••••••"></div>
-    <button class="btn btn-primary" onclick="setupAdmin()"><i class="fas fa-user-shield"></i> Create Admin</button>
-    <p style="margin-top:16px"><button onclick="backToRoleSelect()" style="background:none;border:none;color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer">&larr; Back</button></p>
+    <button class="btn btn-primary" data-action="setupAdmin"><i class="fas fa-user-shield"></i> Create Admin</button>
+    <p style="margin-top:16px"><button data-action="backToRoleSelect" style="background:none;border:none;color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer">&larr; Back</button></p>
   </div>
 </div>
 
-<!-- ADMIN APP -->
+<!-- ==================== ADMIN APP ==================== -->
 <div class="app-container" id="adminApp">
   <div class="topbar">
     <div class="topbar-left">
       <span class="topbar-logo">🎬</span>
-      <div>
-        <div class="topbar-title">Crew Tracker</div>
-      </div>
+      <div><div class="topbar-title">Crew Tracker</div></div>
     </div>
     <div class="topbar-right">
-      <span class="topbar-role" >👑 Admin</span>
-      <button class="btn btn-icon btn-secondary" onclick="logout()" title="Logout">
-        <i class="fas fa-sign-out-alt"></i>
-      </button>
+      <span class="topbar-role">👑 Admin</span>
+      <button class="btn btn-icon btn-secondary" data-action="logout" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
     </div>
   </div>
 
-  <!-- ADMIN PAGES -->
   <!-- Dashboard -->
   <div class="page active" id="adminDashboard">
     <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">🏠 Dashboard</h2>
-    
-    <!-- Previous Month Winner -->
     <div class="prev-winner" id="adminPrevWinner" style="display:none">
       <div class="pw-label">⭐ Star Performer — <span id="adminPrevMonth"></span></div>
       <div class="pw-name" id="adminPrevName"></div>
       <div class="pw-score" id="adminPrevScore"></div>
     </div>
-
     <div class="stat-grid">
-      <div class="stat-box gold">
-        <div class="stat-icon">📝</div>
-        <div class="stat-value" id="todayEntries">0</div>
-        <div class="stat-label">Today's Entries</div>
-      </div>
-      <div class="stat-box blue">
-        <div class="stat-icon">📊</div>
-        <div class="stat-value" id="weeklyEntries">0</div>
-        <div class="stat-label">This Week</div>
-      </div>
-      <div class="stat-box green">
-        <div class="stat-icon">👥</div>
-        <div class="stat-value" id="totalMembers">0</div>
-        <div class="stat-label">Total Members</div>
-      </div>
-      <div class="stat-box red">
-        <div class="stat-icon">🚨</div>
-        <div class="stat-value" id="alertCount">0</div>
-        <div class="stat-label">Alerts</div>
-      </div>
+      <div class="stat-box gold"><div class="stat-icon">📝</div><div class="stat-value" id="todayEntries">0</div><div class="stat-label">Today's Entries</div></div>
+      <div class="stat-box blue"><div class="stat-icon">📊</div><div class="stat-value" id="weeklyEntries">0</div><div class="stat-label">This Week</div></div>
+      <div class="stat-box green"><div class="stat-icon">👥</div><div class="stat-value" id="totalMembers">0</div><div class="stat-label">Total Members</div></div>
+      <div class="stat-box red"><div class="stat-icon">🚨</div><div class="stat-value" id="alertCount">0</div><div class="stat-label">Alerts</div></div>
     </div>
-
-    <!-- Top 3 Performers -->
-    <div class="card">
-      <div class="card-title">🏆 Top 3 Performers (This Month)</div>
-      <div id="topPerformers">
-        <div class="loading"><div class="spinner"></div></div>
-      </div>
-    </div>
-
-    <!-- Low Performers Alert -->
-    <div class="card" id="alertCard" style="display:none">
-      <div class="card-title">🚨 Low Performance Alerts</div>
-      <div id="alertList"></div>
-    </div>
+    <div class="card"><div class="card-title">🏆 Top 3 Performers (This Month)</div><div id="topPerformers"><div class="loading"><div class="spinner"></div></div></div></div>
+    <div class="card" id="alertCard" style="display:none"><div class="card-title">🚨 Low Performance Alerts</div><div id="alertList"></div></div>
   </div>
 
   <!-- Performance Entry -->
   <div class="page" id="adminEntry">
     <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">➕ Performance Entry</h2>
-    
     <div class="section-tabs">
-      <button class="section-tab active" onclick="switchEntryTab('daily')">📋 Daily Performance</button>
-      <button class="section-tab" onclick="switchEntryTab('weekly')">📅 Weekly Discipline</button>
+      <button class="section-tab active" data-action="switchEntryTab" data-tab="daily">📋 Daily Performance</button>
+      <button class="section-tab" data-action="switchEntryTab" data-tab="weekly">📅 Weekly Discipline</button>
     </div>
-
-    <!-- Daily Performance Section -->
     <div id="dailyEntrySection">
-      <div class="card">
-        <div class="card-title">Select Member</div>
-        <div id="dailyMemberList" class="entry-member-select"></div>
-      </div>
+      <div class="card"><div class="card-title">Select Member</div><div id="dailyMemberList" class="entry-member-select"></div></div>
       <div id="dailyRatingForm" style="display:none">
         <div class="card">
           <div class="card-title">📅 Date: <span id="dailyDate"></span></div>
-          
-          <div class="rating-section">
-            <div class="rating-label">1. Quality</div>
-            <div class="rating-options" data-field="quality">
-              <button class="rating-btn" data-value="10" onclick="selectRating(this)">Excellent<span class="rb-points">10</span></button>
-              <button class="rating-btn" data-value="7" onclick="selectRating(this)">Good<span class="rb-points">7</span></button>
-              <button class="rating-btn" data-value="4" onclick="selectRating(this)">Average<span class="rb-points">4</span></button>
-              <button class="rating-btn" data-value="1" onclick="selectRating(this)">Poor<span class="rb-points">1</span></button>
-            </div>
-          </div>
-
-          <div class="rating-section">
-            <div class="rating-label">2. Shoot Completion & Speed</div>
-            <div class="rating-options" data-field="speed">
-              <button class="rating-btn" data-value="10" onclick="selectRating(this)">Fast<span class="rb-points">10</span></button>
-              <button class="rating-btn" data-value="7" onclick="selectRating(this)">Normal<span class="rb-points">7</span></button>
-              <button class="rating-btn" data-value="4" onclick="selectRating(this)">Slow<span class="rb-points">4</span></button>
-              <button class="rating-btn" data-value="1" onclick="selectRating(this)">Poor<span class="rb-points">1</span></button>
-            </div>
-          </div>
-
-          <div class="rating-section">
-            <div class="rating-label">3. Behavior</div>
-            <div class="rating-options" data-field="behavior">
-              <button class="rating-btn" data-value="10" onclick="selectRating(this)">Excellent<span class="rb-points">10</span></button>
-              <button class="rating-btn" data-value="7" onclick="selectRating(this)">Good<span class="rb-points">7</span></button>
-              <button class="rating-btn" data-value="4" onclick="selectRating(this)">Average<span class="rb-points">4</span></button>
-              <button class="rating-btn" data-value="1" onclick="selectRating(this)">Poor<span class="rb-points">1</span></button>
-            </div>
-          </div>
-
-          <div class="rating-section">
-            <div class="rating-label">4. Supportive / Initiative</div>
-            <div class="rating-options three-col" data-field="initiative">
-              <button class="rating-btn" data-value="10" onclick="selectRating(this)">High<span class="rb-points">10</span></button>
-              <button class="rating-btn" data-value="6" onclick="selectRating(this)">Medium<span class="rb-points">6</span></button>
-              <button class="rating-btn" data-value="3" onclick="selectRating(this)">Low<span class="rb-points">3</span></button>
-            </div>
-          </div>
-
-          <div class="rating-section">
-            <div class="rating-label">5. Code of Conduct</div>
-            <div class="rating-options" data-field="conduct">
-              <button class="rating-btn" data-value="10" onclick="selectRating(this)">Excellent<span class="rb-points">10</span></button>
-              <button class="rating-btn" data-value="7" onclick="selectRating(this)">Good<span class="rb-points">7</span></button>
-              <button class="rating-btn" data-value="4" onclick="selectRating(this)">Average<span class="rb-points">4</span></button>
-              <button class="rating-btn" data-value="1" onclick="selectRating(this)">Poor<span class="rb-points">1</span></button>
-            </div>
-          </div>
-
-          <div style="text-align:center;margin-top:16px">
-            <div style="font-size:13px;color:var(--text-muted)">Total Daily Points</div>
-            <div id="dailyTotalPreview" style="font-size:32px;font-weight:800;color:var(--accent)">0 / 50</div>
-          </div>
-
-          <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="submitDailyEntry()">
-            <i class="fas fa-check"></i> Submit Daily Entry
-          </button>
+          <div class="rating-section"><div class="rating-label">1. Quality</div><div class="rating-options" data-field="quality"><button class="rating-btn" data-value="10">Excellent<span class="rb-points">10</span></button><button class="rating-btn" data-value="7">Good<span class="rb-points">7</span></button><button class="rating-btn" data-value="4">Average<span class="rb-points">4</span></button><button class="rating-btn" data-value="1">Poor<span class="rb-points">1</span></button></div></div>
+          <div class="rating-section"><div class="rating-label">2. Shoot Completion & Speed</div><div class="rating-options" data-field="speed"><button class="rating-btn" data-value="10">Fast<span class="rb-points">10</span></button><button class="rating-btn" data-value="7">Normal<span class="rb-points">7</span></button><button class="rating-btn" data-value="4">Slow<span class="rb-points">4</span></button><button class="rating-btn" data-value="1">Poor<span class="rb-points">1</span></button></div></div>
+          <div class="rating-section"><div class="rating-label">3. Behavior</div><div class="rating-options" data-field="behavior"><button class="rating-btn" data-value="10">Excellent<span class="rb-points">10</span></button><button class="rating-btn" data-value="7">Good<span class="rb-points">7</span></button><button class="rating-btn" data-value="4">Average<span class="rb-points">4</span></button><button class="rating-btn" data-value="1">Poor<span class="rb-points">1</span></button></div></div>
+          <div class="rating-section"><div class="rating-label">4. Supportive / Initiative</div><div class="rating-options three-col" data-field="initiative"><button class="rating-btn" data-value="10">High<span class="rb-points">10</span></button><button class="rating-btn" data-value="6">Medium<span class="rb-points">6</span></button><button class="rating-btn" data-value="3">Low<span class="rb-points">3</span></button></div></div>
+          <div class="rating-section"><div class="rating-label">5. Code of Conduct</div><div class="rating-options" data-field="conduct"><button class="rating-btn" data-value="10">Excellent<span class="rb-points">10</span></button><button class="rating-btn" data-value="7">Good<span class="rb-points">7</span></button><button class="rating-btn" data-value="4">Average<span class="rb-points">4</span></button><button class="rating-btn" data-value="1">Poor<span class="rb-points">1</span></button></div></div>
+          <div style="text-align:center;margin-top:16px"><div style="font-size:13px;color:var(--text-muted)">Total Daily Points</div><div id="dailyTotalPreview" style="font-size:32px;font-weight:800;color:var(--accent)">0 / 50</div></div>
+          <button class="btn btn-primary" style="margin-top:16px;width:100%" data-action="submitDailyEntry"><i class="fas fa-check"></i> Submit Daily Entry</button>
         </div>
       </div>
     </div>
-
-    <!-- Weekly Discipline Section -->
     <div id="weeklyEntrySection" style="display:none">
-      <div class="card">
-        <div class="card-title">Select Member</div>
-        <div id="weeklyMemberList" class="entry-member-select"></div>
-      </div>
+      <div class="card"><div class="card-title">Select Member</div><div id="weeklyMemberList" class="entry-member-select"></div></div>
       <div id="weeklyRatingForm" style="display:none">
         <div class="card">
           <div class="card-title">📅 Week of: <span id="weeklyDate"></span></div>
-          
-          <div class="rating-section">
-            <div class="rating-label">Attendance / On-time</div>
-            <div class="rating-options" data-field="attendance">
-              <button class="rating-btn" data-value="20" onclick="selectRating(this)">Excellent<span class="rb-points">20</span></button>
-              <button class="rating-btn" data-value="14" onclick="selectRating(this)">Good<span class="rb-points">14</span></button>
-              <button class="rating-btn" data-value="8" onclick="selectRating(this)">Average<span class="rb-points">8</span></button>
-              <button class="rating-btn" data-value="2" onclick="selectRating(this)">Poor<span class="rb-points">2</span></button>
-            </div>
-          </div>
-
-          <div style="text-align:center;margin-top:16px">
-            <div style="font-size:13px;color:var(--text-muted)">Weekly Discipline Points</div>
-            <div id="weeklyTotalPreview" style="font-size:32px;font-weight:800;color:var(--accent)">0 / 20</div>
-          </div>
-
-          <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="submitWeeklyEntry()">
-            <i class="fas fa-check"></i> Submit Weekly Entry
-          </button>
+          <div class="rating-section"><div class="rating-label">Attendance / On-time</div><div class="rating-options" data-field="attendance"><button class="rating-btn" data-value="20">Excellent<span class="rb-points">20</span></button><button class="rating-btn" data-value="14">Good<span class="rb-points">14</span></button><button class="rating-btn" data-value="8">Average<span class="rb-points">8</span></button><button class="rating-btn" data-value="2">Poor<span class="rb-points">2</span></button></div></div>
+          <div style="text-align:center;margin-top:16px"><div style="font-size:13px;color:var(--text-muted)">Weekly Discipline Points</div><div id="weeklyTotalPreview" style="font-size:32px;font-weight:800;color:var(--accent)">0 / 20</div></div>
+          <button class="btn btn-primary" style="margin-top:16px;width:100%" data-action="submitWeeklyEntry"><i class="fas fa-check"></i> Submit Weekly Entry</button>
         </div>
       </div>
     </div>
@@ -956,10 +587,8 @@
   <div class="page" id="adminPerformance">
     <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">📊 All Performance</h2>
     <div class="filter-bar">
-      <select id="perfFilterMember" onchange="filterPerformance()">
-        <option value="">All Members</option>
-      </select>
-      <input type="date" id="perfFilterDate" onchange="filterPerformance()">
+      <select id="perfFilterMember"><option value="">All Members</option></select>
+      <input type="date" id="perfFilterDate">
     </div>
     <div id="performanceList"></div>
   </div>
@@ -968,188 +597,219 @@
   <div class="page" id="adminLeaderboard">
     <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">🏆 Leaderboard</h2>
     <div class="section-tabs">
-      <button class="section-tab active" onclick="switchLBTab('monthly')">Monthly</button>
-      <button class="section-tab" onclick="switchLBTab('weekly')">Weekly</button>
+      <button class="section-tab active" data-action="switchLBTab" data-tab="monthly">Monthly</button>
+      <button class="section-tab" data-action="switchLBTab" data-tab="weekly">Weekly</button>
     </div>
-
-    <!-- Star Performer Declaration -->
     <div id="starDeclareSection" style="display:none">
       <div class="star-declare">
         <div class="star-icon">🌟</div>
         <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px">SUGGESTED STAR PERFORMER</div>
         <div class="star-name" id="suggestedStarName"></div>
         <div class="star-score" id="suggestedStarScore"></div>
-        <button class="btn btn-primary" style="margin-top:16px" onclick="declareStarPerformer()">
-          <i class="fas fa-trophy"></i> Declare Star Performer
-        </button>
+        <button class="btn btn-primary" style="margin-top:16px" data-action="declareStarPerformer"><i class="fas fa-trophy"></i> Declare Star Performer</button>
       </div>
     </div>
-
     <div id="leaderboardContent"></div>
   </div>
 
   <!-- Employee Management -->
   <div class="page" id="adminEmployees">
     <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">👥 Employee Management</h2>
-    <button class="btn btn-primary btn-sm" onclick="openAddMemberModal()" style="margin-bottom:16px">
-      <i class="fas fa-plus"></i> Add New Member
-    </button>
+    <button class="btn btn-primary btn-sm" data-action="openAddMemberModal" style="margin-bottom:16px"><i class="fas fa-plus"></i> Add New Member</button>
     <div id="employeeList"></div>
+  </div>
+
+  <!-- Settings -->
+  <div class="page" id="adminSettings">
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">⚙️ Settings</h2>
+    <div class="card">
+      <div class="card-title">📋 Manager PIN</div>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Manager এই PIN দিয়ে login করবে। Performance entry দিতে পারবে।</p>
+      <div id="managerPinDisplay" style="margin-bottom:12px"></div>
+      <div class="form-group"><label>New PIN (min 4 chars)</label><input type="text" id="newManagerPin" placeholder="Enter new PIN" maxlength="10"></div>
+      <button class="btn btn-primary btn-sm" data-action="saveManagerPin"><i class="fas fa-save"></i> Save PIN</button>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="card-title">🔑 Change Admin Password</div>
+      <div class="form-group"><label>New Password (min 6 chars)</label><input type="password" id="newAdminPw" placeholder="Enter new password"></div>
+      <button class="btn btn-primary btn-sm" data-action="changeAdminPw"><i class="fas fa-save"></i> Update Password</button>
+    </div>
   </div>
 
   <!-- ADMIN BOTTOM NAV -->
   <div class="bottom-nav">
-    <button class="nav-item active" onclick="switchAdminPage('adminDashboard', this)">
-      <i class="fas fa-home"></i><span>Home</span>
-    </button>
-    <button class="nav-item" onclick="switchAdminPage('adminEntry', this)">
-      <i class="fas fa-plus-circle"></i><span>Entry</span>
-    </button>
-    <button class="nav-item" onclick="switchAdminPage('adminPerformance', this)">
-      <i class="fas fa-chart-bar"></i><span>View</span>
-    </button>
-    <button class="nav-item" onclick="switchAdminPage('adminLeaderboard', this)">
-      <i class="fas fa-trophy"></i><span>Board</span>
-    </button>
-    <button class="nav-item" onclick="switchAdminPage('adminEmployees', this)">
-      <i class="fas fa-users"></i><span>Team</span>
-    </button>
+    <button class="nav-item active" data-action="switchAdminPage" data-page="adminDashboard"><i class="fas fa-home"></i><span>Home</span></button>
+    <button class="nav-item" data-action="switchAdminPage" data-page="adminEntry"><i class="fas fa-plus-circle"></i><span>Entry</span></button>
+    <button class="nav-item" data-action="switchAdminPage" data-page="adminPerformance"><i class="fas fa-chart-bar"></i><span>View</span></button>
+    <button class="nav-item" data-action="switchAdminPage" data-page="adminLeaderboard"><i class="fas fa-trophy"></i><span>Board</span></button>
+    <button class="nav-item" data-action="switchAdminPage" data-page="adminEmployees"><i class="fas fa-users"></i><span>Team</span></button>
+    <button class="nav-item" data-action="switchAdminPage" data-page="adminSettings"><i class="fas fa-cog"></i><span>Settings</span></button>
   </div>
 </div>
 
-<!-- STAFF APP -->
+<!-- ==================== MANAGER APP ==================== -->
+<div class="app-container" id="managerApp">
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-logo">🎬</span>
+      <div><div class="topbar-title">Crew Tracker</div></div>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-role" style="background:var(--purple-light);color:var(--purple)">📋 Manager</span>
+      <button class="btn btn-icon btn-secondary" data-action="logout" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </div>
+
+  <!-- Manager Dashboard -->
+  <div class="page active" id="mgrDashboard">
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">🏠 Manager Dashboard</h2>
+    <div class="prev-winner" id="mgrPrevWinner" style="display:none">
+      <div class="pw-label">⭐ Star Performer — <span id="mgrPrevMonth"></span></div>
+      <div class="pw-name" id="mgrPrevName"></div>
+      <div class="pw-score" id="mgrPrevScore"></div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-box gold"><div class="stat-icon">📝</div><div class="stat-value" id="mgrTodayEntries">0</div><div class="stat-label">Today's Entries</div></div>
+      <div class="stat-box blue"><div class="stat-icon">📊</div><div class="stat-value" id="mgrWeeklyEntries">0</div><div class="stat-label">This Week</div></div>
+      <div class="stat-box green"><div class="stat-icon">👥</div><div class="stat-value" id="mgrTotalMembers">0</div><div class="stat-label">Total Members</div></div>
+      <div class="stat-box red"><div class="stat-icon">🚨</div><div class="stat-value" id="mgrAlertCount">0</div><div class="stat-label">Alerts</div></div>
+    </div>
+    <div class="card"><div class="card-title">🏆 Top 3 Performers (This Month)</div><div id="mgrTopPerformers"><div class="loading"><div class="spinner"></div></div></div></div>
+  </div>
+
+  <!-- Manager Entry -->
+  <div class="page" id="mgrEntry">
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">➕ Performance Entry</h2>
+    <div class="section-tabs">
+      <button class="section-tab active" data-action="switchMgrEntryTab" data-tab="daily">📋 Daily Performance</button>
+      <button class="section-tab" data-action="switchMgrEntryTab" data-tab="weekly">📅 Weekly Discipline</button>
+    </div>
+    <div id="mgrDailyEntrySection">
+      <div class="card"><div class="card-title">Select Member</div><div id="mgrDailyMemberList" class="entry-member-select"></div></div>
+      <div id="mgrDailyRatingForm" style="display:none">
+        <div class="card">
+          <div class="card-title">📅 Date: <span id="mgrDailyDate"></span></div>
+          <div class="rating-section"><div class="rating-label">1. Quality</div><div class="rating-options" data-field="mgr_quality"><button class="rating-btn" data-value="10">Excellent<span class="rb-points">10</span></button><button class="rating-btn" data-value="7">Good<span class="rb-points">7</span></button><button class="rating-btn" data-value="4">Average<span class="rb-points">4</span></button><button class="rating-btn" data-value="1">Poor<span class="rb-points">1</span></button></div></div>
+          <div class="rating-section"><div class="rating-label">2. Shoot Completion & Speed</div><div class="rating-options" data-field="mgr_speed"><button class="rating-btn" data-value="10">Fast<span class="rb-points">10</span></button><button class="rating-btn" data-value="7">Normal<span class="rb-points">7</span></button><button class="rating-btn" data-value="4">Slow<span class="rb-points">4</span></button><button class="rating-btn" data-value="1">Poor<span class="rb-points">1</span></button></div></div>
+          <div class="rating-section"><div class="rating-label">3. Behavior</div><div class="rating-options" data-field="mgr_behavior"><button class="rating-btn" data-value="10">Excellent<span class="rb-points">10</span></button><button class="rating-btn" data-value="7">Good<span class="rb-points">7</span></button><button class="rating-btn" data-value="4">Average<span class="rb-points">4</span></button><button class="rating-btn" data-value="1">Poor<span class="rb-points">1</span></button></div></div>
+          <div class="rating-section"><div class="rating-label">4. Supportive / Initiative</div><div class="rating-options three-col" data-field="mgr_initiative"><button class="rating-btn" data-value="10">High<span class="rb-points">10</span></button><button class="rating-btn" data-value="6">Medium<span class="rb-points">6</span></button><button class="rating-btn" data-value="3">Low<span class="rb-points">3</span></button></div></div>
+          <div class="rating-section"><div class="rating-label">5. Code of Conduct</div><div class="rating-options" data-field="mgr_conduct"><button class="rating-btn" data-value="10">Excellent<span class="rb-points">10</span></button><button class="rating-btn" data-value="7">Good<span class="rb-points">7</span></button><button class="rating-btn" data-value="4">Average<span class="rb-points">4</span></button><button class="rating-btn" data-value="1">Poor<span class="rb-points">1</span></button></div></div>
+          <div style="text-align:center;margin-top:16px"><div style="font-size:13px;color:var(--text-muted)">Total Daily Points</div><div id="mgrDailyTotalPreview" style="font-size:32px;font-weight:800;color:var(--accent)">0 / 50</div></div>
+          <button class="btn btn-primary" style="margin-top:16px;width:100%" data-action="mgrSubmitDailyEntry"><i class="fas fa-check"></i> Submit Daily Entry</button>
+        </div>
+      </div>
+    </div>
+    <div id="mgrWeeklyEntrySection" style="display:none">
+      <div class="card"><div class="card-title">Select Member</div><div id="mgrWeeklyMemberList" class="entry-member-select"></div></div>
+      <div id="mgrWeeklyRatingForm" style="display:none">
+        <div class="card">
+          <div class="card-title">📅 Week of: <span id="mgrWeeklyDate"></span></div>
+          <div class="rating-section"><div class="rating-label">Attendance / On-time</div><div class="rating-options" data-field="mgr_attendance"><button class="rating-btn" data-value="20">Excellent<span class="rb-points">20</span></button><button class="rating-btn" data-value="14">Good<span class="rb-points">14</span></button><button class="rating-btn" data-value="8">Average<span class="rb-points">8</span></button><button class="rating-btn" data-value="2">Poor<span class="rb-points">2</span></button></div></div>
+          <div style="text-align:center;margin-top:16px"><div style="font-size:13px;color:var(--text-muted)">Weekly Discipline Points</div><div id="mgrWeeklyTotalPreview" style="font-size:32px;font-weight:800;color:var(--accent)">0 / 20</div></div>
+          <button class="btn btn-primary" style="margin-top:16px;width:100%" data-action="mgrSubmitWeeklyEntry"><i class="fas fa-check"></i> Submit Weekly Entry</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Manager Performance View -->
+  <div class="page" id="mgrPerformance">
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">📊 All Performance</h2>
+    <div class="filter-bar">
+      <select id="mgrPerfFilterMember"><option value="">All Members</option></select>
+      <input type="date" id="mgrPerfFilterDate">
+    </div>
+    <div id="mgrPerformanceList"></div>
+  </div>
+
+  <!-- Manager Leaderboard -->
+  <div class="page" id="mgrLeaderboard">
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">🏆 Leaderboard</h2>
+    <div class="section-tabs">
+      <button class="section-tab active" data-action="switchMgrLBTab" data-tab="monthly">Monthly</button>
+      <button class="section-tab" data-action="switchMgrLBTab" data-tab="weekly">Weekly</button>
+    </div>
+    <div id="mgrLeaderboardContent"></div>
+  </div>
+
+  <!-- MANAGER BOTTOM NAV -->
+  <div class="bottom-nav">
+    <button class="nav-item active" data-action="switchMgrPage" data-page="mgrDashboard"><i class="fas fa-home"></i><span>Home</span></button>
+    <button class="nav-item" data-action="switchMgrPage" data-page="mgrEntry"><i class="fas fa-plus-circle"></i><span>Entry</span></button>
+    <button class="nav-item" data-action="switchMgrPage" data-page="mgrPerformance"><i class="fas fa-chart-bar"></i><span>View</span></button>
+    <button class="nav-item" data-action="switchMgrPage" data-page="mgrLeaderboard"><i class="fas fa-trophy"></i><span>Board</span></button>
+  </div>
+</div>
+
+<!-- ==================== STAFF APP ==================== -->
 <div class="app-container" id="staffApp">
   <div class="topbar">
     <div class="topbar-left">
       <span class="topbar-logo">🎬</span>
-      <div>
-        <div class="topbar-title">Crew Tracker</div>
-      </div>
+      <div><div class="topbar-title">Crew Tracker</div></div>
     </div>
     <div class="topbar-right">
       <span class="topbar-role" style="background:var(--green-light);color:var(--green)" id="staffNameBadge">Staff</span>
-      <button class="btn btn-icon btn-secondary" onclick="logout()" title="Logout">
-        <i class="fas fa-sign-out-alt"></i>
-      </button>
+      <button class="btn btn-icon btn-secondary" data-action="logout" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
     </div>
   </div>
 
-  <!-- Staff Dashboard -->
   <div class="page active" id="staffDashboard">
     <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">🏠 My Dashboard</h2>
-    
-    <!-- Previous Month Winner -->
     <div class="prev-winner" id="staffPrevWinner" style="display:none">
       <div class="pw-label">⭐ Star Performer — <span id="staffPrevMonth"></span></div>
       <div class="pw-name" id="staffPrevName"></div>
       <div class="pw-score" id="staffPrevScore"></div>
     </div>
-
-    <!-- Top 3 Banner -->
     <div class="card" id="staffTop3Card" style="display:none">
       <div class="card-title">🥇🥈🥉 Top 3 — Previous Month</div>
       <div id="staffTop3List"></div>
     </div>
-
     <div class="my-rank-card">
       <div style="font-size:12px;color:var(--text-muted)">YOUR CURRENT RANK</div>
       <div class="big-rank" id="staffMyRank">-</div>
       <div class="rank-label">out of <span id="staffTotalMembers">0</span> members</div>
     </div>
-
     <div class="stat-grid">
-      <div class="stat-box gold">
-        <div class="stat-icon">⭐</div>
-        <div class="stat-value" id="staffTodayPts">-</div>
-        <div class="stat-label">Today's Points</div>
-      </div>
-      <div class="stat-box blue">
-        <div class="stat-icon">📊</div>
-        <div class="stat-value" id="staffWeeklyPts">0</div>
-        <div class="stat-label">This Week</div>
-      </div>
-      <div class="stat-box green">
-        <div class="stat-icon">📈</div>
-        <div class="stat-value" id="staffMonthlyPct">0%</div>
-        <div class="stat-label">Monthly %</div>
-      </div>
-      <div class="stat-box" style="border-color:var(--accent)">
-        <div class="stat-icon">🎯</div>
-        <div class="stat-value" id="staffMonthlyPts">0</div>
-        <div class="stat-label">Monthly Total</div>
-      </div>
+      <div class="stat-box gold"><div class="stat-icon">⭐</div><div class="stat-value" id="staffTodayPts">-</div><div class="stat-label">Today's Points</div></div>
+      <div class="stat-box blue"><div class="stat-icon">📊</div><div class="stat-value" id="staffWeeklyPts">0</div><div class="stat-label">This Week</div></div>
+      <div class="stat-box green"><div class="stat-icon">📈</div><div class="stat-value" id="staffMonthlyPct">0%</div><div class="stat-label">Monthly %</div></div>
+      <div class="stat-box" style="border-color:var(--accent)"><div class="stat-icon">🎯</div><div class="stat-value" id="staffMonthlyPts">0</div><div class="stat-label">Monthly Total</div></div>
     </div>
-
-    <!-- Weekly Progress -->
-    <div class="card">
-      <div class="card-title">📅 Daily Score List (This Week)</div>
-      <div id="staffDailyScores"></div>
-    </div>
+    <div class="card"><div class="card-title">📅 Daily Score List (This Week)</div><div id="staffDailyScores"></div></div>
   </div>
 
-  <!-- Staff Leaderboard -->
   <div class="page" id="staffLeaderboard">
     <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">🏆 Leaderboard</h2>
     <div id="staffLeaderboardContent"></div>
   </div>
 
-  <!-- Staff Rewards -->
   <div class="page" id="staffRewards">
     <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">🎁 Rewards</h2>
     <div id="staffRewardsContent"></div>
   </div>
 
-  <!-- STAFF BOTTOM NAV -->
   <div class="bottom-nav">
-    <button class="nav-item active" onclick="switchStaffPage('staffDashboard', this)">
-      <i class="fas fa-home"></i><span>Home</span>
-    </button>
-    <button class="nav-item" onclick="switchStaffPage('staffLeaderboard', this)">
-      <i class="fas fa-trophy"></i><span>Board</span>
-    </button>
-    <button class="nav-item" onclick="switchStaffPage('staffRewards', this)">
-      <i class="fas fa-gift"></i><span>Rewards</span>
-    </button>
+    <button class="nav-item active" data-action="switchStaffPage" data-page="staffDashboard"><i class="fas fa-home"></i><span>Home</span></button>
+    <button class="nav-item" data-action="switchStaffPage" data-page="staffLeaderboard"><i class="fas fa-trophy"></i><span>Board</span></button>
+    <button class="nav-item" data-action="switchStaffPage" data-page="staffRewards"><i class="fas fa-gift"></i><span>Rewards</span></button>
   </div>
 </div>
+
+<!-- ==================== MODALS ==================== -->
 
 <!-- ADD MEMBER MODAL -->
 <div class="modal-overlay" id="addMemberModal">
   <div class="modal">
     <div class="modal-title"><i class="fas fa-user-plus"></i> Add New Member</div>
-    <div class="form-group">
-      <label>Name / নাম</label>
-      <input type="text" id="newMemberName" placeholder="Full name">
-    </div>
-    <div class="form-group">
-      <label>Phone</label>
-      <input type="tel" id="newMemberPhone" placeholder="01XXXXXXXXX">
-    </div>
-    <div class="form-group">
-      <label>Password (staff এটা দিয়ে login করবে)</label>
-      <input type="text" id="newMemberPassword" placeholder="Min 6 characters">
-    </div>
-    <div class="form-group">
-      <label>Role</label>
-      <select id="newMemberRole">
-        <option value="DOP">DOP</option>
-        <option value="Actor">Actor</option>
-        <option value="Light Man">Light Man</option>
-        <option value="Assistant">Assistant</option>
-        <option value="Others">Others</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Staff Type</label>
-      <select id="newMemberType">
-        <option value="Daily">Daily (Regular)</option>
-        <option value="Freelancer">Freelancer</option>
-      </select>
-    </div>
-    
+    <div class="form-group"><label>Name / নাম</label><input type="text" id="newMemberName" placeholder="Full name"></div>
+    <div class="form-group"><label>Phone</label><input type="tel" id="newMemberPhone" placeholder="01XXXXXXXXX"></div>
+    <div class="form-group"><label>Password (staff এটা দিয়ে login করবে)</label><input type="text" id="newMemberPassword" placeholder="Min 6 characters"></div>
+    <div class="form-group"><label>Role</label><select id="newMemberRole"><option value="DOP">DOP</option><option value="Actor">Actor</option><option value="Light Man">Light Man</option><option value="Assistant">Assistant</option><option value="Others">Others</option></select></div>
+    <div class="form-group"><label>Staff Type</label><select id="newMemberType"><option value="Daily">Daily (Regular)</option><option value="Freelancer">Freelancer</option></select></div>
     <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal('addMemberModal')">Cancel</button>
-      <button class="btn btn-primary" onclick="addNewMember()"><i class="fas fa-plus"></i> Add</button>
+      <button class="btn btn-secondary" data-action="closeModal" data-modal="addMemberModal">Cancel</button>
+      <button class="btn btn-primary" data-action="addNewMember"><i class="fas fa-plus"></i> Add</button>
     </div>
   </div>
 </div>
@@ -1159,49 +819,16 @@
   <div class="modal">
     <div class="modal-title"><i class="fas fa-edit"></i> Edit Member</div>
     <input type="hidden" id="editMemberId">
-    <div class="form-group">
-      <label>Name / নাম</label>
-      <input type="text" id="editMemberName">
-    </div>
-    <div class="form-group">
-      <label>Phone</label>
-      <input type="tel" id="editMemberPhone">
-    </div>
-    <div class="form-group">
-      <label>Role</label>
-      <select id="editMemberRole">
-        <option value="DOP">DOP</option>
-        <option value="Actor">Actor</option>
-        <option value="Light Man">Light Man</option>
-        <option value="Assistant">Assistant</option>
-        <option value="Others">Others</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Staff Type</label>
-      <select id="editMemberType">
-        <option value="Daily">Daily (Regular)</option>
-        <option value="Freelancer">Freelancer</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Status</label>
-      <select id="editMemberStatus">
-        <option value="Active">Active</option>
-        <option value="Inactive">Inactive</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Current Password</label>
-      <input type="text" id="editMemberCurrentPw" disabled style="opacity:0.6">
-    </div>
-    <div class="form-group">
-      <label>New Password (ফাঁকা রাখলে change হবে না)</label>
-      <input type="text" id="editMemberNewPw" placeholder="নতুন password দিন (optional)">
-    </div>
+    <div class="form-group"><label>Name / নাম</label><input type="text" id="editMemberName"></div>
+    <div class="form-group"><label>Phone</label><input type="tel" id="editMemberPhone"></div>
+    <div class="form-group"><label>Role</label><select id="editMemberRole"><option value="DOP">DOP</option><option value="Actor">Actor</option><option value="Light Man">Light Man</option><option value="Assistant">Assistant</option><option value="Others">Others</option></select></div>
+    <div class="form-group"><label>Staff Type</label><select id="editMemberType"><option value="Daily">Daily (Regular)</option><option value="Freelancer">Freelancer</option></select></div>
+    <div class="form-group"><label>Status</label><select id="editMemberStatus"><option value="Active">Active</option><option value="Inactive">Inactive</option></select></div>
+    <div class="form-group"><label>Current Password</label><input type="text" id="editMemberCurrentPw" disabled style="opacity:0.6"></div>
+    <div class="form-group"><label>New Password (ফাঁকা রাখলে change হবে না)</label><input type="text" id="editMemberNewPw" placeholder="নতুন password দিন (optional)"></div>
     <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal('editMemberModal')">Cancel</button>
-      <button class="btn btn-primary" onclick="updateMember()"><i class="fas fa-save"></i> Save</button>
+      <button class="btn btn-secondary" data-action="closeModal" data-modal="editMemberModal">Cancel</button>
+      <button class="btn btn-primary" data-action="updateMember"><i class="fas fa-save"></i> Save</button>
     </div>
   </div>
 </div>
@@ -1214,101 +841,1178 @@
     <input type="hidden" id="editPerfType">
     <div id="editPerfFields"></div>
     <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal('editPerfModal')">Cancel</button>
-      <button class="btn btn-primary" onclick="updatePerformance()"><i class="fas fa-save"></i> Update</button>
+      <button class="btn btn-secondary" data-action="closeModal" data-modal="editPerfModal">Cancel</button>
+      <button class="btn btn-primary" data-action="updatePerformance"><i class="fas fa-save"></i> Update</button>
     </div>
   </div>
 </div>
 
+<!-- ==================== JAVASCRIPT ==================== -->
 <script>
 // ===== FIREBASE =====
-const firebaseConfig={apiKey:"AIzaSyAPnA_34R1iuQQUymQ2MftSJuquFJREMu4",authDomain:"ascent-editor-tracker.firebaseapp.com",projectId:"ascent-editor-tracker",storageBucket:"ascent-editor-tracker.firebasestorage.app",messagingSenderId:"1044465732037",appId:"1:1044465732037:web:855174ba2eb0b843cca3ac",databaseURL:"https://ascent-editor-tracker-default-rtdb.asia-southeast1.firebasedatabase.app"};
-firebase.initializeApp(firebaseConfig);const db=firebase.database();
+const firebaseConfig = {
+  apiKey: "AIzaSyAPnA_34R1iuQQUymQ2MftSJuquFJREMu4",
+  authDomain: "ascent-editor-tracker.firebaseapp.com",
+  projectId: "ascent-editor-tracker",
+  storageBucket: "ascent-editor-tracker.firebasestorage.app",
+  messagingSenderId: "1044465732037",
+  appId: "1:1044465732037:web:855174ba2eb0b843cca3ac",
+  databaseURL: "https://ascent-editor-tracker-default-rtdb.asia-southeast1.firebasedatabase.app"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
 // ===== GLOBALS =====
-let currentMemberId=null,members={},selectedMemberId=null,currentEntryTab='daily',currentLBTab='monthly',dailyRatings={},weeklyRatings={},selectedStaffId=null;
+let currentMemberId = null;
+let members = {};
+let selectedMemberId = null;
+let currentEntryTab = 'daily';
+let currentLBTab = 'monthly';
+let mgrEntryTab = 'daily';
+let mgrLBTab = 'monthly';
+let dailyRatings = {};
+let weeklyRatings = {};
+let mgrDailyRatings = {};
+let mgrWeeklyRatings = {};
+let selectedStaffId = null;
+let mgrSelectedMemberId = null;
 
 // ===== UTILS =====
-function showToast(m,e=false){const t=document.getElementById('toast');t.textContent=m;t.className='toast'+(e?' error':'');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
-function getToday(){return new Date().toISOString().split('T')[0]}
-function getCurrentMonth(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`}
-function getPrevMonth(){const d=new Date();d.setMonth(d.getMonth()-1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`}
-function getMonthName(ym){const[y,m]=ym.split('-');const ms=['January','February','March','April','May','June','July','August','September','October','November','December'];return ms[parseInt(m)-1]+' '+y}
-function getWeekStart(){const d=new Date();const day=d.getDay();const diff=d.getDate()-day+(day===0?-6:1);return new Date(d.setDate(diff)).toISOString().split('T')[0]}
-function getInitials(n){return n.split(' ').map(x=>x[0]).join('').toUpperCase().slice(0,2)}
-function closeModal(id){document.getElementById(id).classList.remove('active')}
-function openModal(id){document.getElementById(id).classList.add('active')}
-function hideAll(){['loginScreen','adminLoginScreen','staffLoginScreen','setupScreen'].forEach(id=>document.getElementById(id).style.display='none');document.getElementById('adminApp').classList.remove('active');document.getElementById('staffApp').classList.remove('active')}
+function showToast(m, e) {
+  var t = document.getElementById('toast');
+  t.textContent = m;
+  t.className = 'toast' + (e ? ' error' : '');
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 3000);
+}
 
-// ===== LOGIN =====
-db.ref('crew_admin').once('value').then(s=>{if(s.exists())document.getElementById('setupLink').style.display='none'});
-function showAdminLogin(){hideAll();document.getElementById('adminLoginScreen').style.display='flex';document.getElementById('adminLoginPw').focus()}
-function showStaffLogin(){hideAll();document.getElementById('staffLoginScreen').style.display='flex';loadStaffList()}
-function showSetup(){hideAll();document.getElementById('setupScreen').style.display='flex'}
-function backToRoleSelect(){hideAll();document.getElementById('loginScreen').style.display='flex'}
-function logout(){hideAll();document.getElementById('loginScreen').style.display='flex';currentMemberId=null}
+function getToday() {
+  return new Date().toISOString().split('T')[0];
+}
 
-function setupAdmin(){const name=document.getElementById('setupName').value.trim(),pw=document.getElementById('setupPassword').value;if(!name||!pw)return showToast('Name ও Password দিন',true);if(pw.length<6)return showToast('Password minimum 6 characters',true);db.ref('crew_admin').once('value').then(s=>{if(s.exists())return showToast('Admin already exists!',true);db.ref('crew_admin').set({name:name,password:pw,createdAt:getToday()}).then(()=>{showToast('✅ Admin created!');document.getElementById('setupLink').style.display='none';backToRoleSelect()})})}
+function getCurrentMonth() {
+  var d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+}
 
-function adminLogin(){const pw=document.getElementById('adminLoginPw').value;if(!pw)return showToast('Password দিন',true);db.ref('crew_admin/password').once('value').then(s=>{if(s.val()===pw){hideAll();document.getElementById('adminApp').classList.add('active');loadAdminDashboard();loadMembers()}else showToast('Wrong password!',true)})}
+function getPrevMonth() {
+  var d = new Date();
+  d.setMonth(d.getMonth() - 1);
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+}
 
-function loadStaffList(){db.ref('crew_members').once('value').then(s=>{const all=s.val()||{};const active=Object.entries(all).filter(([_,m])=>m.status!=='Inactive');const c=document.getElementById('staffSelectList');if(active.length===0){c.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:16px">No members yet</p>';return}c.innerHTML=active.map(([id,m])=>`<div class="staff-option" onclick="selectStaff('${id}')" id="so_${id}"><div class="so-avatar">${getInitials(m.name)}</div><div><div class="so-name">${m.name}</div><div class="so-role">${m.role} · ${m.staffType||'Daily'}</div></div></div>`).join('')})}
+function getMonthName(ym) {
+  var parts = ym.split('-');
+  var ms = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return ms[parseInt(parts[1]) - 1] + ' ' + parts[0];
+}
 
-function selectStaff(id){selectedStaffId=id;document.querySelectorAll('.staff-option').forEach(x=>x.classList.remove('selected'));document.getElementById('so_'+id).classList.add('selected');document.getElementById('staffPwSection').style.display='block';document.getElementById('staffLoginPw').value='';document.getElementById('staffLoginPw').focus()}
+function getWeekStart() {
+  var d = new Date();
+  var day = d.getDay();
+  var diff = d.getDate() - day + (day === 0 ? -6 : 1);
+  return new Date(d.setDate(diff)).toISOString().split('T')[0];
+}
 
-function staffLogin(){if(!selectedStaffId)return showToast('নাম select করুন',true);const pw=document.getElementById('staffLoginPw').value;if(!pw)return showToast('Password দিন',true);db.ref('crew_members/'+selectedStaffId+'/password').once('value').then(s=>{if(s.val()===pw){currentMemberId=selectedStaffId;db.ref('crew_members/'+selectedStaffId+'/name').once('value').then(ns=>{document.getElementById('staffNameBadge').textContent=ns.val();hideAll();document.getElementById('staffApp').classList.add('active');loadStaffDashboard()})}else showToast('Wrong password!',true)})}
+function getInitials(n) {
+  return n.split(' ').map(function(x) { return x[0]; }).join('').toUpperCase().slice(0, 2);
+}
 
-// ===== NAV =====
-function switchAdminPage(p,el){document.querySelectorAll('#adminApp .page').forEach(x=>x.classList.remove('active'));document.getElementById(p).classList.add('active');document.querySelectorAll('#adminApp .nav-item').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(p==='adminDashboard')loadAdminDashboard();if(p==='adminEntry')loadEntryMembers();if(p==='adminPerformance')loadAllPerformance();if(p==='adminLeaderboard')loadLeaderboard();if(p==='adminEmployees')loadEmployeeList()}
-function switchStaffPage(p,el){document.querySelectorAll('#staffApp .page').forEach(x=>x.classList.remove('active'));document.getElementById(p).classList.add('active');document.querySelectorAll('#staffApp .nav-item').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(p==='staffDashboard')loadStaffDashboard();if(p==='staffLeaderboard')loadStaffLeaderboard();if(p==='staffRewards')loadStaffRewards()}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
 
-// ===== MEMBERS =====
-function loadMembers(){db.ref('crew_members').on('value',s=>{members=s.val()||{};const f=document.getElementById('perfFilterMember');if(f){f.innerHTML='<option value="">All Members</option>';Object.entries(members).forEach(([id,m])=>{if(m.status!=='Inactive')f.innerHTML+=`<option value="${id}">${m.name}</option>`})}})}
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+}
 
-// ===== DASHBOARD =====
-function loadAdminDashboard(){const today=getToday(),month=getCurrentMonth(),ws=getWeekStart();db.ref('crew_daily_performance').orderByChild('date').equalTo(today).once('value').then(s=>{document.getElementById('todayEntries').textContent=s.numChildren()});db.ref('crew_daily_performance').orderByChild('date').startAt(ws).once('value').then(s=>{document.getElementById('weeklyEntries').textContent=s.numChildren()});db.ref('crew_members').once('value').then(s=>{document.getElementById('totalMembers').textContent=Object.values(s.val()||{}).filter(m=>m.status!=='Inactive').length});loadTopPerformers(month);loadPrevMonthWinner('admin')}
+function hideAll() {
+  ['loginScreen', 'adminLoginScreen', 'managerLoginScreen', 'staffLoginScreen', 'setupScreen'].forEach(function(id) {
+    document.getElementById(id).style.display = 'none';
+  });
+  document.getElementById('adminApp').classList.remove('active');
+  document.getElementById('managerApp').classList.remove('active');
+  document.getElementById('staffApp').classList.remove('active');
+}
 
-function loadTopPerformers(month){calculateMonthlyScores(month).then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage),top3=sorted.slice(0,3);const c=document.getElementById('topPerformers');if(top3.length===0){c.innerHTML='<p style="color:var(--text-muted);font-size:13px;text-align:center;padding:20px">No data yet</p>';return}c.innerHTML=top3.map((p,i)=>`<div class="top-performer"><div class="rank rank-${i+1}">${i+1}</div><div class="tp-info"><div class="tp-name">${p.name}</div><div class="tp-role">${p.role} · ${p.type} · ${p.workDays} days</div></div><div style="text-align:right"><div class="tp-score">${p.percentage}%</div><div class="tp-pct">${p.totalPoints} pts</div></div></div>`).join('');const alerts=scores.filter(s=>s.percentage<40&&s.workDays>0);document.getElementById('alertCount').textContent=alerts.filter(s=>s.percentage<25).length;if(alerts.length>0){document.getElementById('alertCard').style.display='block';document.getElementById('alertList').innerHTML=alerts.map(a=>{let b=a.percentage<25?'<span class="alert-badge alert-red"><i class="fas fa-exclamation-triangle"></i> Red Flag</span>':'<span class="alert-badge alert-yellow"><i class="fas fa-exclamation-circle"></i> Warning</span>';return `<div class="top-performer" style="margin-bottom:8px"><div style="width:36px;height:36px;border-radius:50%;background:var(--red-light);display:flex;align-items:center;justify-content:center"><i class="fas fa-exclamation" style="color:var(--red)"></i></div><div class="tp-info"><div class="tp-name">${a.name}</div><div class="tp-role">${a.percentage}% · ${a.workDays} days</div></div>${b}</div>`}).join('')}else{document.getElementById('alertCard').style.display='none'}})}
+// ===== EVENT DELEGATION =====
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('[data-action]');
+  if (!btn) {
+    // Check for rating-btn
+    var rb = e.target.closest('.rating-btn');
+    if (rb) { handleRatingClick(rb); }
+    return;
+  }
 
-function loadPrevMonthWinner(panel){const pm=getPrevMonth();db.ref('crew_star_performers/'+pm).once('value').then(s=>{const d=s.val();const px=panel==='admin'?'admin':'staff';if(d){document.getElementById(`${px}PrevWinner`).style.display='block';document.getElementById(`${px}PrevMonth`).textContent=getMonthName(pm);document.getElementById(`${px}PrevName`).textContent=d.name;document.getElementById(`${px}PrevScore`).textContent=`${d.percentage}% · ${d.totalPoints} points`;if(panel==='staff'&&d.top3){document.getElementById('staffTop3Card').style.display='block';document.getElementById('staffTop3List').innerHTML=d.top3.map((p,i)=>`<div class="top-performer"><div class="rank rank-${i+1}">${i+1}</div><div class="tp-info"><div class="tp-name">${p.name}</div><div class="tp-role">${p.role}</div></div><div style="text-align:right"><div class="tp-score">${p.percentage}%</div></div></div>`).join('')}}})}
+  var action = btn.dataset.action;
+
+  switch (action) {
+    case 'showAdminLogin': showAdminLogin(); break;
+    case 'showManagerLogin': showManagerLogin(); break;
+    case 'showStaffLogin': showStaffLogin(); break;
+    case 'showSetup': showSetup(); break;
+    case 'backToRoleSelect': backToRoleSelect(); break;
+    case 'adminLogin': adminLogin(); break;
+    case 'managerLogin': managerLogin(); break;
+    case 'staffLogin': staffLogin(); break;
+    case 'setupAdmin': setupAdmin(); break;
+    case 'logout': logout(); break;
+
+    // Admin nav
+    case 'switchAdminPage': switchAdminPage(btn.dataset.page, btn); break;
+    case 'switchEntryTab': switchEntryTab(btn.dataset.tab); break;
+    case 'switchLBTab': switchLBTab(btn.dataset.tab); break;
+    case 'submitDailyEntry': submitDailyEntry(); break;
+    case 'submitWeeklyEntry': submitWeeklyEntry(); break;
+    case 'declareStarPerformer': declareStarPerformer(); break;
+    case 'openAddMemberModal': openAddMemberModal(); break;
+    case 'addNewMember': addNewMember(); break;
+    case 'updateMember': updateMember(); break;
+    case 'updatePerformance': updatePerformance(); break;
+    case 'saveManagerPin': saveManagerPin(); break;
+    case 'changeAdminPw': changeAdminPw(); break;
+
+    // Manager nav
+    case 'switchMgrPage': switchMgrPage(btn.dataset.page, btn); break;
+    case 'switchMgrEntryTab': switchMgrEntryTab(btn.dataset.tab); break;
+    case 'switchMgrLBTab': switchMgrLBTab(btn.dataset.tab); break;
+    case 'mgrSubmitDailyEntry': mgrSubmitDailyEntry(); break;
+    case 'mgrSubmitWeeklyEntry': mgrSubmitWeeklyEntry(); break;
+
+    // Staff nav
+    case 'switchStaffPage': switchStaffPage(btn.dataset.page, btn); break;
+
+    // Modals
+    case 'closeModal': closeModal(btn.dataset.modal); break;
+
+    // Employee actions
+    case 'editMember': openEditMember(btn.dataset.id); break;
+    case 'deleteMember': deleteMember(btn.dataset.id, btn.dataset.name); break;
+    case 'editPerf': openEditPerf(btn.dataset.id); break;
+    case 'togglePw': togglePw(btn.dataset.id, btn.dataset.pw); break;
+  }
+});
+
+// Enter key handlers
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Enter') return;
+  if (e.target.id === 'adminLoginPw') adminLogin();
+  if (e.target.id === 'managerLoginPin') managerLogin();
+  if (e.target.id === 'staffLoginPw') staffLogin();
+});
+
+// Filter handlers
+document.addEventListener('change', function(e) {
+  if (e.target.id === 'perfFilterMember' || e.target.id === 'perfFilterDate') filterPerformance();
+  if (e.target.id === 'mgrPerfFilterMember' || e.target.id === 'mgrPerfFilterDate') mgrFilterPerformance();
+});
+
+// ===== RATING CLICK =====
+function handleRatingClick(btn) {
+  var c = btn.closest('.rating-options');
+  var f = c.dataset.field;
+  var v = parseInt(btn.dataset.value);
+  c.querySelectorAll('.rating-btn').forEach(function(b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+
+  // Admin ratings
+  if (['quality','speed','behavior','initiative','conduct'].indexOf(f) >= 0) {
+    dailyRatings[f] = v;
+    var total = 0;
+    for (var k in dailyRatings) total += dailyRatings[k];
+    document.getElementById('dailyTotalPreview').textContent = total + ' / 50';
+  } else if (f === 'attendance') {
+    weeklyRatings[f] = v;
+    document.getElementById('weeklyTotalPreview').textContent = v + ' / 20';
+  }
+
+  // Manager ratings
+  if (f === 'mgr_quality' || f === 'mgr_speed' || f === 'mgr_behavior' || f === 'mgr_initiative' || f === 'mgr_conduct') {
+    var key = f.replace('mgr_', '');
+    mgrDailyRatings[key] = v;
+    var mt = 0;
+    for (var mk in mgrDailyRatings) mt += mgrDailyRatings[mk];
+    document.getElementById('mgrDailyTotalPreview').textContent = mt + ' / 50';
+  } else if (f === 'mgr_attendance') {
+    mgrWeeklyRatings.attendance = v;
+    document.getElementById('mgrWeeklyTotalPreview').textContent = v + ' / 20';
+  }
+}
+
+// ===== LOGIN SCREENS =====
+db.ref('crew_admin').once('value').then(function(s) {
+  if (s.exists()) document.getElementById('setupLink').style.display = 'none';
+}).catch(function(e) { console.error('Admin check error:', e); });
+
+function showAdminLogin() {
+  hideAll();
+  document.getElementById('adminLoginScreen').style.display = 'flex';
+  document.getElementById('adminLoginPw').focus();
+}
+
+function showManagerLogin() {
+  hideAll();
+  document.getElementById('managerLoginScreen').style.display = 'flex';
+  document.getElementById('managerLoginPin').focus();
+}
+
+function showStaffLogin() {
+  hideAll();
+  document.getElementById('staffLoginScreen').style.display = 'flex';
+  loadStaffList();
+}
+
+function showSetup() {
+  hideAll();
+  document.getElementById('setupScreen').style.display = 'flex';
+}
+
+function backToRoleSelect() {
+  hideAll();
+  document.getElementById('loginScreen').style.display = 'flex';
+}
+
+function logout() {
+  hideAll();
+  document.getElementById('loginScreen').style.display = 'flex';
+  currentMemberId = null;
+  selectedStaffId = null;
+}
+
+function setupAdmin() {
+  var name = document.getElementById('setupName').value.trim();
+  var pw = document.getElementById('setupPassword').value;
+  if (!name || !pw) return showToast('Name ও Password দিন', true);
+  if (pw.length < 6) return showToast('Password minimum 6 characters', true);
+  db.ref('crew_admin').once('value').then(function(s) {
+    if (s.exists()) return showToast('Admin already exists!', true);
+    db.ref('crew_admin').set({ name: name, password: pw, createdAt: getToday() }).then(function() {
+      showToast('✅ Admin created!');
+      document.getElementById('setupLink').style.display = 'none';
+      backToRoleSelect();
+    });
+  });
+}
+
+function adminLogin() {
+  var pw = document.getElementById('adminLoginPw').value;
+  if (!pw) return showToast('Password দিন', true);
+  db.ref('crew_admin/password').once('value').then(function(s) {
+    if (s.val() === pw) {
+      hideAll();
+      document.getElementById('adminApp').classList.add('active');
+      loadAdminDashboard();
+      loadMembers();
+      loadManagerPinDisplay();
+    } else {
+      showToast('Wrong password!', true);
+    }
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+function managerLogin() {
+  var pin = document.getElementById('managerLoginPin').value;
+  if (!pin) return showToast('PIN দিন', true);
+  db.ref('crew_manager/pin').once('value').then(function(s) {
+    if (!s.exists()) return showToast('Manager PIN সেট করা হয়নি। Admin কে বলুন।', true);
+    if (s.val() === pin) {
+      hideAll();
+      document.getElementById('managerApp').classList.add('active');
+      loadMgrDashboard();
+      loadMembers();
+    } else {
+      showToast('Wrong PIN!', true);
+    }
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+function loadStaffList() {
+  db.ref('crew_members').once('value').then(function(s) {
+    var all = s.val() || {};
+    var active = Object.entries(all).filter(function(e) { return e[1].status !== 'Inactive'; });
+    var c = document.getElementById('staffSelectList');
+    if (active.length === 0) {
+      c.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:16px">No members yet</p>';
+      return;
+    }
+    c.innerHTML = active.map(function(e) {
+      var id = e[0], m = e[1];
+      return '<div class="staff-option" data-staffid="' + id + '" id="so_' + id + '">' +
+        '<div class="so-avatar">' + getInitials(m.name) + '</div>' +
+        '<div><div class="so-name">' + m.name + '</div>' +
+        '<div class="so-role">' + m.role + ' · ' + (m.staffType || 'Daily') + '</div></div></div>';
+    }).join('');
+
+    // Attach click listeners
+    c.querySelectorAll('.staff-option').forEach(function(el) {
+      el.addEventListener('click', function() { selectStaff(el.dataset.staffid); });
+    });
+  }).catch(function(e) { console.error('Staff list error:', e); });
+}
+
+function selectStaff(id) {
+  selectedStaffId = id;
+  document.querySelectorAll('.staff-option').forEach(function(x) { x.classList.remove('selected'); });
+  document.getElementById('so_' + id).classList.add('selected');
+  document.getElementById('staffPwSection').style.display = 'block';
+  document.getElementById('staffLoginPw').value = '';
+  document.getElementById('staffLoginPw').focus();
+}
+
+function staffLogin() {
+  if (!selectedStaffId) return showToast('নাম select করুন', true);
+  var pw = document.getElementById('staffLoginPw').value;
+  if (!pw) return showToast('Password দিন', true);
+  db.ref('crew_members/' + selectedStaffId + '/password').once('value').then(function(s) {
+    if (s.val() === pw) {
+      currentMemberId = selectedStaffId;
+      db.ref('crew_members/' + selectedStaffId + '/name').once('value').then(function(ns) {
+        document.getElementById('staffNameBadge').textContent = ns.val();
+        hideAll();
+        document.getElementById('staffApp').classList.add('active');
+        loadStaffDashboard();
+      });
+    } else {
+      showToast('Wrong password!', true);
+    }
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+// ===== ADMIN NAV =====
+function switchAdminPage(p, el) {
+  document.querySelectorAll('#adminApp .page').forEach(function(x) { x.classList.remove('active'); });
+  document.getElementById(p).classList.add('active');
+  document.querySelectorAll('#adminApp .nav-item').forEach(function(n) { n.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  if (p === 'adminDashboard') loadAdminDashboard();
+  if (p === 'adminEntry') loadEntryMembers();
+  if (p === 'adminPerformance') loadAllPerformance();
+  if (p === 'adminLeaderboard') loadLeaderboard();
+  if (p === 'adminEmployees') loadEmployeeList();
+  if (p === 'adminSettings') loadManagerPinDisplay();
+}
+
+// ===== MANAGER NAV =====
+function switchMgrPage(p, el) {
+  document.querySelectorAll('#managerApp .page').forEach(function(x) { x.classList.remove('active'); });
+  document.getElementById(p).classList.add('active');
+  document.querySelectorAll('#managerApp .nav-item').forEach(function(n) { n.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  if (p === 'mgrDashboard') loadMgrDashboard();
+  if (p === 'mgrEntry') loadMgrEntryMembers();
+  if (p === 'mgrPerformance') loadMgrPerformance();
+  if (p === 'mgrLeaderboard') loadMgrLeaderboard();
+}
+
+// ===== STAFF NAV =====
+function switchStaffPage(p, el) {
+  document.querySelectorAll('#staffApp .page').forEach(function(x) { x.classList.remove('active'); });
+  document.getElementById(p).classList.add('active');
+  document.querySelectorAll('#staffApp .nav-item').forEach(function(n) { n.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  if (p === 'staffDashboard') loadStaffDashboard();
+  if (p === 'staffLeaderboard') loadStaffLeaderboard();
+  if (p === 'staffRewards') loadStaffRewards();
+}
+
+// ===== MEMBERS LISTENER =====
+function loadMembers() {
+  db.ref('crew_members').on('value', function(s) {
+    members = s.val() || {};
+    // Populate admin filter
+    var f = document.getElementById('perfFilterMember');
+    if (f) {
+      f.innerHTML = '<option value="">All Members</option>';
+      Object.entries(members).forEach(function(e) {
+        if (e[1].status !== 'Inactive') f.innerHTML += '<option value="' + e[0] + '">' + e[1].name + '</option>';
+      });
+    }
+    // Populate manager filter
+    var mf = document.getElementById('mgrPerfFilterMember');
+    if (mf) {
+      mf.innerHTML = '<option value="">All Members</option>';
+      Object.entries(members).forEach(function(e) {
+        if (e[1].status !== 'Inactive') mf.innerHTML += '<option value="' + e[0] + '">' + e[1].name + '</option>';
+      });
+    }
+  }, function(e) { console.error('Members listener error:', e); });
+}
+
+// ===== ADMIN DASHBOARD =====
+function loadAdminDashboard() {
+  var today = getToday(), month = getCurrentMonth(), ws = getWeekStart();
+  db.ref('crew_daily_performance').orderByChild('date').equalTo(today).once('value').then(function(s) {
+    document.getElementById('todayEntries').textContent = s.numChildren();
+  }).catch(function(e) { console.error(e); });
+  db.ref('crew_daily_performance').orderByChild('date').startAt(ws).once('value').then(function(s) {
+    document.getElementById('weeklyEntries').textContent = s.numChildren();
+  }).catch(function(e) { console.error(e); });
+  db.ref('crew_members').once('value').then(function(s) {
+    document.getElementById('totalMembers').textContent = Object.values(s.val() || {}).filter(function(m) { return m.status !== 'Inactive'; }).length;
+  }).catch(function(e) { console.error(e); });
+  loadTopPerformers(month);
+  loadPrevMonthWinner('admin');
+}
+
+function loadTopPerformers(month) {
+  calculateMonthlyScores(month).then(function(scores) {
+    var sorted = scores.sort(function(a, b) { return b.percentage - a.percentage; });
+    var top3 = sorted.slice(0, 3);
+    var c = document.getElementById('topPerformers');
+    if (top3.length === 0) {
+      c.innerHTML = '<p style="color:var(--text-muted);font-size:13px;text-align:center;padding:20px">No data yet</p>';
+      return;
+    }
+    c.innerHTML = top3.map(function(p, i) {
+      return '<div class="top-performer"><div class="rank rank-' + (i + 1) + '">' + (i + 1) + '</div>' +
+        '<div class="tp-info"><div class="tp-name">' + p.name + '</div>' +
+        '<div class="tp-role">' + p.role + ' · ' + p.type + ' · ' + p.workDays + ' days</div></div>' +
+        '<div style="text-align:right"><div class="tp-score">' + p.percentage + '%</div>' +
+        '<div class="tp-pct">' + p.totalPoints + ' pts</div></div></div>';
+    }).join('');
+
+    var alerts = scores.filter(function(s) { return s.percentage < 40 && s.workDays > 0; });
+    document.getElementById('alertCount').textContent = alerts.filter(function(s) { return s.percentage < 25; }).length;
+    if (alerts.length > 0) {
+      document.getElementById('alertCard').style.display = 'block';
+      document.getElementById('alertList').innerHTML = alerts.map(function(a) {
+        var b = a.percentage < 25 ?
+          '<span class="alert-badge alert-red"><i class="fas fa-exclamation-triangle"></i> Red Flag</span>' :
+          '<span class="alert-badge alert-yellow"><i class="fas fa-exclamation-circle"></i> Warning</span>';
+        return '<div class="top-performer" style="margin-bottom:8px">' +
+          '<div style="width:36px;height:36px;border-radius:50%;background:var(--red-light);display:flex;align-items:center;justify-content:center"><i class="fas fa-exclamation" style="color:var(--red)"></i></div>' +
+          '<div class="tp-info"><div class="tp-name">' + a.name + '</div><div class="tp-role">' + a.percentage + '% · ' + a.workDays + ' days</div></div>' + b + '</div>';
+      }).join('');
+    } else {
+      document.getElementById('alertCard').style.display = 'none';
+    }
+  });
+}
+
+function loadPrevMonthWinner(panel) {
+  var pm = getPrevMonth();
+  db.ref('crew_star_performers/' + pm).once('value').then(function(s) {
+    var d = s.val();
+    var px = panel;
+    if (d) {
+      document.getElementById(px + 'PrevWinner').style.display = 'block';
+      document.getElementById(px + 'PrevMonth').textContent = getMonthName(pm);
+      document.getElementById(px + 'PrevName').textContent = d.name;
+      document.getElementById(px + 'PrevScore').textContent = d.percentage + '% · ' + d.totalPoints + ' points';
+      if (panel === 'staff' && d.top3) {
+        document.getElementById('staffTop3Card').style.display = 'block';
+        document.getElementById('staffTop3List').innerHTML = d.top3.map(function(p, i) {
+          return '<div class="top-performer"><div class="rank rank-' + (i + 1) + '">' + (i + 1) + '</div>' +
+            '<div class="tp-info"><div class="tp-name">' + p.name + '</div><div class="tp-role">' + p.role + '</div></div>' +
+            '<div style="text-align:right"><div class="tp-score">' + p.percentage + '%</div></div></div>';
+        }).join('');
+      }
+    }
+  }).catch(function(e) { console.error('Prev winner error:', e); });
+}
 
 // ===== SCORES =====
-async function calculateMonthlyScores(month){const ms=await db.ref('crew_members').once('value');const am=ms.val()||{};const ds=await db.ref('crew_daily_performance').orderByChild('month').equalTo(month).once('value');const dd=ds.val()||{};const ws=await db.ref('crew_weekly_discipline').orderByChild('month').equalTo(month).once('value');const wd=ws.val()||{};const scores=[];Object.entries(am).forEach(([mid,member])=>{if(member.status==='Inactive')return;let dt=0,ddays=0;Object.values(dd).forEach(e=>{if(e.memberId===mid){dt+=(e.quality||0)+(e.speed||0)+(e.behavior||0)+(e.initiative||0)+(e.conduct||0);ddays++}});let wt=0,ww=0;Object.values(wd).forEach(e=>{if(e.memberId===mid){wt+=(e.attendance||0);ww++}});const mx=(ddays*50)+(ww*20),tp=dt+wt,pct=mx>0?Math.round((tp/mx)*100):0;scores.push({memberId:mid,name:member.name,role:member.role,type:member.staffType||'Daily',totalPoints:tp,maxPossible:mx,percentage:pct,workDays:ddays})});return scores}
-async function calculateWeeklyScores(){const wst=getWeekStart();const ms=await db.ref('crew_members').once('value');const am=ms.val()||{};const ds=await db.ref('crew_daily_performance').orderByChild('date').startAt(wst).once('value');const dd=ds.val()||{};const wds=await db.ref('crew_weekly_discipline').orderByChild('weekStart').equalTo(wst).once('value');const wd=wds.val()||{};const scores=[];Object.entries(am).forEach(([mid,member])=>{if(member.status==='Inactive')return;let dt=0,ddays=0;Object.values(dd).forEach(e=>{if(e.memberId===mid){dt+=(e.quality||0)+(e.speed||0)+(e.behavior||0)+(e.initiative||0)+(e.conduct||0);ddays++}});let wt=0,ww=0;Object.values(wd).forEach(e=>{if(e.memberId===mid){wt+=(e.attendance||0);ww++}});const mx=(ddays*50)+(ww*20),tp=dt+wt,pct=mx>0?Math.round((tp/mx)*100):0;scores.push({memberId:mid,name:member.name,role:member.role,type:member.staffType||'Daily',totalPoints:tp,maxPossible:mx,percentage:pct,workDays:ddays})});return scores}
+function calculateMonthlyScores(month) {
+  return Promise.all([
+    db.ref('crew_members').once('value'),
+    db.ref('crew_daily_performance').orderByChild('month').equalTo(month).once('value'),
+    db.ref('crew_weekly_discipline').orderByChild('month').equalTo(month).once('value')
+  ]).then(function(results) {
+    var am = results[0].val() || {};
+    var dd = results[1].val() || {};
+    var wd = results[2].val() || {};
+    var scores = [];
+    Object.entries(am).forEach(function(entry) {
+      var mid = entry[0], member = entry[1];
+      if (member.status === 'Inactive') return;
+      var dt = 0, ddays = 0;
+      Object.values(dd).forEach(function(e) {
+        if (e.memberId === mid) {
+          dt += (e.quality || 0) + (e.speed || 0) + (e.behavior || 0) + (e.initiative || 0) + (e.conduct || 0);
+          ddays++;
+        }
+      });
+      var wt = 0, ww = 0;
+      Object.values(wd).forEach(function(e) {
+        if (e.memberId === mid) { wt += (e.attendance || 0); ww++; }
+      });
+      var mx = (ddays * 50) + (ww * 20);
+      var tp = dt + wt;
+      var pct = mx > 0 ? Math.round((tp / mx) * 100) : 0;
+      scores.push({ memberId: mid, name: member.name, role: member.role, type: member.staffType || 'Daily', totalPoints: tp, maxPossible: mx, percentage: pct, workDays: ddays });
+    });
+    return scores;
+  });
+}
 
-// ===== ENTRY =====
-function switchEntryTab(tab){currentEntryTab=tab;document.querySelectorAll('#adminEntry .section-tab').forEach((t,i)=>{t.classList.toggle('active',(i===0&&tab==='daily')||(i===1&&tab==='weekly'))});document.getElementById('dailyEntrySection').style.display=tab==='daily'?'block':'none';document.getElementById('weeklyEntrySection').style.display=tab==='weekly'?'block':'none';loadEntryMembers()}
-function loadEntryMembers(){db.ref('crew_members').once('value').then(s=>{const a=s.val()||{};const active=Object.entries(a).filter(([_,m])=>m.status!=='Inactive');['daily','weekly'].forEach(type=>{document.getElementById(`${type}MemberList`).innerHTML=active.map(([id,m])=>`<div class="member-chip" onclick="selectEntryMember('${id}','${type}')" id="${type}_chip_${id}"><div class="mc-avatar">${getInitials(m.name)}</div><div><div class="mc-name">${m.name}</div><div class="mc-role">${m.role}</div></div><span class="mc-type type-${(m.staffType||'Daily').toLowerCase()}">${m.staffType||'Daily'}</span></div>`).join('')})})}
-function selectEntryMember(id,type){selectedMemberId=id;document.querySelectorAll(`#${type}MemberList .member-chip`).forEach(c=>c.classList.remove('selected'));document.getElementById(`${type}_chip_${id}`).classList.add('selected');if(type==='daily'){document.getElementById('dailyRatingForm').style.display='block';document.getElementById('dailyDate').textContent=getToday();dailyRatings={};document.querySelectorAll('#dailyRatingForm .rating-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('dailyTotalPreview').textContent='0 / 50'}else{document.getElementById('weeklyRatingForm').style.display='block';document.getElementById('weeklyDate').textContent=getWeekStart();weeklyRatings={};document.querySelectorAll('#weeklyRatingForm .rating-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('weeklyTotalPreview').textContent='0 / 20'}}
-function selectRating(btn){const c=btn.closest('.rating-options'),f=c.dataset.field,v=parseInt(btn.dataset.value);c.querySelectorAll('.rating-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');if(['quality','speed','behavior','initiative','conduct'].includes(f)){dailyRatings[f]=v;document.getElementById('dailyTotalPreview').textContent=`${Object.values(dailyRatings).reduce((a,b)=>a+b,0)} / 50`}else if(f==='attendance'){weeklyRatings[f]=v;document.getElementById('weeklyTotalPreview').textContent=`${v} / 20`}}
-function submitDailyEntry(){if(!selectedMemberId)return showToast('Member select করুন',true);for(const r of['quality','speed','behavior','initiative','conduct']){if(!dailyRatings[r])return showToast(`${r} rating দিন`,true)}db.ref('crew_daily_performance').push({memberId:selectedMemberId,memberName:members[selectedMemberId]?.name||'',date:getToday(),month:getCurrentMonth(),quality:dailyRatings.quality,speed:dailyRatings.speed,behavior:dailyRatings.behavior,initiative:dailyRatings.initiative,conduct:dailyRatings.conduct,total:Object.values(dailyRatings).reduce((a,b)=>a+b,0),timestamp:firebase.database.ServerValue.TIMESTAMP}).then(()=>{showToast('✅ Daily entry saved!');dailyRatings={};document.querySelectorAll('#dailyRatingForm .rating-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('dailyTotalPreview').textContent='0 / 50';document.getElementById('dailyRatingForm').style.display='none';document.querySelectorAll('#dailyMemberList .member-chip').forEach(c=>c.classList.remove('selected'));selectedMemberId=null}).catch(e=>showToast('Error: '+e.message,true))}
-function submitWeeklyEntry(){if(!selectedMemberId)return showToast('Member select করুন',true);if(!weeklyRatings.attendance)return showToast('Attendance rating দিন',true);db.ref('crew_weekly_discipline').push({memberId:selectedMemberId,memberName:members[selectedMemberId]?.name||'',weekStart:getWeekStart(),month:getCurrentMonth(),attendance:weeklyRatings.attendance,timestamp:firebase.database.ServerValue.TIMESTAMP}).then(()=>{showToast('✅ Weekly entry saved!');weeklyRatings={};document.querySelectorAll('#weeklyRatingForm .rating-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('weeklyTotalPreview').textContent='0 / 20';document.getElementById('weeklyRatingForm').style.display='none';document.querySelectorAll('#weeklyMemberList .member-chip').forEach(c=>c.classList.remove('selected'));selectedMemberId=null}).catch(e=>showToast('Error: '+e.message,true))}
+function calculateWeeklyScores() {
+  var wst = getWeekStart();
+  return Promise.all([
+    db.ref('crew_members').once('value'),
+    db.ref('crew_daily_performance').orderByChild('date').startAt(wst).once('value'),
+    db.ref('crew_weekly_discipline').orderByChild('weekStart').equalTo(wst).once('value')
+  ]).then(function(results) {
+    var am = results[0].val() || {};
+    var dd = results[1].val() || {};
+    var wd = results[2].val() || {};
+    var scores = [];
+    Object.entries(am).forEach(function(entry) {
+      var mid = entry[0], member = entry[1];
+      if (member.status === 'Inactive') return;
+      var dt = 0, ddays = 0;
+      Object.values(dd).forEach(function(e) {
+        if (e.memberId === mid) {
+          dt += (e.quality || 0) + (e.speed || 0) + (e.behavior || 0) + (e.initiative || 0) + (e.conduct || 0);
+          ddays++;
+        }
+      });
+      var wt = 0, ww = 0;
+      Object.values(wd).forEach(function(e) {
+        if (e.memberId === mid) { wt += (e.attendance || 0); ww++; }
+      });
+      var mx = (ddays * 50) + (ww * 20);
+      var tp = dt + wt;
+      var pct = mx > 0 ? Math.round((tp / mx) * 100) : 0;
+      scores.push({ memberId: mid, name: member.name, role: member.role, type: member.staffType || 'Daily', totalPoints: tp, maxPossible: mx, percentage: pct, workDays: ddays });
+    });
+    return scores;
+  });
+}
 
-// ===== PERFORMANCE VIEW =====
-function loadAllPerformance(){db.ref('crew_daily_performance').orderByChild('month').equalTo(getCurrentMonth()).once('value').then(s=>{renderPerformanceList(Object.entries(s.val()||{}).sort((a,b)=>(b[1].timestamp||0)-(a[1].timestamp||0)))})}
-function filterPerformance(){const mid=document.getElementById('perfFilterMember').value,dt=document.getElementById('perfFilterDate').value;db.ref('crew_daily_performance').orderByChild('month').equalTo(getCurrentMonth()).once('value').then(s=>{let e=Object.entries(s.val()||{});if(mid)e=e.filter(([_,x])=>x.memberId===mid);if(dt)e=e.filter(([_,x])=>x.date===dt);renderPerformanceList(e.sort((a,b)=>(b[1].timestamp||0)-(a[1].timestamp||0)))})}
-function renderPerformanceList(entries){const c=document.getElementById('performanceList');if(entries.length===0){c.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:20px">No entries found</p>';return}c.innerHTML=entries.map(([id,e])=>`<div class="card" style="padding:14px"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px"><div><div style="font-weight:700;font-size:14px">${e.memberName||'Unknown'}</div><div style="font-size:11px;color:var(--text-muted)">${e.date}</div></div><div style="display:flex;gap:6px;align-items:center"><span style="font-size:20px;font-weight:800;color:var(--accent)">${e.total}/50</span><button class="btn btn-icon btn-secondary btn-sm" onclick="openEditPerf('${id}')" style="width:28px;height:28px"><i class="fas fa-edit" style="font-size:11px"></i></button></div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="alert-badge ${e.quality>=7?'alert-green':e.quality>=4?'alert-yellow':'alert-red'}">Q:${e.quality}</span><span class="alert-badge ${e.speed>=7?'alert-green':e.speed>=4?'alert-yellow':'alert-red'}">S:${e.speed}</span><span class="alert-badge ${e.behavior>=7?'alert-green':e.behavior>=4?'alert-yellow':'alert-red'}">B:${e.behavior}</span><span class="alert-badge ${e.initiative>=7?'alert-green':e.initiative>=4?'alert-yellow':'alert-red'}">I:${e.initiative}</span><span class="alert-badge ${e.conduct>=7?'alert-green':e.conduct>=4?'alert-yellow':'alert-red'}">C:${e.conduct}</span></div></div>`).join('')}
-function openEditPerf(id){document.getElementById('editPerfId').value=id;db.ref(`crew_daily_performance/${id}`).once('value').then(s=>{const e=s.val();document.getElementById('editPerfFields').innerHTML=['quality','speed','behavior','initiative','conduct'].map(f=>`<div class="form-group"><label>${f.charAt(0).toUpperCase()+f.slice(1)}</label><select id="editPerf_${f}">${f==='initiative'?`<option value="10" ${e[f]===10?'selected':''}>High (10)</option><option value="6" ${e[f]===6?'selected':''}>Medium (6)</option><option value="3" ${e[f]===3?'selected':''}>Low (3)</option>`:`<option value="10" ${e[f]===10?'selected':''}>Excellent (10)</option><option value="7" ${e[f]===7?'selected':''}>Good (7)</option><option value="4" ${e[f]===4?'selected':''}>Average (4)</option><option value="1" ${e[f]===1?'selected':''}>Poor (1)</option>`}</select></div>`).join('');openModal('editPerfModal')})}
-function updatePerformance(){const id=document.getElementById('editPerfId').value,u={};let t=0;['quality','speed','behavior','initiative','conduct'].forEach(f=>{const v=parseInt(document.getElementById(`editPerf_${f}`).value);u[f]=v;t+=v});u.total=t;db.ref(`crew_daily_performance/${id}`).update(u).then(()=>{showToast('✅ Updated!');closeModal('editPerfModal');loadAllPerformance()})}
+// ===== ADMIN ENTRY =====
+function switchEntryTab(tab) {
+  currentEntryTab = tab;
+  document.querySelectorAll('#adminEntry .section-tab').forEach(function(t, i) {
+    t.classList.toggle('active', (i === 0 && tab === 'daily') || (i === 1 && tab === 'weekly'));
+  });
+  document.getElementById('dailyEntrySection').style.display = tab === 'daily' ? 'block' : 'none';
+  document.getElementById('weeklyEntrySection').style.display = tab === 'weekly' ? 'block' : 'none';
+  loadEntryMembers();
+}
 
-// ===== LEADERBOARD =====
-function switchLBTab(tab){currentLBTab=tab;document.querySelectorAll('#adminLeaderboard .section-tab').forEach((t,i)=>{t.classList.toggle('active',(i===0&&tab==='monthly')||(i===1&&tab==='weekly'))});loadLeaderboard()}
-function loadLeaderboard(){const calc=currentLBTab==='monthly'?calculateMonthlyScores(getCurrentMonth()):calculateWeeklyScores();calc.then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage);if(currentLBTab==='monthly'&&sorted.length>0&&sorted[0].workDays>0){document.getElementById('starDeclareSection').style.display='block';document.getElementById('suggestedStarName').textContent=sorted[0].name;document.getElementById('suggestedStarScore').textContent=`${sorted[0].percentage}% · ${sorted[0].totalPoints} pts · ${sorted[0].workDays} days`}else{document.getElementById('starDeclareSection').style.display='none'}const c=document.getElementById('leaderboardContent');if(sorted.length===0){c.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:20px">No data</p>';return}c.innerHTML=`<div style="overflow-x:auto"><table class="lb-table"><thead><tr><th>#</th><th>Name</th><th>Type</th><th>Days</th><th>Pts</th><th>%</th><th>Status</th></tr></thead><tbody>${sorted.map((s,i)=>{let b=s.workDays===0?'<span class="alert-badge" style="background:var(--bg-input);color:var(--text-muted)">-</span>':s.percentage>=70?'<span class="alert-badge alert-green">✓</span>':s.percentage>=40?'<span class="alert-badge alert-yellow">⚠</span>':'<span class="alert-badge alert-red">✗</span>';return `<tr><td><strong>${i+1}</strong></td><td><div style="font-weight:600">${s.name}</div><div style="font-size:11px;color:var(--text-muted)">${s.role}</div></td><td><span class="mc-type type-${s.type.toLowerCase()}">${s.type}</span></td><td>${s.workDays}</td><td><strong>${s.totalPoints}</strong></td><td><strong style="color:var(--accent)">${s.percentage}%</strong></td><td>${b}</td></tr>`}).join('')}</tbody></table></div>`})}
-function declareStarPerformer(){calculateMonthlyScores(getCurrentMonth()).then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage);if(sorted.length===0)return;const w=sorted[0],t3=sorted.slice(0,3).map(s=>({name:s.name,role:s.role,percentage:s.percentage,totalPoints:s.totalPoints}));db.ref('crew_star_performers/'+getCurrentMonth()).set({name:w.name,memberId:w.memberId,percentage:w.percentage,totalPoints:w.totalPoints,top3:t3,declaredAt:firebase.database.ServerValue.TIMESTAMP}).then(()=>showToast('🌟 Star Performer: '+w.name))})}
+function loadEntryMembers() {
+  db.ref('crew_members').once('value').then(function(s) {
+    var a = s.val() || {};
+    var active = Object.entries(a).filter(function(e) { return e[1].status !== 'Inactive'; });
+    ['daily', 'weekly'].forEach(function(type) {
+      var container = document.getElementById(type + 'MemberList');
+      container.innerHTML = active.map(function(e) {
+        var id = e[0], m = e[1];
+        return '<div class="member-chip" data-memberid="' + id + '" data-entrytype="' + type + '" id="' + type + '_chip_' + id + '">' +
+          '<div class="mc-avatar">' + getInitials(m.name) + '</div>' +
+          '<div><div class="mc-name">' + m.name + '</div><div class="mc-role">' + m.role + '</div></div>' +
+          '<span class="mc-type type-' + (m.staffType || 'Daily').toLowerCase() + '">' + (m.staffType || 'Daily') + '</span></div>';
+      }).join('');
 
-// ===== EMPLOYEES =====
-function loadEmployeeList(){db.ref('crew_members').once('value').then(s=>{const all=s.val()||{},c=document.getElementById('employeeList'),e=Object.entries(all);if(e.length===0){c.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:20px">No members yet</p>';return}c.innerHTML=e.map(([id,m])=>`<div class="emp-card"><div class="emp-avatar">${getInitials(m.name)}</div><div class="emp-info"><div class="emp-name">${m.name}</div><div class="emp-meta">${m.role} · ${m.staffType||'Daily'} · ${m.phone||''}</div><div class="emp-meta">${m.status==='Inactive'?'<span style="color:var(--red)">Inactive</span>':'<span style="color:var(--green)">Active</span>'} · Joined: ${m.joinDate||'N/A'}</div><div class="emp-meta" style="margin-top:4px">🔑 <span id="pw_${id}" style="font-family:monospace;background:var(--bg-primary);padding:2px 6px;border-radius:4px;font-size:12px">••••••</span> <button onclick="togglePw('${id}','${(m.password||'N/A').replace(/'/g,"\\'")}')" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:12px"><i class="fas fa-eye" id="pwicon_${id}"></i></button></div></div><div class="emp-actions"><button class="btn btn-icon btn-secondary" onclick="openEditMember('${id}')" style="width:32px;height:32px"><i class="fas fa-edit" style="font-size:12px"></i></button><button class="btn btn-icon" onclick="deleteMember('${id}','${m.name.replace(/'/g,"\\'")}')" style="width:32px;height:32px;background:var(--red-light);color:var(--red)"><i class="fas fa-trash" style="font-size:12px"></i></button></div></div>`).join('')})}
-function togglePw(id,pw){const s=document.getElementById('pw_'+id),i=document.getElementById('pwicon_'+id);if(s.textContent==='••••••'){s.textContent=pw;i.className='fas fa-eye-slash'}else{s.textContent='••••••';i.className='fas fa-eye'}}
-function deleteMember(id,name){if(!confirm('⚠️ "'+name+'" delete করতে চান?'))return;db.ref('crew_members/'+id).remove().then(()=>{db.ref('crew_daily_performance').orderByChild('memberId').equalTo(id).once('value').then(s=>{const u={};s.forEach(c=>{u[c.key]=null});if(Object.keys(u).length>0)db.ref('crew_daily_performance').update(u)});db.ref('crew_weekly_discipline').orderByChild('memberId').equalTo(id).once('value').then(s=>{const u={};s.forEach(c=>{u[c.key]=null});if(Object.keys(u).length>0)db.ref('crew_weekly_discipline').update(u)});showToast('✅ Deleted!');loadEmployeeList()}).catch(e=>showToast('Error: '+e.message,true))}
-function openAddMemberModal(){['newMemberName','newMemberPhone','newMemberPassword'].forEach(id=>document.getElementById(id).value='');openModal('addMemberModal')}
-function addNewMember(){const name=document.getElementById('newMemberName').value.trim(),phone=document.getElementById('newMemberPhone').value.trim(),role=document.getElementById('newMemberRole').value,staffType=document.getElementById('newMemberType').value,password=document.getElementById('newMemberPassword').value;if(!name||!password)return showToast('Name ও Password দিন',true);if(password.length<6)return showToast('Password min 6 chars',true);db.ref('crew_members').push({name:name,phone:phone,role:role,staffType:staffType,password:password,status:'Active',joinDate:getToday(),createdAt:firebase.database.ServerValue.TIMESTAMP}).then(()=>{showToast('✅ '+name+' added!');closeModal('addMemberModal');loadEmployeeList()}).catch(e=>showToast('Error: '+e.message,true))}
-function openEditMember(id){db.ref('crew_members/'+id).once('value').then(s=>{const m=s.val();document.getElementById('editMemberId').value=id;document.getElementById('editMemberName').value=m.name;document.getElementById('editMemberPhone').value=m.phone||'';document.getElementById('editMemberRole').value=m.role;document.getElementById('editMemberType').value=m.staffType||'Daily';document.getElementById('editMemberStatus').value=m.status||'Active';document.getElementById('editMemberCurrentPw').value=m.password||'N/A';document.getElementById('editMemberNewPw').value='';openModal('editMemberModal')})}
-function updateMember(){const id=document.getElementById('editMemberId').value,newPw=document.getElementById('editMemberNewPw').value.trim(),u={name:document.getElementById('editMemberName').value.trim(),phone:document.getElementById('editMemberPhone').value.trim(),role:document.getElementById('editMemberRole').value,staffType:document.getElementById('editMemberType').value,status:document.getElementById('editMemberStatus').value};if(newPw){if(newPw.length<6)return showToast('Password min 6 chars',true);u.password=newPw}db.ref('crew_members/'+id).update(u).then(()=>{showToast('✅ Updated!'+(newPw?' Password changed.':''));closeModal('editMemberModal');loadEmployeeList()})}
+      container.querySelectorAll('.member-chip').forEach(function(chip) {
+        chip.addEventListener('click', function() { selectEntryMember(chip.dataset.memberid, chip.dataset.entrytype); });
+      });
+    });
+  }).catch(function(e) { console.error('Entry members error:', e); });
+}
+
+function selectEntryMember(id, type) {
+  selectedMemberId = id;
+  document.querySelectorAll('#' + type + 'MemberList .member-chip').forEach(function(c) { c.classList.remove('selected'); });
+  document.getElementById(type + '_chip_' + id).classList.add('selected');
+  if (type === 'daily') {
+    document.getElementById('dailyRatingForm').style.display = 'block';
+    document.getElementById('dailyDate').textContent = getToday();
+    dailyRatings = {};
+    document.querySelectorAll('#dailyRatingForm .rating-btn').forEach(function(b) { b.classList.remove('selected'); });
+    document.getElementById('dailyTotalPreview').textContent = '0 / 50';
+  } else {
+    document.getElementById('weeklyRatingForm').style.display = 'block';
+    document.getElementById('weeklyDate').textContent = getWeekStart();
+    weeklyRatings = {};
+    document.querySelectorAll('#weeklyRatingForm .rating-btn').forEach(function(b) { b.classList.remove('selected'); });
+    document.getElementById('weeklyTotalPreview').textContent = '0 / 20';
+  }
+}
+
+function submitDailyEntry() {
+  if (!selectedMemberId) return showToast('Member select করুন', true);
+  var fields = ['quality', 'speed', 'behavior', 'initiative', 'conduct'];
+  for (var i = 0; i < fields.length; i++) {
+    if (!dailyRatings[fields[i]]) return showToast(fields[i] + ' rating দিন', true);
+  }
+  var total = 0;
+  for (var k in dailyRatings) total += dailyRatings[k];
+  db.ref('crew_daily_performance').push({
+    memberId: selectedMemberId,
+    memberName: (members[selectedMemberId] || {}).name || '',
+    date: getToday(), month: getCurrentMonth(),
+    quality: dailyRatings.quality, speed: dailyRatings.speed,
+    behavior: dailyRatings.behavior, initiative: dailyRatings.initiative,
+    conduct: dailyRatings.conduct, total: total,
+    enteredBy: 'admin',
+    timestamp: firebase.database.ServerValue.TIMESTAMP
+  }).then(function() {
+    showToast('✅ Daily entry saved!');
+    dailyRatings = {};
+    document.querySelectorAll('#dailyRatingForm .rating-btn').forEach(function(b) { b.classList.remove('selected'); });
+    document.getElementById('dailyTotalPreview').textContent = '0 / 50';
+    document.getElementById('dailyRatingForm').style.display = 'none';
+    document.querySelectorAll('#dailyMemberList .member-chip').forEach(function(c) { c.classList.remove('selected'); });
+    selectedMemberId = null;
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+function submitWeeklyEntry() {
+  if (!selectedMemberId) return showToast('Member select করুন', true);
+  if (!weeklyRatings.attendance) return showToast('Attendance rating দিন', true);
+  db.ref('crew_weekly_discipline').push({
+    memberId: selectedMemberId,
+    memberName: (members[selectedMemberId] || {}).name || '',
+    weekStart: getWeekStart(), month: getCurrentMonth(),
+    attendance: weeklyRatings.attendance,
+    enteredBy: 'admin',
+    timestamp: firebase.database.ServerValue.TIMESTAMP
+  }).then(function() {
+    showToast('✅ Weekly entry saved!');
+    weeklyRatings = {};
+    document.querySelectorAll('#weeklyRatingForm .rating-btn').forEach(function(b) { b.classList.remove('selected'); });
+    document.getElementById('weeklyTotalPreview').textContent = '0 / 20';
+    document.getElementById('weeklyRatingForm').style.display = 'none';
+    document.querySelectorAll('#weeklyMemberList .member-chip').forEach(function(c) { c.classList.remove('selected'); });
+    selectedMemberId = null;
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+// ===== PERFORMANCE VIEW (Admin) =====
+function loadAllPerformance() {
+  db.ref('crew_daily_performance').orderByChild('month').equalTo(getCurrentMonth()).once('value').then(function(s) {
+    renderPerformanceList(Object.entries(s.val() || {}).sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'performanceList', true);
+  }).catch(function(e) { console.error(e); });
+}
+
+function filterPerformance() {
+  var mid = document.getElementById('perfFilterMember').value;
+  var dt = document.getElementById('perfFilterDate').value;
+  db.ref('crew_daily_performance').orderByChild('month').equalTo(getCurrentMonth()).once('value').then(function(s) {
+    var e = Object.entries(s.val() || {});
+    if (mid) e = e.filter(function(x) { return x[1].memberId === mid; });
+    if (dt) e = e.filter(function(x) { return x[1].date === dt; });
+    renderPerformanceList(e.sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'performanceList', true);
+  });
+}
+
+function renderPerformanceList(entries, containerId, showEdit) {
+  var c = document.getElementById(containerId);
+  if (entries.length === 0) {
+    c.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px">No entries found</p>';
+    return;
+  }
+  c.innerHTML = entries.map(function(entry) {
+    var id = entry[0], e = entry[1];
+    var editBtn = showEdit ? '<button class="btn btn-icon btn-secondary btn-sm" data-action="editPerf" data-id="' + id + '" style="width:28px;height:28px"><i class="fas fa-edit" style="font-size:11px"></i></button>' : '';
+    var badge = function(label, val) {
+      var cls = val >= 7 ? 'alert-green' : val >= 4 ? 'alert-yellow' : 'alert-red';
+      return '<span class="alert-badge ' + cls + '">' + label + ':' + val + '</span>';
+    };
+    return '<div class="card" style="padding:14px"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px"><div>' +
+      '<div style="font-weight:700;font-size:14px">' + (e.memberName || 'Unknown') + '</div>' +
+      '<div style="font-size:11px;color:var(--text-muted)">' + e.date + (e.enteredBy ? ' · by ' + e.enteredBy : '') + '</div></div>' +
+      '<div style="display:flex;gap:6px;align-items:center"><span style="font-size:20px;font-weight:800;color:var(--accent)">' + e.total + '/50</span>' + editBtn + '</div></div>' +
+      '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
+      badge('Q', e.quality) + badge('S', e.speed) + badge('B', e.behavior) + badge('I', e.initiative) + badge('C', e.conduct) +
+      '</div></div>';
+  }).join('');
+}
+
+function openEditPerf(id) {
+  document.getElementById('editPerfId').value = id;
+  db.ref('crew_daily_performance/' + id).once('value').then(function(s) {
+    var e = s.val();
+    document.getElementById('editPerfFields').innerHTML = ['quality', 'speed', 'behavior', 'initiative', 'conduct'].map(function(f) {
+      var opts = f === 'initiative' ?
+        '<option value="10"' + (e[f] === 10 ? ' selected' : '') + '>High (10)</option><option value="6"' + (e[f] === 6 ? ' selected' : '') + '>Medium (6)</option><option value="3"' + (e[f] === 3 ? ' selected' : '') + '>Low (3)</option>' :
+        '<option value="10"' + (e[f] === 10 ? ' selected' : '') + '>Excellent (10)</option><option value="7"' + (e[f] === 7 ? ' selected' : '') + '>Good (7)</option><option value="4"' + (e[f] === 4 ? ' selected' : '') + '>Average (4)</option><option value="1"' + (e[f] === 1 ? ' selected' : '') + '>Poor (1)</option>';
+      return '<div class="form-group"><label>' + f.charAt(0).toUpperCase() + f.slice(1) + '</label><select id="editPerf_' + f + '">' + opts + '</select></div>';
+    }).join('');
+    openModal('editPerfModal');
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+function updatePerformance() {
+  var id = document.getElementById('editPerfId').value;
+  var u = {};
+  var t = 0;
+  ['quality', 'speed', 'behavior', 'initiative', 'conduct'].forEach(function(f) {
+    var v = parseInt(document.getElementById('editPerf_' + f).value);
+    u[f] = v;
+    t += v;
+  });
+  u.total = t;
+  db.ref('crew_daily_performance/' + id).update(u).then(function() {
+    showToast('✅ Updated!');
+    closeModal('editPerfModal');
+    loadAllPerformance();
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+// ===== LEADERBOARD (Admin) =====
+function switchLBTab(tab) {
+  currentLBTab = tab;
+  document.querySelectorAll('#adminLeaderboard .section-tab').forEach(function(t, i) {
+    t.classList.toggle('active', (i === 0 && tab === 'monthly') || (i === 1 && tab === 'weekly'));
+  });
+  loadLeaderboard();
+}
+
+function loadLeaderboard() {
+  var calc = currentLBTab === 'monthly' ? calculateMonthlyScores(getCurrentMonth()) : calculateWeeklyScores();
+  calc.then(function(scores) {
+    var sorted = scores.sort(function(a, b) { return b.percentage - a.percentage; });
+    if (currentLBTab === 'monthly' && sorted.length > 0 && sorted[0].workDays > 0) {
+      document.getElementById('starDeclareSection').style.display = 'block';
+      document.getElementById('suggestedStarName').textContent = sorted[0].name;
+      document.getElementById('suggestedStarScore').textContent = sorted[0].percentage + '% · ' + sorted[0].totalPoints + ' pts · ' + sorted[0].workDays + ' days';
+    } else {
+      document.getElementById('starDeclareSection').style.display = 'none';
+    }
+    renderLeaderboardTable(sorted, 'leaderboardContent');
+  });
+}
+
+function renderLeaderboardTable(sorted, containerId) {
+  var c = document.getElementById(containerId);
+  if (sorted.length === 0) {
+    c.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px">No data</p>';
+    return;
+  }
+  c.innerHTML = '<div style="overflow-x:auto"><table class="lb-table"><thead><tr><th>#</th><th>Name</th><th>Type</th><th>Days</th><th>Pts</th><th>%</th><th>Status</th></tr></thead><tbody>' +
+    sorted.map(function(s, i) {
+      var b = s.workDays === 0 ? '<span class="alert-badge" style="background:var(--bg-input);color:var(--text-muted)">-</span>' :
+        s.percentage >= 70 ? '<span class="alert-badge alert-green">✓</span>' :
+        s.percentage >= 40 ? '<span class="alert-badge alert-yellow">⚠</span>' :
+        '<span class="alert-badge alert-red">✗</span>';
+      return '<tr><td><strong>' + (i + 1) + '</strong></td><td><div style="font-weight:600">' + s.name + '</div><div style="font-size:11px;color:var(--text-muted)">' + s.role + '</div></td>' +
+        '<td><span class="mc-type type-' + s.type.toLowerCase() + '">' + s.type + '</span></td>' +
+        '<td>' + s.workDays + '</td><td><strong>' + s.totalPoints + '</strong></td>' +
+        '<td><strong style="color:var(--accent)">' + s.percentage + '%</strong></td><td>' + b + '</td></tr>';
+    }).join('') + '</tbody></table></div>';
+}
+
+function declareStarPerformer() {
+  calculateMonthlyScores(getCurrentMonth()).then(function(scores) {
+    var sorted = scores.sort(function(a, b) { return b.percentage - a.percentage; });
+    if (sorted.length === 0) return;
+    var w = sorted[0];
+    var t3 = sorted.slice(0, 3).map(function(s) {
+      return { name: s.name, role: s.role, percentage: s.percentage, totalPoints: s.totalPoints };
+    });
+    db.ref('crew_star_performers/' + getCurrentMonth()).set({
+      name: w.name, memberId: w.memberId, percentage: w.percentage,
+      totalPoints: w.totalPoints, top3: t3,
+      declaredAt: firebase.database.ServerValue.TIMESTAMP
+    }).then(function() { showToast('🌟 Star Performer: ' + w.name); });
+  });
+}
+
+// ===== EMPLOYEES (Admin) =====
+function loadEmployeeList() {
+  db.ref('crew_members').once('value').then(function(s) {
+    var all = s.val() || {};
+    var c = document.getElementById('employeeList');
+    var e = Object.entries(all);
+    if (e.length === 0) {
+      c.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px">No members yet</p>';
+      return;
+    }
+    c.innerHTML = e.map(function(entry) {
+      var id = entry[0], m = entry[1];
+      return '<div class="emp-card"><div class="emp-avatar">' + getInitials(m.name) + '</div>' +
+        '<div class="emp-info"><div class="emp-name">' + m.name + '</div>' +
+        '<div class="emp-meta">' + m.role + ' · ' + (m.staffType || 'Daily') + ' · ' + (m.phone || '') + '</div>' +
+        '<div class="emp-meta">' + (m.status === 'Inactive' ? '<span style="color:var(--red)">Inactive</span>' : '<span style="color:var(--green)">Active</span>') + ' · Joined: ' + (m.joinDate || 'N/A') + '</div>' +
+        '<div class="emp-meta" style="margin-top:4px">🔑 <span id="pw_' + id + '" style="font-family:monospace;background:var(--bg-primary);padding:2px 6px;border-radius:4px;font-size:12px">••••••</span> ' +
+        '<button data-action="togglePw" data-id="' + id + '" data-pw="' + (m.password || 'N/A').replace(/"/g, '&quot;') + '" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:12px"><i class="fas fa-eye" id="pwicon_' + id + '"></i></button></div>' +
+        '</div><div class="emp-actions">' +
+        '<button class="btn btn-icon btn-secondary" data-action="editMember" data-id="' + id + '" style="width:32px;height:32px"><i class="fas fa-edit" style="font-size:12px"></i></button>' +
+        '<button class="btn btn-icon" data-action="deleteMember" data-id="' + id + '" data-name="' + m.name.replace(/"/g, '&quot;') + '" style="width:32px;height:32px;background:var(--red-light);color:var(--red)"><i class="fas fa-trash" style="font-size:12px"></i></button>' +
+        '</div></div>';
+    }).join('');
+  }).catch(function(e) { console.error('Employee list error:', e); });
+}
+
+function togglePw(id, pw) {
+  var s = document.getElementById('pw_' + id);
+  var i = document.getElementById('pwicon_' + id);
+  if (s.textContent === '••••••') {
+    s.textContent = pw;
+    i.className = 'fas fa-eye-slash';
+  } else {
+    s.textContent = '••••••';
+    i.className = 'fas fa-eye';
+  }
+}
+
+function deleteMember(id, name) {
+  if (!confirm('⚠️ "' + name + '" delete করতে চান?')) return;
+  db.ref('crew_members/' + id).remove().then(function() {
+    db.ref('crew_daily_performance').orderByChild('memberId').equalTo(id).once('value').then(function(s) {
+      var u = {};
+      s.forEach(function(c) { u[c.key] = null; });
+      if (Object.keys(u).length > 0) db.ref('crew_daily_performance').update(u);
+    });
+    db.ref('crew_weekly_discipline').orderByChild('memberId').equalTo(id).once('value').then(function(s) {
+      var u = {};
+      s.forEach(function(c) { u[c.key] = null; });
+      if (Object.keys(u).length > 0) db.ref('crew_weekly_discipline').update(u);
+    });
+    showToast('✅ Deleted!');
+    loadEmployeeList();
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+function openAddMemberModal() {
+  ['newMemberName', 'newMemberPhone', 'newMemberPassword'].forEach(function(id) { document.getElementById(id).value = ''; });
+  openModal('addMemberModal');
+}
+
+function addNewMember() {
+  var name = document.getElementById('newMemberName').value.trim();
+  var phone = document.getElementById('newMemberPhone').value.trim();
+  var role = document.getElementById('newMemberRole').value;
+  var staffType = document.getElementById('newMemberType').value;
+  var password = document.getElementById('newMemberPassword').value;
+  if (!name || !password) return showToast('Name ও Password দিন', true);
+  if (password.length < 6) return showToast('Password min 6 chars', true);
+  db.ref('crew_members').push({
+    name: name, phone: phone, role: role, staffType: staffType,
+    password: password, status: 'Active', joinDate: getToday(),
+    createdAt: firebase.database.ServerValue.TIMESTAMP
+  }).then(function() {
+    showToast('✅ ' + name + ' added!');
+    closeModal('addMemberModal');
+    loadEmployeeList();
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+function openEditMember(id) {
+  db.ref('crew_members/' + id).once('value').then(function(s) {
+    var m = s.val();
+    document.getElementById('editMemberId').value = id;
+    document.getElementById('editMemberName').value = m.name;
+    document.getElementById('editMemberPhone').value = m.phone || '';
+    document.getElementById('editMemberRole').value = m.role;
+    document.getElementById('editMemberType').value = m.staffType || 'Daily';
+    document.getElementById('editMemberStatus').value = m.status || 'Active';
+    document.getElementById('editMemberCurrentPw').value = m.password || 'N/A';
+    document.getElementById('editMemberNewPw').value = '';
+    openModal('editMemberModal');
+  });
+}
+
+function updateMember() {
+  var id = document.getElementById('editMemberId').value;
+  var newPw = document.getElementById('editMemberNewPw').value.trim();
+  var u = {
+    name: document.getElementById('editMemberName').value.trim(),
+    phone: document.getElementById('editMemberPhone').value.trim(),
+    role: document.getElementById('editMemberRole').value,
+    staffType: document.getElementById('editMemberType').value,
+    status: document.getElementById('editMemberStatus').value
+  };
+  if (newPw) {
+    if (newPw.length < 6) return showToast('Password min 6 chars', true);
+    u.password = newPw;
+  }
+  db.ref('crew_members/' + id).update(u).then(function() {
+    showToast('✅ Updated!' + (newPw ? ' Password changed.' : ''));
+    closeModal('editMemberModal');
+    loadEmployeeList();
+  });
+}
+
+// ===== MANAGER PIN SETTINGS =====
+function loadManagerPinDisplay() {
+  db.ref('crew_manager/pin').once('value').then(function(s) {
+    var pin = s.val();
+    var el = document.getElementById('managerPinDisplay');
+    if (pin) {
+      el.innerHTML = 'Current PIN: <span class="pin-display">' + pin + '</span>';
+    } else {
+      el.innerHTML = '<span style="color:var(--text-muted)">PIN সেট করা হয়নি</span>';
+    }
+  }).catch(function(e) { console.error(e); });
+}
+
+function saveManagerPin() {
+  var pin = document.getElementById('newManagerPin').value.trim();
+  if (!pin || pin.length < 4) return showToast('PIN minimum 4 characters', true);
+  db.ref('crew_manager').set({ pin: pin }).then(function() {
+    showToast('✅ Manager PIN saved!');
+    document.getElementById('newManagerPin').value = '';
+    loadManagerPinDisplay();
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+function changeAdminPw() {
+  var pw = document.getElementById('newAdminPw').value.trim();
+  if (!pw || pw.length < 6) return showToast('Password minimum 6 characters', true);
+  db.ref('crew_admin/password').set(pw).then(function() {
+    showToast('✅ Admin password updated!');
+    document.getElementById('newAdminPw').value = '';
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+// ===== MANAGER DASHBOARD =====
+function loadMgrDashboard() {
+  var today = getToday(), ws = getWeekStart(), month = getCurrentMonth();
+  db.ref('crew_daily_performance').orderByChild('date').equalTo(today).once('value').then(function(s) {
+    document.getElementById('mgrTodayEntries').textContent = s.numChildren();
+  }).catch(function(e) { console.error(e); });
+  db.ref('crew_daily_performance').orderByChild('date').startAt(ws).once('value').then(function(s) {
+    document.getElementById('mgrWeeklyEntries').textContent = s.numChildren();
+  }).catch(function(e) { console.error(e); });
+  db.ref('crew_members').once('value').then(function(s) {
+    document.getElementById('mgrTotalMembers').textContent = Object.values(s.val() || {}).filter(function(m) { return m.status !== 'Inactive'; }).length;
+  }).catch(function(e) { console.error(e); });
+  loadPrevMonthWinner('mgr');
+
+  // Top 3
+  calculateMonthlyScores(month).then(function(scores) {
+    var sorted = scores.sort(function(a, b) { return b.percentage - a.percentage; });
+    var top3 = sorted.slice(0, 3);
+    var c = document.getElementById('mgrTopPerformers');
+    if (top3.length === 0) {
+      c.innerHTML = '<p style="color:var(--text-muted);font-size:13px;text-align:center;padding:20px">No data yet</p>';
+      return;
+    }
+    c.innerHTML = top3.map(function(p, i) {
+      return '<div class="top-performer"><div class="rank rank-' + (i + 1) + '">' + (i + 1) + '</div>' +
+        '<div class="tp-info"><div class="tp-name">' + p.name + '</div>' +
+        '<div class="tp-role">' + p.role + ' · ' + p.type + ' · ' + p.workDays + ' days</div></div>' +
+        '<div style="text-align:right"><div class="tp-score">' + p.percentage + '%</div>' +
+        '<div class="tp-pct">' + p.totalPoints + ' pts</div></div></div>';
+    }).join('');
+
+    var alerts = scores.filter(function(s) { return s.percentage < 25 && s.workDays > 0; });
+    document.getElementById('mgrAlertCount').textContent = alerts.length;
+  });
+}
+
+// ===== MANAGER ENTRY =====
+function switchMgrEntryTab(tab) {
+  mgrEntryTab = tab;
+  document.querySelectorAll('#mgrEntry .section-tab').forEach(function(t, i) {
+    t.classList.toggle('active', (i === 0 && tab === 'daily') || (i === 1 && tab === 'weekly'));
+  });
+  document.getElementById('mgrDailyEntrySection').style.display = tab === 'daily' ? 'block' : 'none';
+  document.getElementById('mgrWeeklyEntrySection').style.display = tab === 'weekly' ? 'block' : 'none';
+  loadMgrEntryMembers();
+}
+
+function loadMgrEntryMembers() {
+  db.ref('crew_members').once('value').then(function(s) {
+    var a = s.val() || {};
+    var active = Object.entries(a).filter(function(e) { return e[1].status !== 'Inactive'; });
+    ['mgrDaily', 'mgrWeekly'].forEach(function(prefix) {
+      var container = document.getElementById(prefix + 'MemberList');
+      container.innerHTML = active.map(function(e) {
+        var id = e[0], m = e[1];
+        return '<div class="member-chip" data-memberid="' + id + '" data-entrytype="' + prefix + '" id="' + prefix + '_chip_' + id + '">' +
+          '<div class="mc-avatar">' + getInitials(m.name) + '</div>' +
+          '<div><div class="mc-name">' + m.name + '</div><div class="mc-role">' + m.role + '</div></div>' +
+          '<span class="mc-type type-' + (m.staffType || 'Daily').toLowerCase() + '">' + (m.staffType || 'Daily') + '</span></div>';
+      }).join('');
+
+      container.querySelectorAll('.member-chip').forEach(function(chip) {
+        chip.addEventListener('click', function() { selectMgrEntryMember(chip.dataset.memberid, chip.dataset.entrytype); });
+      });
+    });
+  }).catch(function(e) { console.error('Mgr entry members error:', e); });
+}
+
+function selectMgrEntryMember(id, type) {
+  mgrSelectedMemberId = id;
+  document.querySelectorAll('#' + type + 'MemberList .member-chip').forEach(function(c) { c.classList.remove('selected'); });
+  document.getElementById(type + '_chip_' + id).classList.add('selected');
+  if (type === 'mgrDaily') {
+    document.getElementById('mgrDailyRatingForm').style.display = 'block';
+    document.getElementById('mgrDailyDate').textContent = getToday();
+    mgrDailyRatings = {};
+    document.querySelectorAll('#mgrDailyRatingForm .rating-btn').forEach(function(b) { b.classList.remove('selected'); });
+    document.getElementById('mgrDailyTotalPreview').textContent = '0 / 50';
+  } else {
+    document.getElementById('mgrWeeklyRatingForm').style.display = 'block';
+    document.getElementById('mgrWeeklyDate').textContent = getWeekStart();
+    mgrWeeklyRatings = {};
+    document.querySelectorAll('#mgrWeeklyRatingForm .rating-btn').forEach(function(b) { b.classList.remove('selected'); });
+    document.getElementById('mgrWeeklyTotalPreview').textContent = '0 / 20';
+  }
+}
+
+function mgrSubmitDailyEntry() {
+  if (!mgrSelectedMemberId) return showToast('Member select করুন', true);
+  var fields = ['quality', 'speed', 'behavior', 'initiative', 'conduct'];
+  for (var i = 0; i < fields.length; i++) {
+    if (!mgrDailyRatings[fields[i]]) return showToast(fields[i] + ' rating দিন', true);
+  }
+  var total = 0;
+  for (var k in mgrDailyRatings) total += mgrDailyRatings[k];
+  db.ref('crew_daily_performance').push({
+    memberId: mgrSelectedMemberId,
+    memberName: (members[mgrSelectedMemberId] || {}).name || '',
+    date: getToday(), month: getCurrentMonth(),
+    quality: mgrDailyRatings.quality, speed: mgrDailyRatings.speed,
+    behavior: mgrDailyRatings.behavior, initiative: mgrDailyRatings.initiative,
+    conduct: mgrDailyRatings.conduct, total: total,
+    enteredBy: 'manager',
+    timestamp: firebase.database.ServerValue.TIMESTAMP
+  }).then(function() {
+    showToast('✅ Daily entry saved!');
+    mgrDailyRatings = {};
+    document.querySelectorAll('#mgrDailyRatingForm .rating-btn').forEach(function(b) { b.classList.remove('selected'); });
+    document.getElementById('mgrDailyTotalPreview').textContent = '0 / 50';
+    document.getElementById('mgrDailyRatingForm').style.display = 'none';
+    document.querySelectorAll('#mgrDailyMemberList .member-chip').forEach(function(c) { c.classList.remove('selected'); });
+    mgrSelectedMemberId = null;
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+function mgrSubmitWeeklyEntry() {
+  if (!mgrSelectedMemberId) return showToast('Member select করুন', true);
+  if (!mgrWeeklyRatings.attendance) return showToast('Attendance rating দিন', true);
+  db.ref('crew_weekly_discipline').push({
+    memberId: mgrSelectedMemberId,
+    memberName: (members[mgrSelectedMemberId] || {}).name || '',
+    weekStart: getWeekStart(), month: getCurrentMonth(),
+    attendance: mgrWeeklyRatings.attendance,
+    enteredBy: 'manager',
+    timestamp: firebase.database.ServerValue.TIMESTAMP
+  }).then(function() {
+    showToast('✅ Weekly entry saved!');
+    mgrWeeklyRatings = {};
+    document.querySelectorAll('#mgrWeeklyRatingForm .rating-btn').forEach(function(b) { b.classList.remove('selected'); });
+    document.getElementById('mgrWeeklyTotalPreview').textContent = '0 / 20';
+    document.getElementById('mgrWeeklyRatingForm').style.display = 'none';
+    document.querySelectorAll('#mgrWeeklyMemberList .member-chip').forEach(function(c) { c.classList.remove('selected'); });
+    mgrSelectedMemberId = null;
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+// ===== MANAGER PERFORMANCE VIEW =====
+function loadMgrPerformance() {
+  db.ref('crew_daily_performance').orderByChild('month').equalTo(getCurrentMonth()).once('value').then(function(s) {
+    renderPerformanceList(Object.entries(s.val() || {}).sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'mgrPerformanceList', false);
+  }).catch(function(e) { console.error(e); });
+}
+
+function mgrFilterPerformance() {
+  var mid = document.getElementById('mgrPerfFilterMember').value;
+  var dt = document.getElementById('mgrPerfFilterDate').value;
+  db.ref('crew_daily_performance').orderByChild('month').equalTo(getCurrentMonth()).once('value').then(function(s) {
+    var e = Object.entries(s.val() || {});
+    if (mid) e = e.filter(function(x) { return x[1].memberId === mid; });
+    if (dt) e = e.filter(function(x) { return x[1].date === dt; });
+    renderPerformanceList(e.sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'mgrPerformanceList', false);
+  });
+}
+
+// ===== MANAGER LEADERBOARD =====
+function switchMgrLBTab(tab) {
+  mgrLBTab = tab;
+  document.querySelectorAll('#mgrLeaderboard .section-tab').forEach(function(t, i) {
+    t.classList.toggle('active', (i === 0 && tab === 'monthly') || (i === 1 && tab === 'weekly'));
+  });
+  loadMgrLeaderboard();
+}
+
+function loadMgrLeaderboard() {
+  var calc = mgrLBTab === 'monthly' ? calculateMonthlyScores(getCurrentMonth()) : calculateWeeklyScores();
+  calc.then(function(scores) {
+    var sorted = scores.sort(function(a, b) { return b.percentage - a.percentage; });
+    renderLeaderboardTable(sorted, 'mgrLeaderboardContent');
+  });
+}
 
 // ===== STAFF PANEL =====
-function loadStaffDashboard(){if(!currentMemberId)return;const month=getCurrentMonth(),today=getToday(),ws=getWeekStart();loadPrevMonthWinner('staff');db.ref('crew_daily_performance').orderByChild('date').equalTo(today).once('value').then(s=>{let tp='-';Object.values(s.val()||{}).forEach(e=>{if(e.memberId===currentMemberId)tp=e.total});document.getElementById('staffTodayPts').textContent=tp});db.ref('crew_daily_performance').orderByChild('date').startAt(ws).once('value').then(s=>{let wt=0;const ds=[];Object.values(s.val()||{}).forEach(e=>{if(e.memberId===currentMemberId){wt+=e.total;ds.push({date:e.date,total:e.total})}});document.getElementById('staffWeeklyPts').textContent=wt;ds.sort((a,b)=>a.date.localeCompare(b.date));const c=document.getElementById('staffDailyScores');if(ds.length===0)c.innerHTML='<p style="color:var(--text-muted);font-size:13px;text-align:center;padding:16px">No scores this week</p>';else c.innerHTML=ds.map(s=>{const p=Math.round((s.total/50)*100),cl=p>=70?'var(--green)':p>=40?'var(--yellow)':'var(--red)';return `<div class="score-day"><div class="sd-date">${s.date.slice(5)}</div><div class="sd-bar"><div class="progress-bar"><div class="progress-fill" style="width:${p}%;background:${cl}"></div></div></div><div class="sd-points" style="color:${cl}">${s.total}/50</div></div>`}).join('')});calculateMonthlyScores(month).then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage),mi=sorted.findIndex(s=>s.memberId===currentMemberId),ms=mi>=0?sorted[mi]:null;document.getElementById('staffMyRank').textContent=mi>=0?`#${mi+1}`:'-';document.getElementById('staffTotalMembers').textContent=sorted.length;document.getElementById('staffMonthlyPts').textContent=ms?ms.totalPoints:0;document.getElementById('staffMonthlyPct').textContent=ms?ms.percentage+'%':'0%'})}
-function loadStaffLeaderboard(){calculateMonthlyScores(getCurrentMonth()).then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage).slice(0,10);const c=document.getElementById('staffLeaderboardContent');if(sorted.length===0){c.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:20px">No data</p>';return}c.innerHTML=sorted.map((s,i)=>{const me=s.memberId===currentMemberId;return `<div class="top-performer" style="${me?'border:2px solid var(--accent);background:var(--accent-light)':''}"><div class="rank ${i<3?'rank-'+(i+1):''}" style="${i>=3?'background:var(--bg-input);color:var(--text-muted)':''}">${i+1}</div><div class="tp-info"><div class="tp-name">${s.name} ${me?'(You)':''}</div><div class="tp-role">${s.role} · ${s.type} · ${s.workDays} days</div></div><div style="text-align:right"><div class="tp-score">${s.percentage}%</div><div class="tp-pct">${s.totalPoints} pts</div></div></div>`}).join('')})}
-function loadStaffRewards(){if(!currentMemberId)return;calculateMonthlyScores(getCurrentMonth()).then(scores=>{const sorted=scores.sort((a,b)=>b.percentage-a.percentage),mi=sorted.findIndex(s=>s.memberId===currentMemberId),ms=mi>=0?sorted[mi]:null,pct=ms?ms.percentage:0;document.getElementById('staffRewardsContent').innerHTML=[{i:'🌟',t:'Star Performer',d:'Rank #1',ok:mi===0&&pct>0,s:mi===0?'Eligible!':'Need #1 (Now #'+(mi+1)+')'},{i:'🏆',t:'Top 3',d:'Top 3 ranking',ok:mi>=0&&mi<3&&pct>0,s:mi<3?'Eligible!':'Need Top 3 (Now #'+(mi+1)+')'},{i:'💰',t:'Bonus',d:'70%+ score',ok:pct>=70,s:pct>=70?'Eligible!':'Need 70%+ (Now '+pct+'%)'}].map(r=>`<div class="reward-card"><div class="rw-icon">${r.i}</div><div class="rw-info"><div class="rw-title">${r.t}</div><div class="rw-desc">${r.d}</div></div><span class="rw-status ${r.ok?'alert-green':'alert-yellow'}">${r.s}</span></div>`).join('')})}
+function loadStaffDashboard() {
+  if (!currentMemberId) return;
+  var month = getCurrentMonth(), today = getToday(), ws = getWeekStart();
+  loadPrevMonthWinner('staff');
+
+  db.ref('crew_daily_performance').orderByChild('date').equalTo(today).once('value').then(function(s) {
+    var tp = '-';
+    Object.values(s.val() || {}).forEach(function(e) { if (e.memberId === currentMemberId) tp = e.total; });
+    document.getElementById('staffTodayPts').textContent = tp;
+  }).catch(function(e) { console.error(e); });
+
+  db.ref('crew_daily_performance').orderByChild('date').startAt(ws).once('value').then(function(s) {
+    var wt = 0, ds = [];
+    Object.values(s.val() || {}).forEach(function(e) {
+      if (e.memberId === currentMemberId) { wt += e.total; ds.push({ date: e.date, total: e.total }); }
+    });
+    document.getElementById('staffWeeklyPts').textContent = wt;
+    ds.sort(function(a, b) { return a.date.localeCompare(b.date); });
+    var c = document.getElementById('staffDailyScores');
+    if (ds.length === 0) {
+      c.innerHTML = '<p style="color:var(--text-muted);font-size:13px;text-align:center;padding:16px">No scores this week</p>';
+    } else {
+      c.innerHTML = ds.map(function(s) {
+        var p = Math.round((s.total / 50) * 100);
+        var cl = p >= 70 ? 'var(--green)' : p >= 40 ? 'var(--yellow)' : 'var(--red)';
+        return '<div class="score-day"><div class="sd-date">' + s.date.slice(5) + '</div>' +
+          '<div class="sd-bar"><div class="progress-bar"><div class="progress-fill" style="width:' + p + '%;background:' + cl + '"></div></div></div>' +
+          '<div class="sd-points" style="color:' + cl + '">' + s.total + '/50</div></div>';
+      }).join('');
+    }
+  }).catch(function(e) { console.error(e); });
+
+  calculateMonthlyScores(month).then(function(scores) {
+    var sorted = scores.sort(function(a, b) { return b.percentage - a.percentage; });
+    var mi = sorted.findIndex(function(s) { return s.memberId === currentMemberId; });
+    var ms = mi >= 0 ? sorted[mi] : null;
+    document.getElementById('staffMyRank').textContent = mi >= 0 ? '#' + (mi + 1) : '-';
+    document.getElementById('staffTotalMembers').textContent = sorted.length;
+    document.getElementById('staffMonthlyPts').textContent = ms ? ms.totalPoints : 0;
+    document.getElementById('staffMonthlyPct').textContent = ms ? ms.percentage + '%' : '0%';
+  });
+}
+
+function loadStaffLeaderboard() {
+  calculateMonthlyScores(getCurrentMonth()).then(function(scores) {
+    var sorted = scores.sort(function(a, b) { return b.percentage - a.percentage; }).slice(0, 10);
+    var c = document.getElementById('staffLeaderboardContent');
+    if (sorted.length === 0) {
+      c.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px">No data</p>';
+      return;
+    }
+    c.innerHTML = sorted.map(function(s, i) {
+      var me = s.memberId === currentMemberId;
+      return '<div class="top-performer" style="' + (me ? 'border:2px solid var(--accent);background:var(--accent-light)' : '') + '">' +
+        '<div class="rank ' + (i < 3 ? 'rank-' + (i + 1) : '') + '" style="' + (i >= 3 ? 'background:var(--bg-input);color:var(--text-muted)' : '') + '">' + (i + 1) + '</div>' +
+        '<div class="tp-info"><div class="tp-name">' + s.name + ' ' + (me ? '(You)' : '') + '</div>' +
+        '<div class="tp-role">' + s.role + ' · ' + s.type + ' · ' + s.workDays + ' days</div></div>' +
+        '<div style="text-align:right"><div class="tp-score">' + s.percentage + '%</div>' +
+        '<div class="tp-pct">' + s.totalPoints + ' pts</div></div></div>';
+    }).join('');
+  });
+}
+
+function loadStaffRewards() {
+  if (!currentMemberId) return;
+  calculateMonthlyScores(getCurrentMonth()).then(function(scores) {
+    var sorted = scores.sort(function(a, b) { return b.percentage - a.percentage; });
+    var mi = sorted.findIndex(function(s) { return s.memberId === currentMemberId; });
+    var ms = mi >= 0 ? sorted[mi] : null;
+    var pct = ms ? ms.percentage : 0;
+    var rewards = [
+      { i: '🌟', t: 'Star Performer', d: 'Rank #1', ok: mi === 0 && pct > 0, s: mi === 0 ? 'Eligible!' : 'Need #1 (Now #' + (mi + 1) + ')' },
+      { i: '🏆', t: 'Top 3', d: 'Top 3 ranking', ok: mi >= 0 && mi < 3 && pct > 0, s: mi < 3 ? 'Eligible!' : 'Need Top 3 (Now #' + (mi + 1) + ')' },
+      { i: '💰', t: 'Bonus', d: '70%+ score', ok: pct >= 70, s: pct >= 70 ? 'Eligible!' : 'Need 70%+ (Now ' + pct + '%)' }
+    ];
+    document.getElementById('staffRewardsContent').innerHTML = rewards.map(function(r) {
+      return '<div class="reward-card"><div class="rw-icon">' + r.i + '</div>' +
+        '<div class="rw-info"><div class="rw-title">' + r.t + '</div><div class="rw-desc">' + r.d + '</div></div>' +
+        '<span class="rw-status ' + (r.ok ? 'alert-green' : 'alert-yellow') + '">' + r.s + '</span></div>';
+    }).join('');
+  });
+}
 </script>
 </body>
 </html>
