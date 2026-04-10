@@ -1987,7 +1987,7 @@ function loadStaffLeaderboard() {
       return '<div class="top-performer" style="' + (me ? 'border:2px solid var(--accent);background:var(--accent-light)' : '') + '">' +
         '<div class="rank ' + (i < 3 ? 'rank-' + (i + 1) : '') + '" style="' + (i >= 3 ? 'background:var(--bg-input);color:var(--text-muted)' : '') + '">' + (i + 1) + '</div>' +
         '<div class="tp-info"><div class="tp-name">' + s.name + ' ' + (me ? '(You)' : '') + '</div>' +
-        '<div class="tp-role">' + s.role + ' · ' + s.type + ' · ' + s.workDays + ' days</div></div>' +
+        '<div class="tp-role">' + s.role + ' · ' + s.workDays + ' days</div></div>' +
         '<div style="text-align:right"><div class="tp-score">' + s.percentage + '%</div>' +
         '<div class="tp-pct">' + s.totalPoints + ' pts</div></div></div>';
     }).join('');
