@@ -779,6 +779,12 @@
     <div class="card"><div class="card-title">📅 Daily Score List (This Week)</div><div id="staffDailyScores"></div></div>
   </div>
 
+  <div class="page" id="staffHistory">
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">📋 My History</h2>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">এই মাসে আপনার প্রতিদিনের performance details</p>
+    <div id="staffHistoryContent"><div class="loading"><div class="spinner"></div></div></div>
+  </div>
+
   <div class="page" id="staffLeaderboard">
     <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">🏆 Leaderboard</h2>
     <div id="staffLeaderboardContent"></div>
@@ -791,6 +797,7 @@
 
   <div class="bottom-nav">
     <button class="nav-item active" data-action="switchStaffPage" data-page="staffDashboard"><i class="fas fa-home"></i><span>Home</span></button>
+    <button class="nav-item" data-action="switchStaffPage" data-page="staffHistory"><i class="fas fa-list"></i><span>History</span></button>
     <button class="nav-item" data-action="switchStaffPage" data-page="staffLeaderboard"><i class="fas fa-trophy"></i><span>Board</span></button>
     <button class="nav-item" data-action="switchStaffPage" data-page="staffRewards"><i class="fas fa-gift"></i><span>Rewards</span></button>
   </div>
@@ -1212,6 +1219,7 @@ function switchStaffPage(p, el) {
   document.querySelectorAll('#staffApp .nav-item').forEach(function(n) { n.classList.remove('active'); });
   if (el) el.classList.add('active');
   if (p === 'staffDashboard') loadStaffDashboard();
+  if (p === 'staffHistory') loadStaffHistory();
   if (p === 'staffLeaderboard') loadStaffLeaderboard();
   if (p === 'staffRewards') loadStaffRewards();
 }
@@ -1971,6 +1979,97 @@ function loadStaffDashboard() {
     document.getElementById('staffTotalMembers').textContent = sorted.length;
     document.getElementById('staffMonthlyPts').textContent = ms ? ms.totalPoints : 0;
     document.getElementById('staffMonthlyPct').textContent = ms ? ms.percentage + '%' : '0%';
+  });
+}
+
+function loadStaffHistory() {
+  if (!currentMemberId) return;
+  var month = getCurrentMonth();
+  var c = document.getElementById('staffHistoryContent');
+  c.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+
+  db.ref('crew_daily_performance').orderByChild('month').equalTo(month).once('value').then(function(s) {
+    var all = s.val() || {};
+    var myEntries = [];
+    Object.values(all).forEach(function(e) {
+      if (e.memberId === currentMemberId) myEntries.push(e);
+    });
+
+    // Sort by date descending (newest first)
+    myEntries.sort(function(a, b) { return b.date.localeCompare(a.date); });
+
+    if (myEntries.length === 0) {
+      c.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px">এই মাসে কোনো entry নেই</p>';
+      return;
+    }
+
+    // Summary stats
+    var totalPts = 0, totalMax = 0;
+    myEntries.forEach(function(e) { totalPts += e.total; totalMax += 50; });
+    var avgPct = totalMax > 0 ? Math.round((totalPts / totalMax) * 100) : 0;
+    var avgColor = avgPct >= 70 ? 'var(--green)' : avgPct >= 40 ? 'var(--yellow)' : 'var(--red)';
+
+    var html = '<div class="card" style="text-align:center;margin-bottom:16px">' +
+      '<div style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">এই মাসের সারাংশ — ' + getMonthName(month) + '</div>' +
+      '<div style="display:flex;justify-content:space-around;margin-top:12px">' +
+      '<div><div style="font-size:28px;font-weight:800;color:var(--accent)">' + myEntries.length + '</div><div style="font-size:11px;color:var(--text-muted)">Total Days</div></div>' +
+      '<div><div style="font-size:28px;font-weight:800;color:var(--accent)">' + totalPts + '</div><div style="font-size:11px;color:var(--text-muted)">Total Points</div></div>' +
+      '<div><div style="font-size:28px;font-weight:800;color:' + avgColor + '">' + avgPct + '%</div><div style="font-size:11px;color:var(--text-muted)">Average</div></div>' +
+      '</div></div>';
+
+    // Category labels
+    var catLabels = { quality: 'Quality', speed: 'Speed', behavior: 'Behavior', initiative: 'Initiative', conduct: 'Conduct' };
+
+    // Each day as an expandable card
+    html += myEntries.map(function(e) {
+      var dayPct = Math.round((e.total / 50) * 100);
+      var dayColor = dayPct >= 70 ? 'var(--green)' : dayPct >= 40 ? 'var(--yellow)' : 'var(--red)';
+
+      // Date display
+      var dParts = e.date.split('-');
+      var dayNum = parseInt(dParts[2]);
+      var monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var dayLabel = dayNum + ' ' + monthNames[parseInt(dParts[1]) - 1];
+
+      var card = '<div class="card" style="padding:14px;margin-bottom:10px">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">' +
+        '<div><div style="font-weight:700;font-size:15px">📅 ' + dayLabel + '</div>' +
+        '<div style="font-size:11px;color:var(--text-muted)">' + e.date + '</div></div>' +
+        '<div style="text-align:right"><div style="font-size:22px;font-weight:800;color:' + dayColor + '">' + e.total + '<span style="font-size:14px;color:var(--text-muted)">/50</span></div>' +
+        '<div style="font-size:11px;color:' + dayColor + '">' + dayPct + '%</div></div></div>';
+
+      // Progress bar for the day
+      card += '<div class="progress-bar" style="margin-bottom:12px;height:6px"><div class="progress-fill" style="width:' + dayPct + '%;background:' + dayColor + '"></div></div>';
+
+      // Breakdown of each category
+      var cats = ['quality', 'speed', 'behavior', 'initiative', 'conduct'];
+      card += '<div style="display:grid;grid-template-columns:1fr;gap:6px">';
+      cats.forEach(function(cat) {
+        var val = e[cat] || 0;
+        var maxVal = cat === 'initiative' ? 10 : 10;
+        var pct = Math.round((val / maxVal) * 100);
+        var catColor = pct >= 70 ? 'var(--green)' : pct >= 40 ? 'var(--yellow)' : 'var(--red)';
+        var ratingText = '';
+        if (cat === 'initiative') {
+          ratingText = val >= 10 ? 'High' : val >= 6 ? 'Medium' : 'Low';
+        } else {
+          ratingText = val >= 10 ? 'Excellent' : val >= 7 ? 'Good' : val >= 4 ? 'Average' : 'Poor';
+        }
+
+        card += '<div style="display:flex;align-items:center;gap:8px;padding:4px 0">' +
+          '<div style="min-width:75px;font-size:12px;color:var(--text-secondary);font-weight:600">' + catLabels[cat] + '</div>' +
+          '<div style="flex:1"><div class="progress-bar" style="height:6px;margin:0"><div class="progress-fill" style="width:' + pct + '%;background:' + catColor + '"></div></div></div>' +
+          '<div style="min-width:65px;text-align:right;font-size:12px"><span style="font-weight:700;color:' + catColor + '">' + val + '/10</span> <span style="color:var(--text-muted);font-size:10px">' + ratingText + '</span></div>' +
+          '</div>';
+      });
+      card += '</div></div>';
+      return card;
+    }).join('');
+
+    c.innerHTML = html;
+  }).catch(function(e) {
+    console.error('Staff history error:', e);
+    c.innerHTML = '<p style="color:var(--red);text-align:center;padding:20px">Error loading data</p>';
   });
 }
 
