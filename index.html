@@ -619,6 +619,22 @@
     <div id="employeeList"></div>
   </div>
 
+  <!-- Penalty / Deduction -->
+  <div class="page" id="adminPenalty">
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">⚠️ Points Deduction</h2>
+    <div class="card">
+      <div class="card-title">➖ নতুন Deduction দিন</div>
+      <div class="form-group"><label>Member Select করুন</label><select id="penaltyMember" style="width:100%;padding:12px 16px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:15px;font-family:inherit"><option value="">-- Select Member --</option></select></div>
+      <div class="form-group"><label>কত Points কাটা হবে</label><input type="number" id="penaltyPoints" placeholder="যেমন: 5, 10, 15" min="1" max="50"></div>
+      <div class="form-group"><label>কারণ / Reason</label><textarea id="penaltyReason" placeholder="কেন Points কাটা হচ্ছে বিস্তারিত লিখুন..." style="width:100%;padding:12px 16px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:14px;font-family:inherit;min-height:80px;resize:vertical"></textarea></div>
+      <button class="btn btn-danger" style="width:100%" data-action="submitPenalty"><i class="fas fa-minus-circle"></i> Deduction Apply করুন</button>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="card-title">📋 এই মাসের Deduction History</div>
+      <div id="penaltyHistoryList"><div class="loading"><div class="spinner"></div></div></div>
+    </div>
+  </div>
+
   <!-- Settings -->
   <div class="page" id="adminSettings">
     <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">⚙️ Settings</h2>
@@ -643,6 +659,7 @@
     <button class="nav-item" data-action="switchAdminPage" data-page="adminPerformance"><i class="fas fa-chart-bar"></i><span>View</span></button>
     <button class="nav-item" data-action="switchAdminPage" data-page="adminLeaderboard"><i class="fas fa-trophy"></i><span>Board</span></button>
     <button class="nav-item" data-action="switchAdminPage" data-page="adminEmployees"><i class="fas fa-users"></i><span>Team</span></button>
+    <button class="nav-item" data-action="switchAdminPage" data-page="adminPenalty"><i class="fas fa-minus-circle"></i><span>Deduct</span></button>
     <button class="nav-item" data-action="switchAdminPage" data-page="adminSettings"><i class="fas fa-cog"></i><span>Settings</span></button>
   </div>
 </div>
@@ -777,6 +794,7 @@
       <div class="stat-box" style="border-color:var(--accent)"><div class="stat-icon">🎯</div><div class="stat-value" id="staffMonthlyPts">0</div><div class="stat-label">Monthly Total</div></div>
     </div>
     <div class="card"><div class="card-title">📅 Daily Score List (This Week)</div><div id="staffDailyScores"></div></div>
+    <div class="card" id="staffPenaltiesCard" style="display:none"><div class="card-title" style="color:var(--red)">⚠️ Points Deduction (এই মাসে)</div><div id="staffPenaltiesList"></div></div>
   </div>
 
   <div class="page" id="staffHistory">
@@ -979,6 +997,8 @@ document.addEventListener('click', function(e) {
     case 'updatePerformance': updatePerformance(); break;
     case 'saveManagerPin': saveManagerPin(); break;
     case 'changeAdminPw': changeAdminPw(); break;
+    case 'submitPenalty': submitPenalty(); break;
+    case 'deletePenalty': deletePenalty(btn.dataset.id, btn.dataset.name); break;
 
     // Manager nav
     case 'switchMgrPage': switchMgrPage(btn.dataset.page, btn); break;
@@ -1198,6 +1218,7 @@ function switchAdminPage(p, el) {
   if (p === 'adminPerformance') loadAllPerformance();
   if (p === 'adminLeaderboard') loadLeaderboard();
   if (p === 'adminEmployees') loadEmployeeList();
+  if (p === 'adminPenalty') loadPenaltyPage();
   if (p === 'adminSettings') loadManagerPinDisplay();
 }
 
@@ -1782,6 +1803,110 @@ function changeAdminPw() {
   }).catch(function(e) { showToast('Error: ' + e.message, true); });
 }
 
+// ===== PENALTY / DEDUCTION =====
+function loadPenaltyPage() {
+  // Populate member dropdown
+  var sel = document.getElementById('penaltyMember');
+  sel.innerHTML = '<option value="">-- Select Member --</option>';
+  Object.entries(members).forEach(function(e) {
+    if (e[1].status !== 'Inactive') {
+      sel.innerHTML += '<option value="' + e[0] + '">' + e[1].name + ' (' + e[1].role + ')</option>';
+    }
+  });
+  loadPenaltyHistory();
+}
+
+function submitPenalty() {
+  var memberId = document.getElementById('penaltyMember').value;
+  var points = parseInt(document.getElementById('penaltyPoints').value);
+  var reason = document.getElementById('penaltyReason').value.trim();
+  if (!memberId) return showToast('Member select করুন', true);
+  if (!points || points < 1) return showToast('কত Points কাটা হবে লিখুন', true);
+  if (!reason) return showToast('কারণ / Reason লিখুন', true);
+  var memberName = (members[memberId] || {}).name || 'Unknown';
+  db.ref('crew_penalties').push({
+    memberId: memberId,
+    memberName: memberName,
+    points: points,
+    reason: reason,
+    date: getToday(),
+    month: getCurrentMonth(),
+    timestamp: firebase.database.ServerValue.TIMESTAMP
+  }).then(function() {
+    showToast('⚠️ ' + memberName + ' — ' + points + ' Points কাটা হয়েছে');
+    document.getElementById('penaltyPoints').value = '';
+    document.getElementById('penaltyReason').value = '';
+    document.getElementById('penaltyMember').value = '';
+    loadPenaltyHistory();
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+function loadPenaltyHistory() {
+  var month = getCurrentMonth();
+  db.ref('crew_penalties').orderByChild('month').equalTo(month).once('value').then(function(s) {
+    var all = s.val() || {};
+    var entries = Object.entries(all).sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); });
+    var c = document.getElementById('penaltyHistoryList');
+    if (entries.length === 0) {
+      c.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:16px">এই মাসে কোনো Deduction নেই</p>';
+      return;
+    }
+    c.innerHTML = entries.map(function(entry) {
+      var id = entry[0], p = entry[1];
+      return '<div style="display:flex;align-items:flex-start;gap:12px;padding:12px;background:var(--bg-input);border-radius:var(--radius-sm);margin-bottom:8px;border-left:4px solid var(--red)">' +
+        '<div style="flex:1">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center">' +
+        '<div style="font-weight:700;font-size:14px">' + p.memberName + '</div>' +
+        '<span style="font-family:Poppins,sans-serif;font-size:18px;font-weight:800;color:var(--red)">-' + p.points + '</span></div>' +
+        '<div style="font-size:12px;color:var(--text-muted);margin-top:2px">' + p.date + '</div>' +
+        '<div style="font-size:13px;color:var(--text-secondary);margin-top:6px;background:var(--bg-primary);padding:8px 10px;border-radius:6px">' + p.reason + '</div>' +
+        '</div>' +
+        '<button class="btn btn-icon btn-sm" data-action="deletePenalty" data-id="' + id + '" data-name="' + p.memberName.replace(/"/g, '&quot;') + '" style="width:28px;height:28px;background:var(--red-light);color:var(--red);flex-shrink:0"><i class="fas fa-trash" style="font-size:11px"></i></button>' +
+        '</div>';
+    }).join('');
+  }).catch(function(e) { console.error('Penalty history error:', e); });
+}
+
+function deletePenalty(id, name) {
+  if (!confirm('⚠️ "' + name + '" এর Deduction মুছে ফেলতে চান?')) return;
+  db.ref('crew_penalties/' + id).remove().then(function() {
+    showToast('✅ Deduction deleted!');
+    loadPenaltyHistory();
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+// Load penalties for staff dashboard
+function loadStaffPenalties() {
+  if (!currentMemberId) return;
+  var month = getCurrentMonth();
+  db.ref('crew_penalties').orderByChild('month').equalTo(month).once('value').then(function(s) {
+    var all = s.val() || {};
+    var myPenalties = [];
+    Object.values(all).forEach(function(p) {
+      if (p.memberId === currentMemberId) myPenalties.push(p);
+    });
+    var card = document.getElementById('staffPenaltiesCard');
+    var list = document.getElementById('staffPenaltiesList');
+    if (myPenalties.length === 0) {
+      card.style.display = 'none';
+      return;
+    }
+    myPenalties.sort(function(a, b) { return (b.timestamp || 0) - (a.timestamp || 0); });
+    card.style.display = 'block';
+    var totalDeducted = 0;
+    myPenalties.forEach(function(p) { totalDeducted += p.points; });
+    list.innerHTML = '<div style="text-align:center;padding:10px;margin-bottom:10px;background:var(--red-light);border-radius:var(--radius-sm)"><span style="font-size:12px;color:var(--red)">এই মাসে মোট কাটা হয়েছে</span><div style="font-family:Poppins,sans-serif;font-size:24px;font-weight:800;color:var(--red)">-' + totalDeducted + ' Points</div></div>' +
+      myPenalties.map(function(p) {
+        return '<div style="padding:10px;background:var(--bg-input);border-radius:var(--radius-sm);margin-bottom:6px;border-left:4px solid var(--red)">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center">' +
+          '<div style="font-size:12px;color:var(--text-muted)">' + p.date + '</div>' +
+          '<span style="font-family:Poppins,sans-serif;font-size:16px;font-weight:800;color:var(--red)">-' + p.points + '</span></div>' +
+          '<div style="font-size:13px;color:var(--text-secondary);margin-top:6px">' + p.reason + '</div>' +
+          '</div>';
+      }).join('');
+  }).catch(function(e) { console.error('Staff penalties error:', e); });
+}
+
 // ===== MANAGER DASHBOARD =====
 function loadMgrDashboard() {
   var today = getToday(), ws = getWeekStart(), month = getCurrentMonth();
@@ -1958,6 +2083,7 @@ function loadStaffDashboard() {
   if (!currentMemberId) return;
   var month = getCurrentMonth(), today = getToday(), ws = getWeekStart();
   loadPrevMonthWinner('staff');
+  loadStaffPenalties();
 
   db.ref('crew_daily_performance').orderByChild('date').equalTo(today).once('value').then(function(s) {
     var tp = '-';
