@@ -997,6 +997,7 @@ document.addEventListener('click', function(e) {
     case 'editMember': openEditMember(btn.dataset.id); break;
     case 'deleteMember': deleteMember(btn.dataset.id, btn.dataset.name); break;
     case 'editPerf': openEditPerf(btn.dataset.id); break;
+    case 'deletePerf': deletePerf(btn.dataset.id, btn.dataset.name, btn.dataset.date); break;
     case 'togglePw': togglePw(btn.dataset.id, btn.dataset.pw); break;
   }
 });
@@ -1491,7 +1492,7 @@ function submitWeeklyEntry() {
 // ===== PERFORMANCE VIEW (Admin) =====
 function loadAllPerformance() {
   db.ref('crew_daily_performance').orderByChild('month').equalTo(getCurrentMonth()).once('value').then(function(s) {
-    renderPerformanceList(Object.entries(s.val() || {}).sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'performanceList', true);
+    renderPerformanceList(Object.entries(s.val() || {}).sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'performanceList', 'admin');
   }).catch(function(e) { console.error(e); });
 }
 
@@ -1502,11 +1503,11 @@ function filterPerformance() {
     var e = Object.entries(s.val() || {});
     if (mid) e = e.filter(function(x) { return x[1].memberId === mid; });
     if (dt) e = e.filter(function(x) { return x[1].date === dt; });
-    renderPerformanceList(e.sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'performanceList', true);
+    renderPerformanceList(e.sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'performanceList', 'admin');
   });
 }
 
-function renderPerformanceList(entries, containerId, showEdit) {
+function renderPerformanceList(entries, containerId, mode) {
   var c = document.getElementById(containerId);
   if (entries.length === 0) {
     c.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px">No entries found</p>';
@@ -1514,7 +1515,8 @@ function renderPerformanceList(entries, containerId, showEdit) {
   }
   c.innerHTML = entries.map(function(entry) {
     var id = entry[0], e = entry[1];
-    var editBtn = showEdit ? '<button class="btn btn-icon btn-secondary btn-sm" data-action="editPerf" data-id="' + id + '" style="width:28px;height:28px"><i class="fas fa-edit" style="font-size:11px"></i></button>' : '';
+    var editBtn = (mode === 'admin' || mode === 'manager') ? '<button class="btn btn-icon btn-secondary btn-sm" data-action="editPerf" data-id="' + id + '" style="width:28px;height:28px"><i class="fas fa-edit" style="font-size:11px"></i></button>' : '';
+    var deleteBtn = (mode === 'admin') ? '<button class="btn btn-icon btn-sm" data-action="deletePerf" data-id="' + id + '" data-name="' + (e.memberName || 'Unknown').replace(/"/g, '&quot;') + '" data-date="' + e.date + '" style="width:28px;height:28px;background:var(--red-light);color:var(--red)"><i class="fas fa-trash" style="font-size:11px"></i></button>' : '';
     var badge = function(label, val) {
       var cls = val >= 7 ? 'alert-green' : val >= 4 ? 'alert-yellow' : 'alert-red';
       return '<span class="alert-badge ' + cls + '">' + label + ':' + val + '</span>';
@@ -1522,7 +1524,7 @@ function renderPerformanceList(entries, containerId, showEdit) {
     return '<div class="card" style="padding:14px"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px"><div>' +
       '<div style="font-weight:700;font-size:14px">' + (e.memberName || 'Unknown') + '</div>' +
       '<div style="font-size:11px;color:var(--text-muted)">' + e.date + (e.enteredBy ? ' · by ' + e.enteredBy : '') + '</div></div>' +
-      '<div style="display:flex;gap:6px;align-items:center"><span style="font-size:20px;font-weight:800;color:var(--accent)">' + e.total + '/50</span>' + editBtn + '</div></div>' +
+      '<div style="display:flex;gap:6px;align-items:center"><span style="font-size:20px;font-weight:800;color:var(--accent)">' + e.total + '/50</span>' + editBtn + deleteBtn + '</div></div>' +
       '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
       badge('Q', e.quality) + badge('S', e.speed) + badge('B', e.behavior) + badge('I', e.initiative) + badge('C', e.conduct) +
       '</div></div>';
@@ -1556,6 +1558,19 @@ function updatePerformance() {
   db.ref('crew_daily_performance/' + id).update(u).then(function() {
     showToast('✅ Updated!');
     closeModal('editPerfModal');
+    // Reload whichever panel is active
+    if (document.getElementById('adminApp').classList.contains('active')) {
+      loadAllPerformance();
+    } else if (document.getElementById('managerApp').classList.contains('active')) {
+      loadMgrPerformance();
+    }
+  }).catch(function(e) { showToast('Error: ' + e.message, true); });
+}
+
+function deletePerf(id, name, date) {
+  if (!confirm('⚠️ "' + name + '" (' + date + ') — এই Entry delete করতে চান?')) return;
+  db.ref('crew_daily_performance/' + id).remove().then(function() {
+    showToast('✅ Entry deleted!');
     loadAllPerformance();
   }).catch(function(e) { showToast('Error: ' + e.message, true); });
 }
@@ -1906,7 +1921,7 @@ function mgrSubmitWeeklyEntry() {
 // ===== MANAGER PERFORMANCE VIEW =====
 function loadMgrPerformance() {
   db.ref('crew_daily_performance').orderByChild('month').equalTo(getCurrentMonth()).once('value').then(function(s) {
-    renderPerformanceList(Object.entries(s.val() || {}).sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'mgrPerformanceList', false);
+    renderPerformanceList(Object.entries(s.val() || {}).sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'mgrPerformanceList', 'manager');
   }).catch(function(e) { console.error(e); });
 }
 
@@ -1917,7 +1932,7 @@ function mgrFilterPerformance() {
     var e = Object.entries(s.val() || {});
     if (mid) e = e.filter(function(x) { return x[1].memberId === mid; });
     if (dt) e = e.filter(function(x) { return x[1].date === dt; });
-    renderPerformanceList(e.sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'mgrPerformanceList', false);
+    renderPerformanceList(e.sort(function(a, b) { return (b[1].timestamp || 0) - (a[1].timestamp || 0); }), 'mgrPerformanceList', 'manager');
   });
 }
 
